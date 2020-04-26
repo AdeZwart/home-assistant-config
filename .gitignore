@@ -1,0 +1,30 @@
+# Generic exclusions
+*.pid
+*.xml
+*.csr
+*.crt
+*.key
+
+# Logs
+*.log
+
+# Databases
+*.db
+
+# Swap files
+*.swp
+
+# Python cache
+__pycache__
+*.pyc
+
+# Ignore folders
+.storage
+.cloud
+custom_components/
+
+# Other
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+

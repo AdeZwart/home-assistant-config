@@ -1,0 +1,51 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+binary_sensor:
+  - platform: stookalert
+    province: !secret province
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret chat_id_andre
+      - !secret chat_id_lize
+      - !secret chat_id_reigeroord
+
+notify:
+  - name: telegram_andre
+    platform: telegram
+    chat_id: !secret chat_id_andre
+  - name: telegram_lize
+    platform: telegram
+    chat_id: !secret chat_id_lize
+  - name: telegram_reigeroord
+    platform: telegram
+    chat_id: !secret chat_id_reigeroord
+
+camera:
+  - platform: generic
+    name: Frontdoor camera 1
+    still_image_url: !secret frontdoor_ip_cam_still_image_url
+    stream_source: !secret frontdoor_ip_cam_stream_source
+
+sensor:
+  - platform: ical
+    name: "Afvalkalender"
+    url: "https://afvalkalender.cyclusnv.nl/ical/0497200000006797"
+    maxevents: 3
