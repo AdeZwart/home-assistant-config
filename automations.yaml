@@ -58,18 +58,16 @@
     domain: switch
     entity_id: switch.outside
     type: turn_off
-- alias: 'Trash collection notification'
+- alias: 'Trash collection notification 0'
   trigger:
-  - platform: time_pattern
-    hours: /1
-    minutes: 0
-    seconds: 0
+  - platform: time
+    at: '19:30'
   condition:
   - condition: and
     conditions:
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) - 16200)) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) - 18000)) %}
           true
         {% endif %}
     - condition: template
@@ -84,3 +82,27 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+- alias: 'Trash collection notification 1' 
+  trigger:
+  - platform: time
+    at: '19:30'
+  condition:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: >
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) - 18000)) %}
+          true
+        {% endif %}
+    - condition: template
+      value_template: >
+        {% if (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start)) - (as_timestamp(now()) > 0) %}
+          true
+        {% endif %}
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.'
+  - service: notify.telegram_lize
+    data_template:
+      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
