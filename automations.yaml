@@ -67,7 +67,7 @@
     conditions:
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) - 18000)) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) - 20000)) %}
           true
         {% endif %}
     - condition: template
@@ -78,7 +78,7 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald. debug:0'
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
@@ -91,7 +91,7 @@
     conditions:
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) - 18000)) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) - 20000)) %}
           true
         {% endif %}
     - condition: template
@@ -102,7 +102,7 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald. debug:1'
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
