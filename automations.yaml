@@ -1,8 +1,8 @@
-- id: '1578239116640'
-  alias: Turn on the front door light before coming home
+- id: 'front_door_light_evening'
+  alias: Turn on the front door in the evening
   description: ''
   trigger:
-  - below: '-2.0'
+  - below: '-4.0'
     entity_id: sun.sun
     platform: numeric_state
     value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
@@ -21,11 +21,11 @@
     domain: switch
     entity_id: switch.outside
     type: turn_on
-- id: '1581245071438'
-  alias: Turn on the front door light before leaving home
+- id: 'front_door_light_morning'
+  alias: Turn on the front door light in the morning
   description: ''
   trigger:
-  - below: '2'
+  - below: '-4.0'
     entity_id: sun.sun
     platform: numeric_state
     value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
@@ -44,7 +44,7 @@
     domain: switch
     entity_id: switch.outside
     type: turn_on
-- id: '1581273016748'
+- id: 'front_door_light_nighttime_daytime'
   alias: Turn off front door light during the night or during the day
   description: ''
   trigger:
