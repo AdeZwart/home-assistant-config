@@ -61,6 +61,11 @@ group:
      - sensor.energy_production_tarif_1
      - sensor.energy_production_tarif_2
      - sensor.gas_consumption
+  meter_readings_2:
+    name: "Current usage"
+    entities:
+      - sensor.power_consumption_phase_l1
+      - sensor.hourly_gas_consumption
   trash_collection:
     name: "Trash collection"
     entities:
