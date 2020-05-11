@@ -51,24 +51,3 @@ sensor:
     maxevents: 3
   - platform: dsmr
     dsmr_version: 5
-
-group:
-  meter_readings:
-    name: "Meter readings"
-    entities:
-     - sensor.energy_consumption_tarif_1
-     - sensor.energy_consumption_tarif_2
-     - sensor.energy_production_tarif_1
-     - sensor.energy_production_tarif_2
-     - sensor.gas_consumption
-  meter_readings_2:
-    name: "Current usage"
-    entities:
-      - sensor.power_consumption_phase_l1
-      - sensor.hourly_gas_consumption
-  trash_collection:
-    name: "Trash collection"
-    entities:
-     - sensor.afvalkalender_event_0
-     - sensor.afvalkalender_event_1
-     - sensor.afvalkalender_event_2
