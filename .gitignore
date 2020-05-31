@@ -23,6 +23,7 @@ __pycache__
 # Ignore folders
 .storage
 .cloud
+.vscode
 custom_components/
 
 # Other
