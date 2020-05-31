@@ -53,3 +53,45 @@ sensor:
     dsmr_version: 5
   - platform: cert_expiry
     host: !secret base_url
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: swap_use_percent
+      - type: processor_use
+  - platform: template
+    sensors:
+      trash_0:
+        friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_0'', ''name'')}}'
+        value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) | timestamp_custom('%d %b %Y') }}"
+        icon_template: >-
+            {% if 'Plastic' in state_attr('sensor.afvalkalender_event_0', 'name') %}
+              mdi:sack
+            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_0', 'name') %}
+              mdi:trash-can-outline
+            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_0', 'name') %}
+              mdi:package-variant
+            {% endif %}
+      trash_1:
+        friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_1'', ''name'')}}'
+        value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) | timestamp_custom('%d %b %Y') }}"
+        icon_template: >-
+            {% if 'Plastic' in state_attr('sensor.afvalkalender_event_1', 'name') %}
+              mdi:sack
+            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_1', 'name') %}
+              mdi:trash-can-outline
+            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_1', 'name') %}
+              mdi:package-variant
+            {% endif %}
+      trash_2:
+        friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_2'', ''name'')}}'
+        value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_2.attributes.start) | timestamp_custom('%d %b %Y') }}"
+        icon_template: >-
+            {% if 'Plastic' in state_attr('sensor.afvalkalender_event_2', 'name') %}
+              mdi:sack
+            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_2', 'name') %}
+              mdi:trash-can-outline
+            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_2', 'name') %}
+              mdi:package-variant
+            {% endif %}
