@@ -67,7 +67,7 @@
     conditions:
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) - 20000)) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) - 43200)) %}
           true
         {% endif %}
     - condition: template
@@ -91,7 +91,7 @@
     conditions:
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) - 20000)) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) - 43200)) %}
           true
         {% endif %}
     - condition: template
