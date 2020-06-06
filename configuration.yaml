@@ -68,10 +68,10 @@ sensor:
         icon_template: >-
             {% if 'Plastic' in state_attr('sensor.afvalkalender_event_0', 'name') %}
               mdi:sack
-            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_0', 'name') %}
-              mdi:trash-can-outline
             {% elif 'Papier' in state_attr('sensor.afvalkalender_event_0', 'name') %}
               mdi:package-variant
+            {% else %}
+              mdi:trash-can-outline
             {% endif %}
       trash_1:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_1'', ''name'')}}'
@@ -79,10 +79,10 @@ sensor:
         icon_template: >-
             {% if 'Plastic' in state_attr('sensor.afvalkalender_event_1', 'name') %}
               mdi:sack
-            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_1', 'name') %}
-              mdi:trash-can-outline
-            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_1', 'name') %}
+            {% elif 'papier' in state_attr('sensor.afvalkalender_event_1', 'name') %}
               mdi:package-variant
+            {% else %}
+              mdi:trash-can-outline
             {% endif %}
       trash_2:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_2'', ''name'')}}'
@@ -90,8 +90,8 @@ sensor:
         icon_template: >-
             {% if 'Plastic' in state_attr('sensor.afvalkalender_event_2', 'name') %}
               mdi:sack
-            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_2', 'name') %}
-              mdi:trash-can-outline
-            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_2', 'name') %}
+            {% elif 'papier' in state_attr('sensor.afvalkalender_event_2', 'name') %}
               mdi:package-variant
+            {% else %}
+              mdi:trash-can-outline
             {% endif %}
