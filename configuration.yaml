@@ -49,10 +49,13 @@ sensor:
     name: "Afvalkalender"
     url: "https://afvalkalender.cyclusnv.nl/ical/0497200000006797"
     maxevents: 3
+
   - platform: dsmr
     dsmr_version: 5
+
   - platform: cert_expiry
     host: !secret base_url
+
   - platform: systemmonitor
     resources:
       - type: disk_use_percent
@@ -60,6 +63,41 @@ sensor:
       - type: memory_use_percent
       - type: swap_use_percent
       - type: processor_use
+
+  - platform: growatt_server
+    username: !secret growatt_username
+    password: !secret growatt_password
+
+  - platform: nederlandse_spoorwegen
+    api_key: !secret ns_api_key
+
+  - platform: buienradar
+    name: 'Buienradar'
+    monitored_conditions:
+      # Current contition:
+      - stationname
+      - conditiondetailed
+      - symbol
+      - feeltemperature
+      - humidity
+      - temperature
+      - precipitation
+      - precipitation_forecast_average
+      - precipitation_forecast_total
+      # Forecasted contitions:
+      - symbol_1d
+      - temperature_1d
+      - rainchance_1d
+      - rain_1d
+      - minrain_1d
+      - maxrain_1d
+      - symbol_2d
+      - temperature_2d
+      - rainchance_2d
+      - symbol_3d
+      - temperature_3d
+      - rainchance_3d
+
   - platform: template
     sensors:
       trash_0:
@@ -68,10 +106,10 @@ sensor:
         icon_template: >-
             {% if 'Plastic' in state_attr('sensor.afvalkalender_event_0', 'name') %}
               mdi:sack
-            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_0', 'name') %}
-              mdi:trash-can-outline
             {% elif 'Papier' in state_attr('sensor.afvalkalender_event_0', 'name') %}
               mdi:package-variant
+            {% else %}
+              mdi:trash-can-outline
             {% endif %}
       trash_1:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_1'', ''name'')}}'
@@ -79,10 +117,10 @@ sensor:
         icon_template: >-
             {% if 'Plastic' in state_attr('sensor.afvalkalender_event_1', 'name') %}
               mdi:sack
-            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_1', 'name') %}
-              mdi:trash-can-outline
-            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_1', 'name') %}
+            {% elif 'papier' in state_attr('sensor.afvalkalender_event_1', 'name') %}
               mdi:package-variant
+            {% else %}
+              mdi:trash-can-outline
             {% endif %}
       trash_2:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_2'', ''name'')}}'
@@ -90,8 +128,8 @@ sensor:
         icon_template: >-
             {% if 'Plastic' in state_attr('sensor.afvalkalender_event_2', 'name') %}
               mdi:sack
-            {% elif 'Groente' in state_attr('sensor.afvalkalender_event_2', 'name') %}
-              mdi:trash-can-outline
-            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_2', 'name') %}
+            {% elif 'papier' in state_attr('sensor.afvalkalender_event_2', 'name') %}
               mdi:package-variant
+            {% else %}
+              mdi:trash-can-outline
             {% endif %}
