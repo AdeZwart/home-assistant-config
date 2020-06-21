@@ -78,7 +78,7 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald. 0'
+      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
@@ -102,7 +102,7 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald. 1'
+      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.'
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
