@@ -58,7 +58,8 @@
     domain: switch
     entity_id: switch.outside
     type: turn_off
-- alias: 'Trash collection notification 0'
+- id: 'trash_collection_notification_day_before_0'
+  alias: 'Trash collection notification day before 0'
   trigger:
   - platform: time
     at: '19:30'
@@ -82,7 +83,8 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
-- alias: 'Trash collection notification 1' 
+- id: 'trash_collection_notification_day_before_1'
+  alias: 'Trash collection notification day before 1' 
   trigger:
   - platform: time
     at: '19:30'
@@ -106,3 +108,22 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
+- id: 'trash_collection_notification_same_day_0'
+  alias: 'Trash collection notification reminder same day 0'
+  trigger:
+  - platform: time
+    at: '06:15'
+  condition:
+  - condition: template
+    value_template: >
+      {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start))) %}
+        true
+      {% endif %}
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+  - service: notify.telegram_lize
+    data_template:
+      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+   
