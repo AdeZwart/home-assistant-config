@@ -44,6 +44,11 @@ camera:
     still_image_url: !secret frontdoor_ip_cam_still_image_url
     stream_source: !secret frontdoor_ip_cam_stream_source
 
+media_player:
+  - platform: lg_netcast
+    host: !secret lg_ip_address
+    access_token: !secret lg_access_token
+
 sensor:
   - platform: ical
     name: "Afvalkalender"
@@ -83,7 +88,7 @@ sensor:
         from: Bdg
         to: Ut
         time: !secret ns_bu_departure
-      - name: Utrecht - Bodgraven
+      - name: Utrecht - Bodegraven
         from: Ut
         to: Bdg
         time: !secret ns_ub_departure
