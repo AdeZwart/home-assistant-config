@@ -19,6 +19,11 @@ binary_sensor:
   - platform: stookalert
     province: !secret province
 
+  - platform: workday
+    country: NL
+    workdays: [mon, tue, wed, thu, fri]
+    excludes: [sat, sun]
+
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_api_key
@@ -37,6 +42,8 @@ notify:
   - name: telegram_reigeroord
     platform: telegram
     chat_id: !secret chat_id_reigeroord
+
+ffmpeg:
 
 camera:
   - platform: generic
@@ -92,33 +99,6 @@ sensor:
         from: Ut
         to: Bdg
         time: !secret ns_ub_departure
-
-  - platform: buienradar
-    name: 'Buienradar'
-    monitored_conditions:
-      # Current contition:
-      - stationname
-      - conditiondetailed
-      - symbol
-      - feeltemperature
-      - humidity
-      - temperature
-      - precipitation
-      - precipitation_forecast_average
-      - precipitation_forecast_total
-      # Forecasted contitions:
-      - symbol_1d
-      - temperature_1d
-      - rainchance_1d
-      - rain_1d
-      - minrain_1d
-      - maxrain_1d
-      - symbol_2d
-      - temperature_2d
-      - rainchance_2d
-      - symbol_3d
-      - temperature_3d
-      - rainchance_3d
 
   - platform: template
     sensors:
