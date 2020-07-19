@@ -7,20 +7,20 @@
     platform: numeric_state
     value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
   condition:
-  - after: '15:00:00'
-    before: '22:45:00'
-    condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+  - condition: and
+    conditions:
+    - condition: time
+      after: '15:00:00'
+      before: '22:45:00'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
   action:
   - device_id: 5aca4596f22b4a6da91634d6c84681e9
     domain: switch
     entity_id: switch.outside
     type: turn_on
+
 - id: 'front_door_light_morning'
   alias: Turn on the front door light in the morning
   description: ''
@@ -30,20 +30,20 @@
     platform: numeric_state
     value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
   condition:
-  - after: '6:00:00'
-    before: '7:15:00'
-    condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+  - condition: and
+    conditions:
+    - condition: time
+      after: '6:00:00'
+      before: '7:15:00'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
   action:
   - device_id: 5aca4596f22b4a6da91634d6c84681e9
     domain: switch
     entity_id: switch.outside
     type: turn_on
+
 - id: 'front_door_light_nighttime_daytime'
   alias: Turn off front door light during the night or during the day
   description: ''
@@ -58,6 +58,7 @@
     domain: switch
     entity_id: switch.outside
     type: turn_off
+
 - id: 'trash_collection_notification_day_before_0'
   alias: 'Trash collection notification day before 0'
   trigger:
@@ -83,6 +84,7 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+
 - id: 'trash_collection_notification_day_before_1'
   alias: 'Trash collection notification day before 1' 
   trigger:
@@ -108,17 +110,23 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
-- id: 'trash_collection_notification_same_day_0'
-  alias: 'Trash collection notification reminder same day 0'
+
+- id: 'trash_collection_notification_working_day_0'
+  alias: 'Trash collection notification reminder working day 0'
   trigger:
   - platform: time
     at: '06:15'
   condition:
-  - condition: template
-    value_template: >
-      {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start))) %}
-        true
-      {% endif %}
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on' 
+    - condition: template
+      value_template: >
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start))) %}
+          true
+        {% endif %}
   action:
   - service: notify.telegram_andre
     data_template:
@@ -126,4 +134,98 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
-   
+
+- id: 'trash_collection_notification_weekend_day_0' 
+  alias: 'Trash collection notification reminder weekend day 0'
+  trigger:
+  - platform: time
+    at: '07:30'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'off'
+    - condition: template
+      value_template: >
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start)))  %} 
+          true
+        {% endif  %}
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+  - service: notify.telegram_lize
+    data_template:
+      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+
+- id: 'ns_bdg_ut_delayed'
+  alias: 'NS Bdg - Ut delayed'
+  initial_state: false
+  trigger:
+  - platform: time_pattern
+    minutes: "/1"
+  condition:
+    - condition: template
+      value_template: >
+        {% if states.sensor.bodegraven_utrecht.attributes.departure_delay == true %}
+          true
+        {% endif %}
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: '{{states.sensor.bodegraven_utrecht.attributes.departure_time_actual}}'
+
+- id: 'ns_bdg_ut_cancelled'
+  alias: 'NS Bdg - Ut cancelled'
+  initial_state: false
+  trigger:
+  - platform: time_pattern
+    minutes: "/1"
+  condition:
+  - condition: template
+    value_template: >
+      {% if states.sensor.bodegraven_utrecht.attributes.going == false %}
+        true
+      {% endif %}
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: 'De trein van Bodegraven naar Utrecht van {{states.sensor.bodegraven_utrecht.departure_time}} is vervallen.'
+
+- id: 'enable_ns_bdg_ut_delay_cancelled'
+  alias: 'Enable NS Bdg - Ut automation'
+  description: 'Enables the bdg - ut delay and cancelled automations when the state is updated from unknown'
+  trigger:
+    - platform: state
+      entity_id: sensor.bodegraven_utrecht
+      from: 'unknown'
+  condition:    
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  action:
+  - service: homeassistant.turnon
+    entity_id: automation.ns_bdg_ut_delayed
+  - service: homeassistant.turnon
+    entity_id: automation.ns_bdg_ut_cancelled
+
+- id: 'disable_ns_bdg_ut_delay'
+  alias: 'Disable NS Bdg - Ut delayed automation'
+  description: 'Disables the bdg - ut delay automation and resets to all the initial values'
+  trigger:
+    - platform: state
+      entity_id: sensor.bodegraven_utrecht
+      to: 'unknown'
+  action:
+  - service: homeassistant.turnoff
+    entity_id: automation.ns_bdg_ut_delayed
+  - service: homeassistant.turnoff
+    entity_id: automation.ns_bdg_ut_cancelled
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.train_delay_utrecht
+      value: "0"
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.train_delay_utrecht
