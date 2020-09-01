@@ -3,12 +3,21 @@
 default_config:
 
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
- http:
-   base_url: !secret base_url
+# http:
+#    base_url: !secret base_url
 
 # Text to speech
 tts:
   - platform: google_translate
+
+homeassistant:
+  allowlist_external_dirs:
+    - /tmp
+    
+logger:
+  default: warning
+  logs:
+    homeassistant.components.onvif: info
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -75,6 +84,21 @@ sensor:
       - type: memory_use_percent
       - type: swap_use_percent
       - type: processor_use
+
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ (value | multiply(0.001)) | round(1) }}'
+
+  - platform: buienradar
+    monitored_conditions:
+      - feeltemperature
+      - temperature
+      - windspeed
+      - precipitation
+      - precipitation_forecast_average
+      - precipitation_forecast_total
 
   - platform: growatt_server
     username: !secret growatt_username
