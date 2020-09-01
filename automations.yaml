@@ -159,6 +159,36 @@
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
 
+- id: 'system_monitor_temp_alert'
+  alias: 'System monitor high temperature alert'
+  trigger: 
+  - platform: numeric_state
+    entity_id: sensor.cpu_temperature
+    above: '85'
+  action:
+    - service: notify.mobile_app_sgs10_andre
+      data_template:
+        message: 'System temperature at {{states.sensor.cpu_temperature.state_with_unit}}!'
+
+- id: 'front_door_camera_snapshot'
+  alias: 'Create a snapshot of the frontdoor camera and send it with Telegram'
+  trigger:
+    platform: state
+    entity_id: input_boolean.doorbell
+    to: 'on'
+  action:
+    - service: camera.snapshot
+      data:
+        entity_id: camera.frontdoor_camera_1
+        filename: /tmp/frontdoor_snapshot.jpg
+    - service: notify.telegram_andre
+      data: 
+        title: "We hebben een beller!"
+        data:
+          photo:
+            file: /tmp/frontdoor_snapshot.jpg
+            caption: We hebben een beller!
+
 - id: 'ns_bdg_ut_delayed'
   alias: 'NS Bdg - Ut delayed'
   initial_state: false
@@ -205,9 +235,9 @@
     entity_id: binary_sensor.workday_sensor
     state: 'on'
   action:
-  - service: homeassistant.turnon
+  - service: homeassistant.turn_on
     entity_id: automation.ns_bdg_ut_delayed
-  - service: homeassistant.turnon
+  - service: homeassistant.turn_on
     entity_id: automation.ns_bdg_ut_cancelled
 
 - id: 'disable_ns_bdg_ut_delay'
@@ -218,14 +248,11 @@
       entity_id: sensor.bodegraven_utrecht
       to: 'unknown'
   action:
-  - service: homeassistant.turnoff
+  - service: homeassistant.turn_off
     entity_id: automation.ns_bdg_ut_delayed
-  - service: homeassistant.turnoff
+  - service: homeassistant.turn_off
     entity_id: automation.ns_bdg_ut_cancelled
   - service: input_number.set_value
     data_template:
       entity_id: input_number.train_delay_utrecht
       value: "0"
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.train_delay_utrecht
