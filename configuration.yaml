@@ -17,7 +17,7 @@ homeassistant:
 logger:
   default: warning
   logs:
-    homeassistant.components.onvif: info
+    homeassistant.components.onvif: debug
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -102,9 +102,7 @@ sensor:
       - feeltemperature
       - temperature
       - windspeed
-      - precipitation
       - precipitation_forecast_average
-      - precipitation_forecast_total
 
   - platform: growatt_server
     username: !secret growatt_username
@@ -138,7 +136,7 @@ sensor:
         icon_template: >-
             {% if 'Plastic' in state_attr('sensor.afvalkalender_event_0', 'name') %}
               mdi:sack
-            {% elif 'Papier' in state_attr('sensor.afvalkalender_event_0', 'name') %}
+            {% elif 'papier' in state_attr('sensor.afvalkalender_event_0', 'name') %}
               mdi:package-variant
             {% else %}
               mdi:trash-can-outline
