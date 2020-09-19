@@ -65,6 +65,12 @@ media_player:
     host: !secret lg_ip_address
     access_token: !secret lg_access_token
 
+influxdb:
+  host: 192.168.2.10
+  include: 
+    domains:
+      - sensor
+
 sensor:
   - platform: ical
     name: "Afvalkalender"
@@ -137,6 +143,7 @@ sensor:
             {% else %}
               mdi:trash-can-outline
             {% endif %}
+      
       trash_1:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_1'', ''name'')}}'
         value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) | timestamp_custom('%d %b %Y') }}"
@@ -148,6 +155,7 @@ sensor:
             {% else %}
               mdi:trash-can-outline
             {% endif %}
+      
       trash_2:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_2'', ''name'')}}'
         value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_2.attributes.start) | timestamp_custom('%d %b %Y') }}"
@@ -159,3 +167,9 @@ sensor:
             {% else %}
               mdi:trash-can-outline
             {% endif %}
+
+      power_direct_usage:
+        friendly_name: 'Direct Power Usage'
+        unique_id: 'sensor.direct_power_usage'
+        unit_of_measurement: 'W'
+        value_template: "{{ ((states('sensor.growatt_total_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
