@@ -13,7 +13,7 @@ tts:
 homeassistant:
   allowlist_external_dirs:
     - /tmp
-    
+
 logger:
   default: warning
   logs:
@@ -67,9 +67,15 @@ media_player:
 
 influxdb:
   host: 192.168.2.10
-  include: 
+  include:
     domains:
       - sensor
+
+nefiteasy:
+  devices:
+  - serial: !secret nefit_easy_serial
+    accesskey: !secret nefit_easy_accesskey
+    password: !secret nefit_easy_password
 
 sensor:
   - platform: ical
@@ -141,7 +147,7 @@ sensor:
             {% else %}
               mdi:trash-can-outline
             {% endif %}
-      
+
       trash_1:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_1'', ''name'')}}'
         value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) | timestamp_custom('%d %b %Y') }}"
@@ -153,7 +159,7 @@ sensor:
             {% else %}
               mdi:trash-can-outline
             {% endif %}
-      
+
       trash_2:
         friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_2'', ''name'')}}'
         value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_2.attributes.start) | timestamp_custom('%d %b %Y') }}"
