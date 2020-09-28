@@ -90,7 +90,7 @@
   - platform: time
     at: '23:00:00'
   - platform: time
-    at: '7:30:00'
+    at: '8:00:00'
   condition: []
   action:
   - device_id: 5aca4596f22b4a6da91634d6c84681e9
