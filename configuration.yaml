@@ -177,3 +177,15 @@ sensor:
         unique_id: 'sensor.direct_power_usage'
         unit_of_measurement: 'W'
         value_template: "{{ ((states('sensor.growatt_total_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
+
+      nefit_temperature:
+        friendly_name: 'Nefit Set temperature'
+        unique_id: 'sensor.nefit_temperature'
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('climate.nefit', 'temperature') }}"
+
+      nefit_current_temperature:
+        friendly_name: 'Nefit Current temperature'
+        unique_id: 'sensor.nefit_current_temperature'
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('climate.nefit', 'current_temperature') }}"
