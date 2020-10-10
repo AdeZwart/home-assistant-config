@@ -189,3 +189,9 @@ sensor:
         unique_id: 'sensor.nefit_current_temperature'
         unit_of_measurement: '°C'
         value_template: "{{ state_attr('climate.nefit', 'current_temperature') }}"
+
+      office_temperature:
+        friendly_name: 'Office Current temperature'
+        unique_id: 'sensor.office_current_temperature'
+        unit_of_measurement: '°C'
+        value_template: "{{ state_attr('climate.office', 'current_temperature') }}"
