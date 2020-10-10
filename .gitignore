@@ -26,6 +26,7 @@ __pycache__
 .vscode
 custom_components/
 www/
+image/
 
 # Other
 ip_bans.yaml
