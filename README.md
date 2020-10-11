@@ -27,6 +27,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Buienradar
 * Certificate Expiry
 * DSML Slimme meter (Dutch Smart Meter Requirements)
+* Google Chromecast
 * Growatt solar panels
 * Ikea tradfri
 * Influx DB
