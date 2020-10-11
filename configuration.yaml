@@ -77,6 +77,11 @@ nefiteasy:
     accesskey: !secret nefit_easy_accesskey
     password: !secret nefit_easy_password
 
+pi_hole:
+  host: 192.168.2.10
+  name: pihole
+  api_key: !secret pi_hole_api_token
+
 sensor:
   - platform: ical
     name: "Afvalkalender"
