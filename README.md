@@ -29,6 +29,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * DSML Slimme meter (Dutch Smart Meter Requirements)
 * Growatt solar panels
 * Ikea tradfri
+* Influx DB
 * Mobile App (android)
 * NS (Dutch railways)
 * Onvif
@@ -48,10 +49,14 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Notifications for trash collection
 * Front door light (evening and morning)
 * Central heating pressure notifications
-* System momnitor temperature notifications
+* System monitor temperature notifications
 
 ## Wishlist
 * Roborock S5 Max integration
+* Control Somfy sunscreens (433mhz)
+* Smoke detector integration (433mhz)
+* Shelly 1 and 2.5
+* Shelly doorsensors
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
