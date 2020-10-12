@@ -14,6 +14,8 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://hub.docker.com/r/linuxserver/swag)
 
+See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
+
 ## Tooling
 * [VS Code](https://code.visualstudio.com/download)
   * [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant)
@@ -23,6 +25,8 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
   * [SSH](https://docs.microsoft.com/en-us/windows/terminal/tutorials/ssh)
 
 ## Devices
+
+
 ### Official integrations
 * Buienradar
 * Certificate Expiry
@@ -31,6 +35,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Growatt solar panels
 * Ikea tradfri
 * Influx DB
+* LG Netcast
 * Mobile App (android)
 * NS (Dutch railways)
 * Onvif
@@ -54,10 +59,11 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 
 ## Wishlist
 * Roborock S5 Max integration
-* Control Somfy sunscreens (433mhz)
+* Somfy sunscreen control (433mhz)
 * Smoke detector integration (433mhz)
 * Shelly 1 and 2.5
-* Shelly doorsensors
+* Shelly door sensors
+* Xiaomi Aqara Temperature Humidity Sensors
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
