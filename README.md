@@ -43,7 +43,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 * Stookalert
 * System monitor
 * Telegram
-
+* Xiaomi Roborock S5 Max
+  
 ### HACS integrations
 * Adax heating
 * HACS
@@ -59,7 +60,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 * System monitor temperature notifications
 
 ## Wishlist
-* Roborock S5 Max integration
 * Somfy sunscreen control (433mhz)
 * Smoke detector integration (433mhz)
 * Shelly 1 and 2.5
