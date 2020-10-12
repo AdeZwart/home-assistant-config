@@ -26,7 +26,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 
 ## Devices
 
-
 ### Official integrations
 * Buienradar
 * Certificate Expiry
@@ -51,6 +50,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 * iCal
 * Nefit easy
 
+### Custom integrations
+
 ## Automations
 * Notifications for trash collection
 * Front door light (evening and morning)
@@ -64,6 +65,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 * Shelly 1 and 2.5
 * Shelly door sensors
 * Xiaomi Aqara Temperature Humidity Sensors
+* [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
+* Custom integration for trash bin usage
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
