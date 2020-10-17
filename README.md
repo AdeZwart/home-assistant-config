@@ -67,6 +67,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 * Xiaomi Aqara Temperature Humidity Sensors
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for trash bin usage
+* Add a MQTT Broker 
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
