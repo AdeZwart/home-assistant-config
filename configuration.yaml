@@ -66,7 +66,7 @@ media_player:
     access_token: !secret lg_access_token
 
 influxdb:
-  host: 192.168.2.10
+  host: 192.168.2.100
   include:
     domains:
       - sensor
@@ -78,7 +78,7 @@ nefiteasy:
     password: !secret nefit_easy_password
 
 pi_hole:
-  host: 192.168.2.10
+  host: 192.168.2.100
   name: pihole
   api_key: !secret pi_hole_api_token
 
