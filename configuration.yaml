@@ -84,7 +84,7 @@ pi_hole:
 
 vacuum:
   - platform: xiaomi_miio
-    host: 192.168.2.4
+    host: 192.168.2.176
     token: !secret roborock_token
 
 sensor:
