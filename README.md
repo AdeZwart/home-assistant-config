@@ -14,8 +14,6 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://hub.docker.com/r/linuxserver/swag)
 
-See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
-
 ## Tooling
 * [VS Code](https://code.visualstudio.com/download)
   * [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant)
@@ -27,11 +25,11 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 ## Devices
 
 ### Official integrations
-* Buienradar
+* Buienradar (Dutch weather forecast)
 * Certificate Expiry
 * DSML Slimme meter (Dutch Smart Meter Requirements)
 * Google Chromecast
-* Growatt solar panels
+* Growatt inverter for photovoltaic plant
 * Ikea tradfri
 * Influx DB
 * LG Netcast
@@ -46,8 +44,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 * Xiaomi Roborock S5 Max
   
 ### HACS integrations
-* Adax heating
 * HACS
+* Adax heating
 * iCal
 * Nefit easy
 
@@ -66,8 +64,9 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
 * Shelly door sensors
 * Xiaomi Aqara Temperature Humidity Sensors
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
-* Custom integration for trash bin usage
-* Add a MQTT Broker 
+* Custom integration for underground trash container usage
+* MQTT Broker (for Shelly and DIY cat feeder)
+* Doorbell automation 
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
@@ -76,6 +75,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-setup)
   * [InfluxDB, Grafana & Home Assistant - Pt 2.](https://youtu.be/rMaU69am_cg)
   * [Pi-hole, Add-blocks and Home Assistant](https://youtu.be/yMbpxB39X1Y)
   * [LetsEncrypt with NginX for Home Assistant](https://youtu.be/oN1qPl3Yve8)
+* [Frenck - DIY smart doorbell for just 2 dollar](https://frenck.dev/diy-smart-doorbell-for-just-2-dollar/)
 
 ## A curated list of awesome Home Assistant resources
 [Awesome Home Assistant](https://www.awesome-ha.com/)
