@@ -1,27 +1,29 @@
-- id: 'front_door_light_evening_sun_elevation'
+- id: front_door_light_evening_sun_elevation
   alias: Turn on the front door light in the evening based on the sun elevation
   description: ''
   trigger:
   - platform: numeric_state
     entity_id: sun.sun
-    below: '-4.0'
-    value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
+    attribute: elevation
+    below: '-4.0'  
   condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
-    - condition: time
-      after: '16:00:00'
-      before: '22:45:00'
+  - condition: time
+    after: '16:00:00'
+    before: '22:45:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
   action:
   - device_id: 5aca4596f22b4a6da91634d6c84681e9
     domain: switch
     entity_id: switch.outside
     type: turn_on
+  mode: single
 
-- id: 'front_door_light_evening_timed'
+- id: front_door_light_evening_timed
   alias: Turn on the front door light in the evening based on the time
   description: ''
   trigger:
@@ -35,15 +37,16 @@
       state: 'on'
     - condition: numeric_state
       entity_id: sun.sun
+      attribute: elevation
       below: '-4.0'
-      value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
   action:
   - device_id: 5aca4596f22b4a6da91634d6c84681e9
     domain: switch
     entity_id: switch.outside
     type: turn_on
+  mode: single
 
-- id: 'front_door_light_morning_timed'
+- id: front_door_light_morning_timed
   alias: Turn on the front door light in the morning based on the time
   description: ''
   trigger:
@@ -58,21 +61,22 @@
     - condition: numeric_state
       entity_id: sun.sun
       below: '-4.0'
-      value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
+      attribute: elevation
   action:
   - device_id: 5aca4596f22b4a6da91634d6c84681e9
     domain: switch
     entity_id: switch.outside
     type: turn_on
+  mode: single
 
-- id: 'front_door_light_morning_sun_elevation'
+- id: front_door_light_morning_sun_elevation
   alias: Turn off the front door light in the morning based on the sun elevation
   description: ''
   trigger:
   - platform: numeric_state
     entity_id: sun.sun
     above: '-3.0'
-    value_template: '{{ state_attr(''sun.sun'', ''elevation'') }}'
+    attribute: elevation
   condition: 
     - condition: state
       entity_id: binary_sensor.workday_sensor
@@ -82,8 +86,9 @@
     domain: switch
     entity_id: switch.outside
     type: turn_off
+  mode: single
 
-- id: 'front_door_light_nighttime_daytime'
+- id: front_door_light_nighttime_daytime
   alias: Turn off front door light during the night or during the day
   description: ''
   trigger:
@@ -97,8 +102,9 @@
     domain: switch
     entity_id: switch.outside
     type: turn_off
+  mode: single
 
-- id: 'trash_collection_notification_day_before_0'
+- id: trash_collection_notification_day_before_0
   alias: 'Trash collection notification day before 0'
   trigger:
   - platform: time
@@ -123,8 +129,9 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+  mode: single
 
-- id: 'trash_collection_notification_day_before_1'
+- id: trash_collection_notification_day_before_1
   alias: 'Trash collection notification day before 1' 
   trigger:
   - platform: time
@@ -149,8 +156,9 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
+  mode: single
 
-- id: 'trash_collection_notification_working_day_0'
+- id: trash_collection_notification_working_day_0
   alias: 'Trash collection notification reminder working day 0'
   trigger:
   - platform: time
@@ -173,8 +181,9 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+  mode: single
 
-- id: 'trash_collection_notification_weekend_day_0' 
+- id: trash_collection_notification_weekend_day_0'
   alias: 'Trash collection notification reminder weekend day 0'
   trigger:
   - platform: time
@@ -197,8 +206,9 @@
   - service: notify.telegram_lize
     data_template:
       message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+  mode: single
 
-- id: 'central_heating_pressure_low_alert'
+- id: central_heating_pressure_low_alert
   alias: 'Central heating system pressure low alert'
   trigger:
   - platform: numeric_state
@@ -208,8 +218,9 @@
     - service: notify.mobile_app_sgs10_andre
       data_template:
         message: 'Low CV System pressure! Pressure at {{states.sensor.nefit_cv_pressure.state_with_unit}}!'
-        
-- id: 'central_heating_pressure_high_alert'
+  mode: single
+
+- id: central_heating_pressure_high_alert
   alias: 'Central heating system pressure high alert'
   trigger:
   - platform: numeric_state
@@ -219,8 +230,9 @@
     - service: notify.mobile_app_sgs10_andre
       data_template:
         message: 'High CV System pressure! Pressure at {{states.sensor.nefit_cv_pressure.state_with_unit}}!'
+  mode: single
 
-- id: 'system_monitor_temp_alert'
+- id: system_monitor_temp_alert
   alias: 'System monitor high temperature alert'
   trigger: 
   - platform: numeric_state
@@ -230,8 +242,9 @@
     - service: notify.mobile_app_sgs10_andre
       data_template:
         message: 'System temperature at {{states.sensor.cpu_temperature.state_with_unit}}!'
+  mode: single
 
-- id: 'front_door_camera_snapshot'
+- id: front_door_camera_snapshot
   alias: 'Send frontdoor camera snapshot with Telegram'
   trigger:
     platform: state
@@ -250,8 +263,9 @@
           photo:
             file: /tmp/frontdoor_snapshot.jpg
             caption: We hebben een beller!
+  mode: single
 
-- id: 'ns_bdg_ut_delayed'
+- id: ns_bdg_ut_delayed
   alias: 'NS Bdg - Ut delayed'
   initial_state: false
   trigger:
@@ -267,8 +281,9 @@
   - service: notify.telegram_andre
     data_template:
       message: "{{states.sensor.bodegraven_utrecht.attributes.departure_time_actual}}"
+  mode: single
 
-- id: 'ns_bdg_ut_cancelled'
+- id: ns_bdg_ut_cancelled
   alias: 'NS Bdg - Ut cancelled'
   initial_state: false
   trigger:
@@ -284,8 +299,9 @@
   - service: notify.telegram_andre
     data_template:
       message: 'De trein van Bodegraven naar Utrecht van {{states.sensor.bodegraven_utrecht.attributes.departure_time_planned}} is vervallen.'
+  mode: single
 
-- id: 'enable_ns_bdg_ut_delay_cancelled'
+- id: enable_ns_bdg_ut_delay_cancelled
   alias: 'Enable NS Bdg - Ut automation'
   description: 'Enables the bdg - ut delay and cancelled automations when the state is updated from unknown'
   trigger:
@@ -301,8 +317,9 @@
     entity_id: automation.ns_bdg_ut_delayed
   - service: homeassistant.turn_on
     entity_id: automation.ns_bdg_ut_cancelled
+  mode: single
 
-- id: 'disable_ns_bdg_ut_delay'
+- id: disable_ns_bdg_ut_delay
   alias: 'Disable NS Bdg - Ut delayed automation'
   description: 'Disables the bdg - ut delay automation and resets to all the initial values'
   trigger:
@@ -318,3 +335,4 @@
     data_template:
       entity_id: input_number.train_delay_utrecht
       value: "0"
+  mode: single      
