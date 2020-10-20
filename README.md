@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-0.116.2%20-darkblue)](https://github.com/home-assistant/core/releases/tag/0.116.2)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-0.116.2%20-darkblue)](https://github.com/home-assistant/core/releases/tag/0.116.4)
 
 # Home Assistant configuration
 
