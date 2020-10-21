@@ -17,10 +17,8 @@
     - thu
     - fri
   action:
-  - device_id: 5aca4596f22b4a6da91634d6c84681e9
-    domain: switch
-    entity_id: switch.outside
-    type: turn_on
+  - service: switch.turn_on
+    entity_id: switch.outside    
   mode: single
 
 - id: front_door_light_evening_timed
@@ -39,11 +37,9 @@
       entity_id: sun.sun
       attribute: elevation
       below: '-4.0'
-  action:
-  - device_id: 5aca4596f22b4a6da91634d6c84681e9
-    domain: switch
+  action:    
+  - service: switch.turn_on
     entity_id: switch.outside
-    type: turn_on
   mode: single
 
 - id: front_door_light_morning_timed
@@ -63,10 +59,8 @@
       below: '-4.0'
       attribute: elevation
   action:
-  - device_id: 5aca4596f22b4a6da91634d6c84681e9
-    domain: switch
+  - service: switch.turn_on
     entity_id: switch.outside
-    type: turn_on
   mode: single
 
 - id: front_door_light_morning_sun_elevation
@@ -77,15 +71,9 @@
     entity_id: sun.sun
     above: '-3.0'
     attribute: elevation
-  condition: 
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
   action:
-  - device_id: 5aca4596f22b4a6da91634d6c84681e9
-    domain: switch
+  - service: switch.turn_off
     entity_id: switch.outside
-    type: turn_off
   mode: single
 
 - id: front_door_light_nighttime_daytime
@@ -98,10 +86,8 @@
     at: '8:00:00'
   condition: []
   action:
-  - device_id: 5aca4596f22b4a6da91634d6c84681e9
-    domain: switch
+  - service: switch.turn_off
     entity_id: switch.outside
-    type: turn_off
   mode: single
 
 - id: trash_collection_notification_day_before_0
