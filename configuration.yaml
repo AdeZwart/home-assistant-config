@@ -87,6 +87,34 @@ vacuum:
     host: 192.168.2.176
     token: !secret roborock_token
 
+monitor_docker:
+  - name: Docker
+    containers:
+      - home-assistant
+      - influxdb
+      - grafana
+      - portainer
+      - swag
+      - pihole
+    rename:
+      home-assistant: Home Assistant
+      influxdb: InfluxDB
+      grafana: Grafana
+      portainer: Portainer
+      swag: Secure Web Application Gateway
+      pihole: Pi Hole
+    monitored_conditions:
+      - version
+      - containers_total
+      - containers_running
+      - containers_paused
+      - containers_stopped
+      - containers_cpu_percentage
+      - images
+      - uptime
+      - image
+      - cpu_percentage
+
 sensor:
   - platform: ical
     name: "Afvalkalender"
