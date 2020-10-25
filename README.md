@@ -48,8 +48,10 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Adax heating
 * iCal
 * Nefit easy
+* Monitor Docker
 
 ### Custom integrations
+* -
 
 ## Automations
 * Notifications for trash collection

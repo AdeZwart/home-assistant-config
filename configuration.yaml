@@ -110,10 +110,14 @@ monitor_docker:
       - containers_paused
       - containers_stopped
       - containers_cpu_percentage
+      - containers_memory
+      - containers_memory_percentage
       - images
       - uptime
       - image
       - cpu_percentage
+      - memory
+      - memory_percentage
 
 sensor:
   - platform: ical

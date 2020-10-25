@@ -218,6 +218,57 @@
         message: 'High CV System pressure! Pressure at {{states.sensor.nefit_cv_pressure.state_with_unit}}!'
   mode: single
 
+- id: set_tv_watching_ambiance
+  alias: 'Set TV watching ambiance when Chromecast starts playing'
+  trigger:
+    - platform: state
+      entity_id: media_player.blackcast
+      to: playing
+  action:
+    - service: light.turn_on
+      data: 
+        entity_id: light.tv_meubel_links
+        brightness_pct: 50
+        color_temp: 370
+    - service: light.turn_on
+      data: 
+        entity_id: light.tv_meubel_rechts
+        brightness_pct: 50
+        color_temp: 370
+  mode: single
+
+- id: start_vacuuming
+  alias: Start vacuuming
+  trigger:
+    platform: state
+    entity_id: input_boolean.vacuum
+    to: 'on'
+  action:
+    - service: vacuum.start
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+
+- id: set_house_sleep_mode
+  alias: House sleep mode (lights and heating off)
+  trigger:
+    platform: state
+    entity_id: input_boolean.snooze
+    to: 'on'
+  action:
+    - service: light.turn_off
+      entity_id: light.tv_meubel_links
+    - service: light.turn_off
+      entity_id: light.tv_meubel_rechts
+    - service: light.turn_off
+      entity_id: light.tradfri_driver
+    - service: light.turn_off
+      entity_id: light.test_lamp
+    - service: climate.turn_off
+      entity_id: climate.office
+    - service: media_player.turn_off
+      entity_id: media_player.lg_tv_remote
+  mode: single
+
 - id: system_monitor_temp_alert
   alias: 'System monitor high temperature alert'
   trigger: 
