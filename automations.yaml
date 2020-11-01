@@ -235,6 +235,8 @@
         entity_id: light.tv_meubel_rechts
         brightness_pct: 50
         color_temp: 370
+    - service: switch.turn_off
+      entity_id: switch.livingroom_shelly_channel_1
   mode: single
 
 - id: start_vacuuming
@@ -247,6 +249,8 @@
     - service: vacuum.start
       data:
         entity_id: vacuum.xiaomi_vacuum_cleaner
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.vacuum
   mode: single
 
 - id: notification_goto_trash_bin
@@ -254,11 +258,11 @@
   trigger:
   - platform: time
     at: '20:00:00'
-  # condition:
-  #   condition: time
-  #   weekday:
-  #     - wed
-  #     - sat
+  condition:
+    condition: time
+    weekday:
+      - wed
+      - sat
   action:
     - service: notify.mobile_app_sgs10_andre
       data:
@@ -307,6 +311,16 @@
       entity_id: climate.office
     - service: media_player.turn_off
       entity_id: media_player.lg_tv_remote
+    - service: switch.turn_off
+      entity_id: switch.livingroom_shelly_channel_1
+    - service: switch.turn_off
+      entity_id: switch.livingroom_shelly_channel_2
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.nefit
+        temperature: 17
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.snooze
   mode: single
 
 - id: system_monitor_temp_alert
@@ -340,6 +354,8 @@
           photo:
             file: /tmp/frontdoor_snapshot.jpg
             caption: We hebben een beller!
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.doorbell
   mode: single
 
 - id: ns_bdg_ut_delayed
