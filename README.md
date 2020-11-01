@@ -64,6 +64,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Smoke detector integration (433mhz)
 * Shelly 1 and 2.5
 * Shelly door sensors
+* Samsung TV
 * Xiaomi Aqara Temperature Humidity Sensors
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
