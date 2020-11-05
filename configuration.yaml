@@ -90,12 +90,13 @@ vacuum:
 monitor_docker:
   - name: Docker
     containers:
+      - grafana
       - home-assistant
       - influxdb
-      - grafana
+      - mosquitto
+      - pihole
       - portainer
       - swag
-      - pihole
     rename:
       home-assistant: Home Assistant
       influxdb: InfluxDB

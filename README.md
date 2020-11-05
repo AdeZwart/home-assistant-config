@@ -10,6 +10,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 ## Other containers
 * [Grafana](https://hub.docker.com/r/grafana/grafana)
 * [InfluxDB](https://hub.docker.com/_/influxdb)
+* [Mosquitto](https://hub.docker.com/_/eclipse-mosquitto)
 * [Pi Hole](https://hub.docker.com/r/pihole/pihole)
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://hub.docker.com/r/linuxserver/swag)
@@ -26,6 +27,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 
 ### Official integrations
 * Buienradar (Dutch weather forecast)
+* Camera (Generic IP camera)
 * Certificate Expiry
 * DSML Slimme meter (Dutch Smart Meter Requirements)
 * Google Chromecast
@@ -34,9 +36,11 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Influx DB
 * LG Netcast
 * Mobile App (android)
+* MQTT
 * NS (Dutch railways)
 * Onvif
 * Pi-Hole
+* Shelly
 * Speedtest
 * Stookalert
 * System monitor
@@ -44,11 +48,11 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Xiaomi Roborock S5 Max
   
 ### HACS integrations
-* HACS
 * Adax heating
+* HACS
 * iCal
-* Nefit easy
 * Monitor Docker
+* Nefit easy
 
 ### Custom integrations
 * -
@@ -58,18 +62,19 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Front door light (evening and morning)
 * Central heating pressure notifications
 * System monitor temperature notifications
+* Lighting adjustment when streaming on the living room Chrome Cast
+* Manually triggered bed-time routine
+* Actionable notification reminder to have the Roborock report at the trashbin to empty the dustbin
 
 ## Wishlist
 * Somfy sunscreen control (433mhz)
 * Smoke detector integration (433mhz)
-* Shelly 1 and 2.5
-* Shelly door sensors
+* Door sensors
 * Samsung TV
 * Xiaomi Aqara Temperature Humidity Sensors
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
-* MQTT Broker (for Shelly and DIY cat feeder)
-* Doorbell automation 
+* Smart Doorbell
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
