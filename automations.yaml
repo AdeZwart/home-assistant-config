@@ -90,6 +90,23 @@
     entity_id: switch.outside
   mode: single
 
+- id: turn_on_front_door_light_when_coming_home
+  alias: Turn on front door light when coming homeassistant
+  trigger:
+  - platform: geo_location
+    source: device_tracker.sm_g973f
+    zone: zone.home
+    event: enter
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '-3.0'    
+  action:
+  - service: switch.turn_on
+    entity_id: switch.outside
+  mode: single
+
 - id: trash_collection_notification_day_before_0
   alias: 'Trash collection notification day before 0'
   trigger:
