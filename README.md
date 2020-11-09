@@ -29,7 +29,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Buienradar (Dutch weather forecast)
 * Camera (Generic IP camera)
 * Certificate Expiry
-* DSML Slimme meter (Dutch Smart Meter Requirements)
+* DSMR Slimme meter (Dutch Smart Meter Requirements)
 * Google Chromecast
 * Growatt inverter for photovoltaic plant
 * Ikea tradfri
@@ -59,7 +59,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 
 ## Automations
 * Notifications for trash collection
-* Front door light (evening and morning)
+* Front door light (evening, morning and when coming home while dark)
 * Central heating pressure notifications
 * System monitor temperature notifications
 * Lighting adjustment when streaming on the living room Chrome Cast
