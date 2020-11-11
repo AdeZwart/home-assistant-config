@@ -11,6 +11,7 @@ tts:
   - platform: google_translate
 
 homeassistant:
+  customize: !include customize.yaml
   allowlist_external_dirs:
     - /tmp
 
