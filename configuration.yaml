@@ -18,6 +18,7 @@ homeassistant:
 logger:
   default: warning
   logs:
+    homeassistant.components.webhook: debug
     homeassistant.components.onvif: debug
 
 group: !include groups.yaml
