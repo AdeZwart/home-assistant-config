@@ -37,6 +37,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * LG Netcast
 * Mobile App (android)
 * MQTT
+  * Smart doorbell (ESPHome based)
 * NS (Dutch railways)
 * Onvif
 * Pi-Hole
@@ -65,6 +66,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Lighting adjustment when streaming on the living room Chrome Cast
 * Manually triggered bed-time routine
 * Actionable notification reminder to have the Roborock report at the trashbin to empty the dustbin
+* Send a camera snapshot to Telegram when the doorbell is pressed
 
 ## Wishlist
 * Somfy sunscreen control (433mhz)
@@ -74,7 +76,6 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * Xiaomi Aqara Temperature Humidity Sensors
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
-* Smart Doorbell
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)

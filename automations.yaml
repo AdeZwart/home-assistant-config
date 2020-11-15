@@ -366,7 +366,7 @@
   alias: 'Send frontdoor camera snapshot with Telegram'
   trigger:
     platform: state
-    entity_id: input_boolean.doorbell
+    entity_id: binary_sensor.doorbell_button
     to: 'on'
   action:
     - service: camera.snapshot
@@ -380,9 +380,15 @@
         data:
           photo:
             file: /tmp/frontdoor_snapshot.jpg
-            caption: We hebben een beller!
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.doorbell
+            caption: We hebben een beller!    
+    - service: notify.telegram_lize
+      data: 
+        title: "frontdoor snapshot"
+        message: "frontdoor snapshot"
+        data:
+          photo:
+            file: /tmp/frontdoor_snapshot.jpg
+            caption: We hebben een beller!  
   mode: single
 
 - id: ns_bdg_ut_delayed
