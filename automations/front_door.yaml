@@ -1,0 +1,51 @@
+- id: front_door_camera_snapshot_when_doorbell_is_pressed
+  alias: 'Send frontdoor camera snapshot with Telegram when the doorbell is pressed'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.doorbell_button
+    to: 'on'
+  action:
+    - service: camera.snapshot
+      data:
+        entity_id: camera.frontdoor_camera_1
+        filename: /tmp/frontdoor_snapshot.jpg
+    - service: notify.telegram_andre
+      data: 
+        title: "frontdoor snapshot"
+        message: "frontdoor snapshot"
+        data:
+          photo:
+            file: /tmp/frontdoor_snapshot.jpg
+            caption: We hebben een beller!    
+    - service: notify.telegram_lize
+      data: 
+        title: "frontdoor snapshot"
+        message: "frontdoor snapshot"
+        data:
+          photo:
+            file: /tmp/frontdoor_snapshot.jpg
+            caption: We hebben een beller!
+    - delay: '00:00:30'
+  mode: single
+
+- id: front_door_camera_motion
+  alias: 'Send frontdoor camera snapshot when motion is detected'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.mymotiondetectorrule_cell_motion_detection
+    to: 'on'
+  action:
+    - service: camera.snapshot
+      data:
+        entity_id: camera.frontdoor_camera_1
+        filename: /tmp/frontdoor_snapshot.jpg
+    - service: notify.telegram_andre
+      data: 
+        title: "frontdoor snapshot"
+        message: "frontdoor snapshot"
+        data:
+          photo:
+            file: /tmp/frontdoor_snapshot.jpg
+            caption: Motion detected!
+    - delay: '00:01:00'
+  mode: single

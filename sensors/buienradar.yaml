@@ -1,0 +1,6 @@
+  - platform: buienradar
+    monitored_conditions:
+      - feeltemperature
+      - temperature
+      - windspeed
+      - precipitation_forecast_average

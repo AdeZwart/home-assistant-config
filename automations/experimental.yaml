@@ -1,0 +1,92 @@
+- id: set_tv_watching_ambiance
+  alias: 'Set TV watching ambiance when Chromecast starts playing'
+  trigger:
+    - platform: state
+      entity_id: media_player.blackcast
+      to: playing
+  action:
+    - service: light.turn_on
+      data: 
+        entity_id: light.tv_meubel_links
+        brightness_pct: 50
+        color_temp: 370
+    - service: light.turn_on
+      data: 
+        entity_id: light.tv_meubel_rechts
+        brightness_pct: 50
+        color_temp: 370
+    - service: switch.turn_off
+      entity_id: switch.livingroom_shelly_channel_1
+  mode: single
+
+- id: ns_bdg_ut_delayed
+  alias: 'NS Bdg - Ut delayed'
+  initial_state: false
+  trigger:
+  - platform: time_pattern
+    minutes: "/1"
+  condition:
+    - condition: template
+      value_template: >
+        {% if state_attr('sensor.bodegraven_utrecht', 'departure_delay') == true %}
+          true
+        {% endif %}
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: "{{states.sensor.bodegraven_utrecht.attributes.departure_time_actual}}"
+  mode: single
+
+- id: ns_bdg_ut_cancelled
+  alias: 'NS Bdg - Ut cancelled'
+  initial_state: false
+  trigger:
+  - platform: time_pattern
+    minutes: "/1"
+  condition:
+  - condition: template
+    value_template: >
+      {% if state_attr('sensor.bodegraven_utrecht', 'going') == false %}
+        true
+      {% endif %}
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: 'De trein van Bodegraven naar Utrecht van {{states.sensor.bodegraven_utrecht.attributes.departure_time_planned}} is vervallen.'
+  mode: single
+
+- id: enable_ns_bdg_ut_delay_cancelled
+  alias: 'Enable NS Bdg - Ut automation'
+  description: 'Enables the bdg - ut delay and cancelled automations when the state is updated from unknown'
+  trigger:
+    - platform: state
+      entity_id: sensor.bodegraven_utrecht
+      from: 'unknown'
+  condition:    
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: automation.ns_bdg_ut_delayed
+  - service: homeassistant.turn_on
+    entity_id: automation.ns_bdg_ut_cancelled
+  mode: single
+
+- id: disable_ns_bdg_ut_delay
+  alias: 'Disable NS Bdg - Ut delayed automation'
+  description: 'Disables the bdg - ut delay automation and resets to all the initial values'
+  trigger:
+    - platform: state
+      entity_id: sensor.bodegraven_utrecht
+      to: 'unknown'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: automation.ns_bdg_ut_delayed
+  - service: homeassistant.turn_off
+    entity_id: automation.ns_bdg_ut_cancelled
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.train_delay_utrecht
+      value: "0"
+  mode: single      

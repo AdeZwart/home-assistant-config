@@ -1,0 +1,3 @@
+  - platform: growatt_server
+    username: !secret growatt_username
+    password: !secret growatt_password
