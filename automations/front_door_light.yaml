@@ -1,0 +1,108 @@
+- id: front_door_light_evening_sun_elevation
+  alias: Turn on the front door light in the evening based on the sun elevation
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '-4.0'  
+  condition:
+  - condition: time
+    after: '16:00:00'
+    before: '22:45:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: switch.turn_on
+    entity_id: switch.outside    
+  mode: single
+
+- id: front_door_light_evening_timed
+  alias: Turn on the front door light in the evening based on the time
+  description: ''
+  trigger:
+  - platform: time
+    at: '16:00:00'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: '-4.0'
+  action:    
+  - service: switch.turn_on
+    entity_id: switch.outside
+  mode: single
+
+- id: front_door_light_morning_timed
+  alias: Turn on the front door light in the morning based on the time
+  description: ''
+  trigger:
+  - platform: time
+    at: '06:00:00'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sun.sun
+      below: '-4.0'
+      attribute: elevation
+  action:
+  - service: switch.turn_on
+    entity_id: switch.outside
+  mode: single
+
+- id: front_door_light_morning_sun_elevation
+  alias: Turn off the front door light in the morning based on the sun elevation
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    above: '-3.0'
+    attribute: elevation
+  action:
+  - service: switch.turn_off
+    entity_id: switch.outside
+  mode: single
+
+- id: front_door_light_nighttime_daytime
+  alias: Turn off front door light during the night or during the day
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  - platform: time
+    at: '8:00:00'
+  condition: []
+  action:
+  - service: switch.turn_off
+    entity_id: switch.outside
+  mode: single
+
+- id: turn_on_front_door_light_when_coming_home
+  alias: Turn on front door light when coming homeassistant
+  trigger:
+  - platform: geo_location
+    source: device_tracker.sm_g973f
+    zone: zone.home
+    event: enter
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '-3.0'    
+  action:
+  - service: switch.turn_on
+    entity_id: switch.outside
+  mode: single

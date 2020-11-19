@@ -2,10 +2,6 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#    base_url: !secret base_url
-
 # Text to speech
 tts:
   - platform: google_translate
@@ -13,18 +9,13 @@ tts:
 homeassistant:
   customize: !include customize.yaml
   allowlist_external_dirs:
-    - /tmp
-
-logger:
-  default: warning
-  logs:
-    homeassistant.components.webhook: debug
-    homeassistant.components.onvif: debug
+    - /tmp    
 
 group: !include groups.yaml
-automation: !include automations.yaml
+automation: !include_dir_merge_list automations
 script: !include scripts.yaml
 scene: !include scenes.yaml
+sensor: !include_dir_merge_list sensors
 
 binary_sensor:
   - platform: stookalert
@@ -121,122 +112,3 @@ monitor_docker:
       - cpu_percentage
       - memory
       - memory_percentage
-
-sensor:
-  - platform: ical
-    name: "Afvalkalender"
-    url: "https://afvalkalender.cyclusnv.nl/ical/0497200000006797"
-    maxevents: 3
-
-  - platform: dsmr
-    dsmr_version: 5
-
-  - platform: cert_expiry
-    host: !secret base_url
-
-  - platform: systemmonitor
-    resources:
-      - type: disk_use_percent
-        arg: /
-      - type: memory_use_percent
-      - type: swap_use_percent
-      - type: processor_use
-
-  - platform: command_line
-    name: CPU Temperature
-    command: "cat /sys/class/thermal/thermal_zone0/temp"
-    unit_of_measurement: "°C"
-    value_template: '{{ (value | multiply(0.001)) | round(1) }}'
-
-  - platform: buienradar
-    monitored_conditions:
-      - feeltemperature
-      - temperature
-      - windspeed
-      - precipitation_forecast_average
-
-  - platform: growatt_server
-    username: !secret growatt_username
-    password: !secret growatt_password
-
-  - platform: nederlandse_spoorwegen
-    api_key: !secret ns_api_key
-    routes:
-      - name: Bodegraven - Leiden
-        from: Bdg
-        to: Ledn
-        time: !secret ns_bl_departure
-      - name: Leiden - Bodegraven
-        from: Ledn
-        to: Bdg
-        time: !secret ns_lb_departure
-      - name: Bodegraven - Utrecht
-        from: Bdg
-        to: Ut
-        time: !secret ns_bu_departure
-      - name: Utrecht - Bodegraven
-        from: Ut
-        to: Bdg
-        time: !secret ns_ub_departure
-
-  - platform: template
-    sensors:
-      trash_0:
-        friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_0'', ''name'')}}'
-        value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) | timestamp_custom('%d %b %Y') }}"
-        icon_template: >-
-            {% if 'Plastic' in state_attr('sensor.afvalkalender_event_0', 'name') %}
-              mdi:sack
-            {% elif 'papier' in state_attr('sensor.afvalkalender_event_0', 'name') %}
-              mdi:package-variant
-            {% else %}
-              mdi:trash-can-outline
-            {% endif %}
-
-      trash_1:
-        friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_1'', ''name'')}}'
-        value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) | timestamp_custom('%d %b %Y') }}"
-        icon_template: >-
-            {% if 'Plastic' in state_attr('sensor.afvalkalender_event_1', 'name') %}
-              mdi:sack
-            {% elif 'papier' in state_attr('sensor.afvalkalender_event_1', 'name') %}
-              mdi:package-variant
-            {% else %}
-              mdi:trash-can-outline
-            {% endif %}
-
-      trash_2:
-        friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_2'', ''name'')}}'
-        value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_2.attributes.start) | timestamp_custom('%d %b %Y') }}"
-        icon_template: >-
-            {% if 'Plastic' in state_attr('sensor.afvalkalender_event_2', 'name') %}
-              mdi:sack
-            {% elif 'papier' in state_attr('sensor.afvalkalender_event_2', 'name') %}
-              mdi:package-variant
-            {% else %}
-              mdi:trash-can-outline
-            {% endif %}
-
-      power_direct_usage:
-        friendly_name: 'Direct Power Usage'
-        unique_id: 'sensor.direct_power_usage'
-        unit_of_measurement: 'W'
-        value_template: "{{ ((states('sensor.growatt_total_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
-
-      nefit_temperature:
-        friendly_name: 'Nefit Set temperature'
-        unique_id: 'sensor.nefit_temperature'
-        unit_of_measurement: '°C'
-        value_template: "{{ state_attr('climate.nefit', 'temperature') }}"
-
-      nefit_current_temperature:
-        friendly_name: 'Nefit Current temperature'
-        unique_id: 'sensor.nefit_current_temperature'
-        unit_of_measurement: '°C'
-        value_template: "{{ state_attr('climate.nefit', 'current_temperature') }}"
-
-      office_temperature:
-        friendly_name: 'Office Current temperature'
-        unique_id: 'sensor.office_current_temperature'
-        unit_of_measurement: '°C'
-        value_template: "{{ state_attr('climate.office', 'current_temperature') }}"

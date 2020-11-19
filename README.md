@@ -1,4 +1,5 @@
 [![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-0.117.0%20-darkblue)](https://github.com/home-assistant/core/releases/tag/0.117.0)
+ [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/master)
 
 # Home Assistant configuration
 
@@ -71,6 +72,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 ## Wishlist
 * Somfy sunscreen control (433mhz)
 * Smoke detector integration (433mhz)
+* Netgear ReadyNAS (Rest API?)
 * Door sensors
 * Samsung TV
 * Xiaomi Aqara Temperature Humidity Sensors

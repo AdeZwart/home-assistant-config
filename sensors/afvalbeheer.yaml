@@ -1,0 +1,11 @@
+  - platform: afvalbeheer
+    wastecollector: Cyclus
+    resources:
+      - gft
+      - papier
+      - pmd
+    postcode: 2411LD
+    streetnumber: 1
+    upcomingsensor: 1
+    alwaysshowday: 1
+    nameprefix: 0

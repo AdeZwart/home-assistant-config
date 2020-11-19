@@ -1,0 +1,61 @@
+- platform: template
+  sensors:
+    trash_0:
+      friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_0'', ''name'')}}'
+      value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) | timestamp_custom('%d %b %Y') }}"
+      icon_template: >-
+          {% if 'Plastic' in state_attr('sensor.afvalkalender_event_0', 'name') %}
+            mdi:sack
+          {% elif 'papier' in state_attr('sensor.afvalkalender_event_0', 'name') %}
+            mdi:package-variant
+          {% else %}
+            mdi:trash-can-outline
+          {% endif %}
+
+    trash_1:
+      friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_1'', ''name'')}}'
+      value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) | timestamp_custom('%d %b %Y') }}"
+      icon_template: >-
+          {% if 'Plastic' in state_attr('sensor.afvalkalender_event_1', 'name') %}
+            mdi:sack
+          {% elif 'papier' in state_attr('sensor.afvalkalender_event_1', 'name') %}
+            mdi:package-variant
+          {% else %}
+            mdi:trash-can-outline
+          {% endif %}
+
+    trash_2:
+      friendly_name_template: '{{ state_attr(''sensor.afvalkalender_event_2'', ''name'')}}'
+      value_template: "{{ as_timestamp(states.sensor.afvalkalender_event_2.attributes.start) | timestamp_custom('%d %b %Y') }}"
+      icon_template: >-
+          {% if 'Plastic' in state_attr('sensor.afvalkalender_event_2', 'name') %}
+            mdi:sack
+          {% elif 'papier' in state_attr('sensor.afvalkalender_event_2', 'name') %}
+            mdi:package-variant
+          {% else %}
+            mdi:trash-can-outline
+          {% endif %}
+
+    power_direct_usage:
+      friendly_name: 'Direct Power Usage'
+      unique_id: 'sensor.direct_power_usage'
+      unit_of_measurement: 'W'
+      value_template: "{{ ((states('sensor.growatt_total_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
+
+    nefit_temperature:
+      friendly_name: 'Nefit Set temperature'
+      unique_id: 'sensor.nefit_temperature'
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.nefit', 'temperature') }}"
+
+    nefit_current_temperature:
+      friendly_name: 'Nefit Current temperature'
+      unique_id: 'sensor.nefit_current_temperature'
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.nefit', 'current_temperature') }}"
+
+    office_temperature:
+      friendly_name: 'Office Current temperature'
+      unique_id: 'sensor.office_current_temperature'
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.office', 'current_temperature') }}"
