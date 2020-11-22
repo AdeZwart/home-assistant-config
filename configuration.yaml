@@ -9,7 +9,7 @@ tts:
 homeassistant:
   customize: !include customize.yaml
   allowlist_external_dirs:
-    - /tmp    
+    - /tmp
 
 group: !include groups.yaml
 automation: !include_dir_merge_list automations
