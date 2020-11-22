@@ -16,6 +16,8 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://hub.docker.com/r/linuxserver/swag)
 
+See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-configuration)
+
 ## Tooling
 * [VS Code](https://code.visualstudio.com/download)
   * [Home Assistant Config Helper](https://github.com/keesschollaart81/vscode-home-assistant)
