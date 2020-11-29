@@ -5,6 +5,7 @@
     entity_id: binary_sensor.doorbell_button
     to: 'on'
   action:
+    - delay: '00:00:01'
     - service: camera.snapshot
       data:
         entity_id: camera.frontdoor_camera_1
@@ -25,6 +26,32 @@
           photo:
             file: /tmp/frontdoor_snapshot.jpg
             caption: We hebben een beller!
+    - delay: '00:00:01'
+    - service: camera.snapshot
+      data:
+        entity_id: camera.frontdoor_camera_1
+        filename: /tmp/frontdoor_snapshot_1s.jpg    
+    - service: notify.telegram_reigeroord
+      data: 
+        title: "frontdoor snapshot"
+        message: "frontdoor snapshot"
+        data:
+          photo:
+            file: /tmp/frontdoor_snapshot_1s.jpg
+            caption: We hebben een beller! 2s delay
+    - delay: '00:00:01'
+    - service: camera.snapshot
+      data:
+        entity_id: camera.frontdoor_camera_1
+        filename: /tmp/frontdoor_snapshot_2s.jpg    
+    - service: notify.telegram_reigeroord
+      data: 
+        title: "frontdoor snapshot"
+        message: "frontdoor snapshot"
+        data:
+          photo:
+            file: /tmp/frontdoor_snapshot_2s.jpg
+            caption: We hebben een beller! 3s delay              
     - delay: '00:00:30'
   mode: single
 
