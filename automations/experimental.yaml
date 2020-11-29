@@ -16,7 +16,7 @@
         brightness_pct: 50
         color_temp: 370
     - service: switch.turn_off
-      entity_id: switch.livingroom_shelly_channel_1
+      entity_id: switch.shelly1_livingroom
   mode: single
 
 - id: ns_bdg_ut_delayed

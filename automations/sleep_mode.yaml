@@ -18,9 +18,9 @@
     - service: media_player.turn_off
       entity_id: media_player.lg_tv_remote
     - service: switch.turn_off
-      entity_id: switch.livingroom_shelly_channel_1
+      entity_id: switch.shelly1_livingroom
     - service: switch.turn_off
-      entity_id: switch.livingroom_shelly_channel_2
+      entity_id: switch.shelly1_8caab54b660e
     - service: climate.set_temperature
       data:
         entity_id: climate.nefit
