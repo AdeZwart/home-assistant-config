@@ -44,11 +44,13 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * NS (Dutch railways)
 * Onvif
 * Pi-Hole
+* Ping (Netgear ReadyNAS NV+ v2)
 * Shelly
 * Speedtest
 * Stookalert
 * System monitor
 * Telegram
+* Wake On Lan (Netgear ReadyNAS NV+ v2)
 * Xiaomi Roborock S5 Max
   
 ### HACS integrations
@@ -64,7 +66,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 ## Automations
 * Notifications for trash collection
 * Front door light (evening, morning and when coming home while dark)
-* Central heating pressure notifications
+* Central heating pressure notifications (low & high)
 * System monitor temperature notifications
 * Lighting adjustment when streaming on the living room Chrome Cast
 * Manually triggered bed-time routine
@@ -78,6 +80,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Door sensors
 * Samsung TV
 * Xiaomi Aqara Temperature Humidity Sensors
+* Motion sensors
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
 
