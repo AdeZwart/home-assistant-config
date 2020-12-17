@@ -47,6 +47,6 @@
     - service: xiaomi_miio.vacuum_goto
       data:
         entity_id: vacuum.xiaomi_vacuum_cleaner
-        x_coord: 25500
-        y_coord: 26750
+        x_coord: 25000
+        y_coord: 26500
   mode: single
