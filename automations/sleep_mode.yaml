@@ -20,7 +20,7 @@
     - service: switch.turn_off
       entity_id: switch.shelly1_livingroom
     - service: switch.turn_off
-      entity_id: switch.shelly1_8caab54b660e
+      entity_id: switch.shelly1_diningroom
     - service: climate.set_temperature
       data:
         entity_id: climate.nefit

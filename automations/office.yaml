@@ -1,0 +1,28 @@
+- id: turn_on_office
+  alias: Turn on office
+  trigger:
+  - platform: state
+    entity_id: input_boolean.office
+    to: 'on'
+  action:
+  - service: light.turn_on
+    entity_id: light.test_lamp
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.office
+      temperature: 19
+      hvac_mode: heat  
+  mode: single
+
+- id: turn_off_office
+  alias: Turn off office
+  trigger:
+  - platform: state
+    entity_id: input_boolean.office
+    to: 'off'
+  action:
+  - service: light.turn_off
+    entity_id: light.test_lamp
+  - service: climate.turn_off
+    entity_id: climate.office
+  mode: single
