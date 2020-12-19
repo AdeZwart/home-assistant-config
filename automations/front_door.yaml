@@ -5,6 +5,14 @@
     entity_id: binary_sensor.doorbell_button
     to: 'on'
   action:
+    - service: notify.telegram_andre
+      data:
+        title: "Someone rang the doorbell"
+        message: "We hebben een beller!"
+    - service: notify.telegram_lize
+      data:
+        title: "Someone rang the doorbell"
+        message: "We hebben een beller!"        
     - delay: '00:00:01'
     - service: camera.snapshot
       data:
@@ -17,7 +25,6 @@
         data:
           photo:
             file: /tmp/frontdoor_snapshot.jpg
-            caption: We hebben een beller!    
     - service: notify.telegram_lize
       data: 
         title: "frontdoor snapshot"
@@ -25,13 +32,12 @@
         data:
           photo:
             file: /tmp/frontdoor_snapshot.jpg
-            caption: We hebben een beller!
     - delay: '00:00:01'
     - service: camera.snapshot
       data:
         entity_id: camera.frontdoor_camera_1
         filename: /tmp/frontdoor_snapshot_1s.jpg    
-    - service: notify.telegram_reigeroord
+    - service: notify.telegram_andre
       data: 
         title: "frontdoor snapshot"
         message: "frontdoor snapshot"
@@ -44,7 +50,7 @@
       data:
         entity_id: camera.frontdoor_camera_1
         filename: /tmp/frontdoor_snapshot_2s.jpg    
-    - service: notify.telegram_reigeroord
+    - service: notify.telegram_andre
       data: 
         title: "frontdoor snapshot"
         message: "frontdoor snapshot"
