@@ -45,6 +45,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Onvif
 * Pi-Hole
 * Ping (Netgear ReadyNAS NV+ v2)
+* RFXCOM RFXtrx
 * Shelly
 * Speedtest
 * Stookalert

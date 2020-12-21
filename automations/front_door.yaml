@@ -5,53 +5,29 @@
     entity_id: binary_sensor.doorbell_button
     to: 'on'
   action:
+    - service: notify.telegram_andre
+      data:
+        message: "We hebben een beller!"
+    - service: notify.telegram_lize
+      data:
+        message: "We hebben een beller!"        
     - delay: '00:00:01'
     - service: camera.snapshot
       data:
         entity_id: camera.frontdoor_camera_1
-        filename: /tmp/frontdoor_snapshot.jpg
+        filename: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
     - service: notify.telegram_andre
       data: 
-        title: "frontdoor snapshot"
         message: "frontdoor snapshot"
         data:
           photo:
-            file: /tmp/frontdoor_snapshot.jpg
-            caption: We hebben een beller!    
+            file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
     - service: notify.telegram_lize
       data: 
-        title: "frontdoor snapshot"
         message: "frontdoor snapshot"
         data:
           photo:
-            file: /tmp/frontdoor_snapshot.jpg
-            caption: We hebben een beller!
-    - delay: '00:00:01'
-    - service: camera.snapshot
-      data:
-        entity_id: camera.frontdoor_camera_1
-        filename: /tmp/frontdoor_snapshot_1s.jpg    
-    - service: notify.telegram_reigeroord
-      data: 
-        title: "frontdoor snapshot"
-        message: "frontdoor snapshot"
-        data:
-          photo:
-            file: /tmp/frontdoor_snapshot_1s.jpg
-            caption: We hebben een beller! 2s delay
-    - delay: '00:00:01'
-    - service: camera.snapshot
-      data:
-        entity_id: camera.frontdoor_camera_1
-        filename: /tmp/frontdoor_snapshot_2s.jpg    
-    - service: notify.telegram_reigeroord
-      data: 
-        title: "frontdoor snapshot"
-        message: "frontdoor snapshot"
-        data:
-          photo:
-            file: /tmp/frontdoor_snapshot_2s.jpg
-            caption: We hebben een beller! 3s delay              
+            file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg             
     - delay: '00:00:30'
   mode: single
 
