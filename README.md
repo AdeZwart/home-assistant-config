@@ -46,6 +46,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Pi-Hole
 * Ping (Netgear ReadyNAS NV+ v2)
 * RFXCOM RFXtrx
+  * Somfy RFY sunscreens (2x)
+  * Alecto SA-41 smoke detectors (3x)
 * Shelly
 * Speedtest
 * Stookalert
@@ -75,8 +77,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Send a camera snapshot to Telegram when the doorbell is pressed
 
 ## Wishlist
-* Somfy sunscreen control (433mhz)
-* Smoke detector integration (433mhz)
 * Netgear ReadyNAS (Rest API?)
 * Door sensors
 * Samsung TV
