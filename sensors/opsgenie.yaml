@@ -1,0 +1,8 @@
+- platform: rest
+  name: 'Opsgenie On Call'
+  resource: !secret genie_schedule
+  method: GET
+  value_template: '{{ value_json.data.onCallParticipants[0].name }}'
+  scan_interval: 3600
+  headers:
+    Authorization: !secret genie_api_key

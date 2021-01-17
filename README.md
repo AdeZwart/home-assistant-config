@@ -45,6 +45,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Onvif
 * Pi-Hole
 * Ping (Netgear ReadyNAS NV+ v2)
+* RESTful
+  * OpsGenie on call status
 * RFXCOM RFXtrx
   * Somfy RFY sunscreens (2x)
   * Alecto SA-41 smoke detectors (3x)
@@ -76,16 +78,16 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Manually triggered bed-time routine
 * Actionable notification reminder to have the Roborock report at the trashbin to empty the dustbin
 * Send a camera snapshot to Telegram when the doorbell is pressed
+* Send a push notification when my phone is set to silent while being on call
 
 ## Wishlist
-* Netgear ReadyNAS (Rest API?)
+* Netgear ReadyNAS
 * Door sensors
 * Samsung TV
 * Xiaomi Aqara Temperature Humidity Sensors
-* Motion sensors
+* Presence detection
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
-* Ops Genie OnCall status
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
