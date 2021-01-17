@@ -34,7 +34,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Certificate Expiry
 * DSMR Slimme meter (Dutch Smart Meter Requirements)
 * Google Chromecast
-* Growatt inverter for photovoltaic plant
+* Growatt (Inverter for photovoltaic plant)
 * Ikea tradfri
 * Influx DB
 * LG Netcast
@@ -53,8 +53,9 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Stookalert
 * System monitor
 * Telegram
+* Utility Meter
 * Wake On Lan (Netgear ReadyNAS NV+ v2)
-* Xiaomi Roborock S5 Max
+* Xiaomi Miio (Robot Vacuum Roborock S5 Max)
   
 ### HACS integrations
 * Adax heating
@@ -84,6 +85,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Motion sensors
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
+* Ops Genie OnCall status
 
 ## Tutorials I've used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
