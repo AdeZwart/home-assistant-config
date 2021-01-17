@@ -1,0 +1,15 @@
+- id: notify_tablet_low_battery
+  alias: Notify that the tablet has low battery
+  trigger:
+    platform: state
+    entity_id: input_boolean.snooze
+    to: 'on'
+  condition:
+    condition: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau    
+    below: '30'
+  action:
+    - service: notify.mobile_app_sgs10_andre
+      data:        
+        message: 'Tablet battery level at {{states.sensor.sgts5e_batterijniveau.state_with_unit}}! Please charge.'
+  mode: single

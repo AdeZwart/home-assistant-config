@@ -27,6 +27,8 @@
       data:
         message: 'Time to empty the Roborock dust bin! Do it now?'
         data:
+          persistent: true 
+          tag: persistent
           actions:
             - action: "start_goto_trashbin"
               title: "Yes"

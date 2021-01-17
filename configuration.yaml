@@ -134,3 +134,26 @@ monitor_docker:
       - cpu_percentage
       - memory
       - memory_percentage
+
+utility_meter:
+  gas_nefit:
+    source: sensor.nefit_year_total
+    cycle: monthly
+  gas_dsmr:
+    source: sensor.gas_consumption
+    cycle: monthly
+  energy_consumption_low:
+    source: sensor.energy_consumption_tarif_1
+    cycle: monthly
+  energy_consumption_high:
+    source: sensor.energy_consumption_tarif_2
+    cycle: monthly
+  energy_surplus_low:
+    source: sensor.energy_production_tarif_1
+    cycle: monthly
+  energy_surplus_high:
+    source: sensor.energy_production_tarif_2
+    cycle: monthly
+  energy_production:
+    source: sensor.growatt_total_lifetime_energy_output
+    cycle: monthly      
