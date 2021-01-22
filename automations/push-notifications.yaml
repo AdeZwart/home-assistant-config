@@ -1,0 +1,38 @@
+- id: notify_local_stookalert_on
+  alias: 'Send a push notification in case of a stookalert'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.stookalert
+    to: 'on'
+  action:
+    service: notify.mobile_app_sgs10_andre
+    data:
+      message: 'Let op! Stookalert: stook geen hout!'
+  mode: single
+
+- id: notify_local_stookalert_off
+  alias: 'Send a push notification in case the alert is lifted'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.stookalert
+    to: 'off'
+  action:
+    service: notify.mobile_app_sgs10_andre
+    data:
+      message: 'Stookalert opgeheven.'
+  mode: single
+
+- id: notify_on_shelly_firmware_update
+  alias: 'Send a push notification when a Shelly firmware update is available'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.shelly1_8caab54b660e_firmware_update
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.shelly1_8caab54be41c_firmware_update
+      to: 'on'      
+  action:
+    service: notify.mobile_app_sgs10_andre
+    data_template:
+      message: 'New Shelly firmware version available: {{ states.binary_sensor.shelly1_8caab54be41c_firmware_update.attributes.latest_stable_version }}'
+  mode: single
