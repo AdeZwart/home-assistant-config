@@ -5,9 +5,14 @@
     entity_id: input_boolean.snooze
     to: 'on'
   condition:
-    condition: numeric_state
-    entity_id: sensor.sgts5e_batterijniveau    
-    below: '30'
+    condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.sgts5e_batterijniveau    
+        below: '30'
+      - condition: state
+        entity_id: binary_sensor.sgts5e_is_aan_het_opladen
+        state: 'off'            
   action:
     - service: notify.mobile_app_sgs10_andre
       data:        

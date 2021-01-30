@@ -1,4 +1,0 @@
-  - platform: ical
-    name: "Afvalkalender"
-    url: "https://afvalkalender.cyclusnv.nl/ical/0497200000006797"
-    maxevents: 3

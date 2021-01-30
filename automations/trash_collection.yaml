@@ -2,61 +2,61 @@
   alias: 'Trash collection notification day before 0'
   trigger:
   - platform: time
-    at: '19:30'
+    at: '19:30:00'
   condition:
   - condition: and
     conditions:
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start) - 43200)) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start) - 43200)) %}
           true
         {% endif %}
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) < (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start))) %}
+        {% if (as_timestamp(now()) < (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start))) %}
           true
         {% endif %}
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
   mode: single
 
 - id: trash_collection_notification_day_before_1
   alias: 'Trash collection notification day before 1' 
   trigger:
   - platform: time
-    at: '19:30'
+    at: '19:30:00'
   condition:
   - condition: and
     conditions:
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start) - 43200)) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start) - 43200)) %}
           true
         {% endif %}
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) < (as_timestamp(states.sensor.afvalkalender_event_1.attributes.start))) %}
+        {% if (as_timestamp(now()) < (as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start))) %}
           true
         {% endif %}
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.ical_afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
+      message: '{{states.sensor.ical_afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
   mode: single
 
 - id: trash_collection_notification_working_day_0
   alias: 'Trash collection notification reminder working day 0'
   trigger:
   - platform: time
-    at: '06:15'
+    at: '06:15:00'
   condition:
   - condition: and
     conditions:
@@ -65,23 +65,23 @@
       state: 'on' 
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start))) %}
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start))) %}
           true
         {% endif %}
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
   mode: single
 
 - id: trash_collection_notification_weekend_day_0'
   alias: 'Trash collection notification reminder weekend day 0'
   trigger:
   - platform: time
-    at: '07:30'
+    at: '07:30:00'
   condition:
   - condition: and
     conditions:
@@ -90,14 +90,14 @@
       state: 'off'
     - condition: template
       value_template: >
-        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.afvalkalender_event_0.attributes.start)))  %} 
+        {% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)))  %} 
           true
         {% endif  %}
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
   mode: single
