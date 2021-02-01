@@ -34,9 +34,9 @@ binary_sensor:
     sensors:
       is_on_call:
         friendly_name: "On call"
-        value_template: "{{ is_state('sensor.opsgenie_on_call', 'opsgenie_participant_id') }}"
+        value_template: "{{ is_state('sensor.opsgenie_on_call', states('sensor.opsgenie_participant_id')) }}"
         icon_template: >-
-          {% if is_state('sensor.opsgenie_on_call', 'opsgenie_participant_id') %}
+          {% if ('sensor.opsgenie_on_call', states('sensor.opsgenie_participant_id')) %}
             mdi:phone-alert
           {% else %}
             mdi:phone-off
