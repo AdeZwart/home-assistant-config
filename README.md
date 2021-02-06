@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.1.5%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.1.5)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.2.0%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.2.0)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -15,6 +15,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * [Pi Hole](https://hub.docker.com/r/pihole/pihole)
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://hub.docker.com/r/linuxserver/swag)
+* [Zigbee2MQTT](https://hub.docker.com/r/koenkk/zigbee2mqtt)
 
 See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-configuration)
 
@@ -39,8 +40,10 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Influx DB
 * LG Netcast
 * Mobile App (android)
-* MQTT
+* MQTT (Zigbee2MQTT & regular MQTT)
   * Smart doorbell (ESPHome based)
+  * Xiaomi Aqara Temperature and humidity sensor
+  * Xiaomi Aqara Door and Window sensor
 * NS (Dutch railways)
 * Onvif
 * Pi-Hole
@@ -82,9 +85,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 
 ## Wishlist
 * Netgear ReadyNAS
-* Door sensors
 * Samsung TV
-* Xiaomi Aqara Temperature Humidity Sensors
 * Presence detection
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
@@ -97,6 +98,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
   * [Pi-hole, Add-blocks and Home Assistant](https://youtu.be/yMbpxB39X1Y)
   * [LetsEncrypt with NginX for Home Assistant](https://youtu.be/oN1qPl3Yve8)
 * [Frenck - DIY smart doorbell for just 2 dollar](https://frenck.dev/diy-smart-doorbell-for-just-2-dollar/)
+* [BeardedTinker - Zigbee2MQTT in Docker](https://www.youtube.com/watch?v=HbkXQErileU)
+* [NotEnoughTECH - Flashing CC2531 without CC Debugger](https://www.youtube.com/watch?v=RguRQUXWLCY)
 
 ## A curated list of awesome Home Assistant resources
 [Awesome Home Assistant](https://www.awesome-ha.com/)
