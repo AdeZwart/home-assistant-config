@@ -124,6 +124,7 @@ monitor_docker:
       - pihole
       - portainer
       - swag
+      - zigbee2mqtt
     rename:
       home-assistant: Home Assistant
       influxdb: InfluxDB
@@ -131,6 +132,7 @@ monitor_docker:
       portainer: Portainer
       swag: Secure Web Application Gateway
       pihole: Pi Hole
+      zigbee2mqtt: Zigbee2MQTT
     monitored_conditions:
       - version
       - containers_total
