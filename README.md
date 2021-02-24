@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.2.0%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.2.0)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.2.1%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.2.1)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -40,10 +40,10 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Influx DB
 * LG Netcast
 * Mobile App (android)
-* MQTT (Zigbee2MQTT & regular MQTT)
+* MQTT 
   * Smart doorbell (ESPHome based)
-  * Xiaomi Aqara Temperature and humidity sensor
-  * Xiaomi Aqara Door and Window sensor
+  * Xiaomi Aqara Temperature and humidity sensor (Zigbee2MQTT)
+  * Xiaomi Aqara Door and Window sensor (Zigbee2MQTT)
 * NS (Dutch railways)
 * Onvif
 * Pi-Hole

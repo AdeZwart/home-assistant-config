@@ -19,10 +19,10 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}} wordt morgen opgehaald.'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}} wordt morgen opgehaald.'
   mode: single
 
 - id: trash_collection_notification_day_before_1
@@ -46,10 +46,10 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.'
+      message: '{{states.sensor.ical_afvalkalender_event_1.attributes.description}} wordt morgen opgehaald.'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_1.attributes.name}} wordt morgen opgehaald.' 
+      message: '{{states.sensor.ical_afvalkalender_event_1.attributes.description}} wordt morgen opgehaald.' 
   mode: single
 
 - id: trash_collection_notification_working_day_0
@@ -71,10 +71,10 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}} wordt vandaag opgehaald!'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}} wordt vandaag opgehaald!'
   mode: single
 
 - id: trash_collection_notification_weekend_day_0'
@@ -96,8 +96,8 @@
   action:
   - service: notify.telegram_andre
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}} wordt vandaag opgehaald!'
   - service: notify.telegram_lize
     data_template:
-      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.name}} wordt vandaag opgehaald!'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}} wordt vandaag opgehaald!'
   mode: single

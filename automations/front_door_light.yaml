@@ -83,7 +83,7 @@
   - platform: time
     at: '23:00:00'
   - platform: time
-    at: '8:00:00'
+    at: '08:00:00'
   condition: []
   action:
   - service: switch.turn_off
@@ -91,12 +91,31 @@
   mode: single
 
 - id: turn_on_front_door_light_when_coming_home
-  alias: Turn on front door light when coming homeassistant
+  alias: Turn on front door light when coming home
   trigger:
   - platform: geo_location
     source: device_tracker.sm_g973f
     zone: zone.home
     event: enter
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '-3.0'    
+  action:
+  - service: switch.turn_on
+    entity_id: switch.outside
+  mode: single
+
+- id: turn_on_front_door_light_when_the_door_opens
+  alias: Turn on front door light when the door opens
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.xiaomi_door_1_contact
+    attribute: contact
+    to: "Open"
+    for:
+      minutes: 10
   condition:
   - condition: numeric_state
     entity_id: sun.sun

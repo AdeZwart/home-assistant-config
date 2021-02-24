@@ -5,26 +5,28 @@
     entity_id: input_boolean.snooze
     to: 'on'
   action:
+    - service: media_player.turn_off
+      entity_id: media_player.lg_tv_remote
+    - service: switch.turn_off
+      entity_id: switch.shelly1_diningroom
+    - service: switch.turn_off
+      entity_id: switch.shelly1_livingroom
+    - service: light.turn_off
+      entity_id: light.tradfri_driver
     - service: light.turn_off
       entity_id: light.tv_meubel_links
     - service: light.turn_off
       entity_id: light.tv_meubel_rechts
     - service: light.turn_off
-      entity_id: light.tradfri_driver
-    - service: light.turn_off
       entity_id: light.test_lamp
+    - service: switch.turn_off
+      entity_id: switch.outside
     - service: climate.turn_off
       entity_id: climate.office
-    - service: media_player.turn_off
-      entity_id: media_player.lg_tv_remote
-    - service: switch.turn_off
-      entity_id: switch.shelly1_livingroom
-    - service: switch.turn_off
-      entity_id: switch.shelly1_diningroom
     - service: climate.set_temperature
       data:
         entity_id: climate.nefit
-        temperature: 17
+        temperature: 15
     - service: input_boolean.turn_off
       entity_id: input_boolean.snooze
   mode: single
@@ -33,7 +35,7 @@
   alias: Turn off office heating at 22.00
   trigger:
   - platform: time
-    at: '22:00'
+    at: '22:00:00'
   action:
   - service: climate.turn_off
     entity_id: climate.office
