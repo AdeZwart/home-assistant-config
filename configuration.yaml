@@ -36,7 +36,7 @@ binary_sensor:
         friendly_name: "On call"
         value_template: "{{ is_state('sensor.opsgenie_on_call', states('sensor.opsgenie_participant_id')) }}"
         icon_template: >-
-          {% if ('sensor.opsgenie_on_call', states('sensor.opsgenie_participant_id')) %}
+          {% if is_state('sensor.opsgenie_on_call', states('sensor.opsgenie_participant_id')) %}
             mdi:phone-alert
           {% else %}
             mdi:phone-off
@@ -124,7 +124,7 @@ monitor_docker:
       - pihole
       - portainer
       - swag
-      - zigbee2mqtt
+      - Zigbee2MQTT
     rename:
       home-assistant: Home Assistant
       influxdb: InfluxDB
@@ -132,7 +132,7 @@ monitor_docker:
       portainer: Portainer
       swag: Secure Web Application Gateway
       pihole: Pi Hole
-      zigbee2mqtt: Zigbee2MQTT
+      Zigbee2MQTT: Zigbee2MQTT
     monitored_conditions:
       - version
       - containers_total
