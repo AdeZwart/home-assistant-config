@@ -112,16 +112,16 @@
   trigger:
   - platform: state
     entity_id: binary_sensor.xiaomi_door_1_contact
-    attribute: contact
-    to: "Open"
-    for:
-      minutes: 10
+    to: 'on'    
   condition:
   - condition: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    below: '-3.0'    
+    below: '-3.0'
   action:
-  - service: switch.turn_on
-    entity_id: switch.outside
+    - service: switch.turn_on
+      entity_id: switch.outside
+    - delay: '00:10:00'
+    - service: switch.turn_off
+      entity_id: switch.outside
   mode: single
