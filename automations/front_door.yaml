@@ -30,25 +30,3 @@
             file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg             
     - delay: '00:00:30'
   mode: single
-
-- id: front_door_camera_motion
-  alias: 'Send frontdoor camera snapshot when motion is detected'
-  trigger:
-    platform: state
-    entity_id: binary_sensor.mymotiondetectorrule_cell_motion_detection
-    to: 'on'
-  action:
-    - service: camera.snapshot
-      data:
-        entity_id: camera.frontdoor_camera_1
-        filename: /tmp/frontdoor_snapshot.jpg
-    - service: notify.telegram_andre
-      data: 
-        title: "frontdoor snapshot"
-        message: "frontdoor snapshot"
-        data:
-          photo:
-            file: /tmp/frontdoor_snapshot.jpg
-            caption: Motion detected!
-    - delay: '00:01:00'
-  mode: single
