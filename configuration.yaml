@@ -109,11 +109,6 @@ pi_hole:
   name: pihole
   api_key: !secret pi_hole_api_token
 
-vacuum:
-  - platform: xiaomi_miio
-    host: 192.168.2.176
-    token: !secret roborock_token
-
 monitor_docker:
   - name: Docker
     containers:
