@@ -1,6 +1,39 @@
   - platform: buienradar
     monitored_conditions:
-      - feeltemperature
+      - conditiondetailed
       - temperature
+      - humidity
+      - pressure
       - windspeed
+      - feeltemperature      
       - precipitation_forecast_average
+      - condition_1d
+      - temperature_1d
+      - mintemp_1d
+      - rain_1d
+      - windazimuth_1d
+      - windspeed_1d
+      - condition_2d
+      - temperature_2d
+      - mintemp_2d
+      - rain_2d
+      - windazimuth_2d
+      - windspeed_2d
+      - condition_3d
+      - temperature_3d
+      - mintemp_3d
+      - rain_3d
+      - windazimuth_3d
+      - windspeed_3d
+      - condition_4d
+      - temperature_4d
+      - mintemp_4d
+      - rain_4d
+      - windazimuth_4d
+      - windspeed_4d
+      - condition_5d
+      - temperature_5d
+      - mintemp_5d
+      - rain_5d
+      - windazimuth_5d
+      - windspeed_5d

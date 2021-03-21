@@ -42,55 +42,13 @@ binary_sensor:
             mdi:phone-off
           {% endif %}
 
-rfxtrx:
-  device: /dev/ttyUSB1
-  automatic_add: true
-  devices:
-    # Sunscreen front
-    071a000000101002:
-      signal_repetitions: 1
-    # Sunscreen back
-    071a000000101004:
-      signal_repetitions: 1
-
-switch:
-  - platform: wake_on_lan
-    name: "Netgear ReadyNAS NV+ v2"
-    mac: e0:46:9a:a0:57:03
-    broadcast_address: 192.168.2.15
-    broadcast_port: 9
-
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_api_key
-    allowed_chat_ids:
-      - !secret chat_id_andre
-      - !secret chat_id_lize
-      - !secret chat_id_reigeroord
-
-notify:
-  - name: telegram_andre
-    platform: telegram
-    chat_id: !secret chat_id_andre
-  - name: telegram_lize
-    platform: telegram
-    chat_id: !secret chat_id_lize
-  - name: telegram_reigeroord
-    platform: telegram
-    chat_id: !secret chat_id_reigeroord
-
-ffmpeg:
-
 camera:
   - platform: generic
     name: Frontdoor camera 1
     still_image_url: !secret frontdoor_ip_cam_still_image_url
     stream_source: !secret frontdoor_ip_cam_stream_source
 
-media_player:
-  - platform: lg_netcast
-    host: !secret lg_ip_address
-    access_token: !secret lg_access_token
+ffmpeg:
 
 influxdb:
   host: 192.168.2.100
@@ -98,16 +56,10 @@ influxdb:
     domains:
       - sensor
 
-nefiteasy:
-  devices:
-  - serial: !secret nefit_easy_serial
-    accesskey: !secret nefit_easy_accesskey
-    password: !secret nefit_easy_password
-
-pi_hole:
-  host: 192.168.2.100
-  name: pihole
-  api_key: !secret pi_hole_api_token
+media_player:
+  - platform: lg_netcast
+    host: !secret lg_ip_address
+    access_token: !secret lg_access_token
 
 monitor_docker:
   - name: Docker
@@ -144,6 +96,54 @@ monitor_docker:
       - memory
       - memory_percentage
 
+nefiteasy:
+  devices:
+  - serial: !secret nefit_easy_serial
+    accesskey: !secret nefit_easy_accesskey
+    password: !secret nefit_easy_password
+
+notify:
+  - name: telegram_andre
+    platform: telegram
+    chat_id: !secret chat_id_andre
+  - name: telegram_lize
+    platform: telegram
+    chat_id: !secret chat_id_lize
+  - name: telegram_reigeroord
+    platform: telegram
+    chat_id: !secret chat_id_reigeroord
+
+pi_hole:
+  host: 192.168.2.100
+  name: pihole
+  api_key: !secret pi_hole_api_token
+
+rfxtrx:
+  device: /dev/ttyUSB1
+  automatic_add: true
+  devices:
+    # Sunscreen front
+    071a000000101002:
+      signal_repetitions: 1
+    # Sunscreen back
+    071a000000101004:
+      signal_repetitions: 1
+
+switch:
+  - platform: wake_on_lan
+    name: "Netgear ReadyNAS NV+ v2"
+    mac: e0:46:9a:a0:57:03
+    broadcast_address: 192.168.2.15
+    broadcast_port: 9
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret chat_id_andre
+      - !secret chat_id_lize
+      - !secret chat_id_reigeroord
+
 utility_meter:
   gas_nefit:
     source: sensor.nefit_year_total
@@ -166,3 +166,60 @@ utility_meter:
   energy_production:
     source: sensor.growatt_total_lifetime_energy_output
     cycle: monthly      
+
+weather:
+  - platform: template
+    name: "buienradar"
+    condition_template: "{{ states('sensor.br_detailed_condition') }}"
+    temperature_template: "{{ states('sensor.br_temperature') | float }}"
+    humidity_template: "{{ states('sensor.br_humidity') | float }}"
+    pressure_template: "{{ states('sensor.br_pressure') | float }}"
+    wind_speed_template: "{{ states('sensor.br_wind_speed') | float }}"
+    # forecast_template: >-
+    #   "[
+    #     {
+    #       'datetime': '{{ (now() + timedelta(days=1)).strftime('%Y-%m-%dT00:00:00+00:00') }}', 
+    #       'temperature': {{ states('sensor.br_temperature_1d')|float}}, 
+    #       'templow': {{ states('sensor.br_mintemp_1d')|float}}, 
+    #       'precipitation': {{ states('sensor.br_rain_1d')|float}}, 
+    #       'wind_speed': {{ states('sensor.br_wind_speed_1d')|float}}, 
+    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_1d')|int}}, 
+    #       'condition': '{{ states('sensor.br_condition_1d')|string}}'
+    #     },
+    #     {
+    #       'datetime': '{{ (now() + timedelta(days=2)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
+    #       'temperature': {{ states('sensor.br_temperature_2d')|float}}, 
+    #       'templow': {{ states('sensor.br_mintemp_2d')|float}}, 
+    #       'precipitation': {{ states('sensor.br_rain_2d')|float}}, 
+    #       'wind_speed': {{ states('sensor.br_wind_speed_2d')|float}}, 
+    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_2d')|int}}, 
+    #       'condition': '{{ states('sensor.br_condition_2d')|string}}
+    #     },
+    #     {
+    #       'datetime': '{{ (now() + timedelta(days=3)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
+    #       'temperature': {{ states('sensor.br_temperature_3d')|float}}, 
+    #       'templow': {{ states('sensor.br_mintemp_3d')|float}}, 
+    #       'precipitation': {{ states('sensor.br_rain_3d')|float}}, 
+    #       'wind_speed': {{ states('sensor.br_wind_speed_3d')|float}}, 
+    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_3d')|int}}, 
+    #       'condition': '{{ states('sensor.br_condition_3d')|string}}
+    #     },
+    #     {
+    #       'datetime': '{{ (now() + timedelta(days=4)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
+    #       'temperature': {{ states('sensor.br_temperature_4d')|float}}, 
+    #       'templow': {{ states('sensor.br_mintemp_4d')|float}}, 
+    #       'precipitation': {{ states('sensor.br_rain_4d')|float}}, 
+    #       'wind_speed': {{ states('sensor.br_wind_speed_4d')|float}}, 
+    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_4d')|int}}, 
+    #       'condition': '{{ states('sensor.br_condition_4d')|string}}
+    #     },
+    #     {
+    #       'datetime': '{{ (now() + timedelta(days=5)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
+    #       'temperature': {{ states('sensor.br_temperature_5d')|float}}, 
+    #       'templow': {{ states('sensor.br_mintemp_5d')|float}}, 
+    #       'precipitation': {{ states('sensor.br_rain_5d')|float}}, 
+    #       'wind_speed': {{ states('sensor.br_wind_speed_5d')|float}}, 
+    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_5d')|int}}, 
+    #       'condition': '{{ states('sensor.br_condition_5d')|string}}
+    #     }
+    #    ]"
