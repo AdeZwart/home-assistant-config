@@ -90,7 +90,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
 
-## Tutorials I've used
+## Tutorials/Guides/Tools used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
   * [Installing Home Assistant in Docker](https://youtu.be/bG6g2btJbNk)
   * [InfluxDB, Grafana & Home Assistant - Pt 1.](https://youtu.be/lveSI3hPHE8)
@@ -100,6 +100,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * [Frenck - DIY smart doorbell for just 2 dollar](https://frenck.dev/diy-smart-doorbell-for-just-2-dollar/)
 * [BeardedTinker - Zigbee2MQTT in Docker](https://www.youtube.com/watch?v=HbkXQErileU)
 * [NotEnoughTECH - Flashing CC2531 without CC Debugger](https://www.youtube.com/watch?v=RguRQUXWLCY)
+* [Xiaomi cloud tokens extractor](https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor)
 
 ## A curated list of awesome Home Assistant resources
 [Awesome Home Assistant](https://www.awesome-ha.com/)
