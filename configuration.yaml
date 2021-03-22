@@ -50,6 +50,13 @@ camera:
 
 ffmpeg:
 
+google_assistant:
+  project_id: !secret google_assistant_proj_id
+  service_account: 
+    private_key: !secret google_assistant_private_key
+    client_email: !secret google_assistant_client_email
+  report_state: true
+
 influxdb:
   host: 192.168.2.100
   include:

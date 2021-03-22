@@ -27,6 +27,7 @@ __pycache__
 custom_components/
 www/
 image/
+secrets/
 
 # Other
 ip_bans.yaml
