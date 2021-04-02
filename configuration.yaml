@@ -57,11 +57,11 @@ google_assistant:
     client_email: !secret google_assistant_client_email
   report_state: true
 
-influxdb:
-  host: 192.168.2.100
-  include:
-    domains:
-      - sensor
+# influxdb:
+#   host: 192.168.2.100
+#   include:
+#     domains:
+#       - sensor
 
 media_player:
   - platform: lg_netcast
@@ -79,6 +79,7 @@ monitor_docker:
       - portainer
       - swag
       - Zigbee2MQTT
+      - Zigbee2MQTTAssistant
     rename:
       home-assistant: Home Assistant
       influxdb: InfluxDB
@@ -87,6 +88,7 @@ monitor_docker:
       swag: Secure Web Application Gateway
       pihole: Pi Hole
       Zigbee2MQTT: Zigbee2MQTT
+      Zigbee2MQTTAssistant: Zigbee2MQTTAssistant
     monitored_conditions:
       - version
       - containers_total

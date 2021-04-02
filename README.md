@@ -16,6 +16,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://hub.docker.com/r/linuxserver/swag)
 * [Zigbee2MQTT](https://hub.docker.com/r/koenkk/zigbee2mqtt)
+* [Zigbee2MQTTAssistant](https://hub.docker.com/r/carldebilly/zigbee2mqttassistant)
 
 See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-configuration)
 
@@ -89,6 +90,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Presence detection
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
+* Alecto WS-5500 weather station
 
 ## Tutorials/Guides/Tools used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
