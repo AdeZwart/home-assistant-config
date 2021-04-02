@@ -11,6 +11,8 @@
       entity_id: switch.shelly1_diningroom
     - service: switch.turn_off
       entity_id: switch.shelly1_livingroom
+    - service: switch.turn_off
+      entity_id: switch.shelly1_kitchen
     - service: light.turn_off
       entity_id: light.tradfri_driver
     - service: light.turn_off
