@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.3.4%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.3.4)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.4.3%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.4.3)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -64,11 +64,12 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Xiaomi Miio (Robot Vacuum Roborock S5 Max)
   
 ### HACS integrations
-* Adax heating
-* HACS
-* iCal
-* Monitor Docker
-* Nefit easy
+* [Adax heating](https://github.com/Danielhiversen/home_assistant_adax)
+* [Ecowitt](https://github.com/garbled1/homeassistant_ecowitt)
+* [HACS](https://github.com/hacs/integration)
+* [iCal](https://github.com/tybritten/ical-sensor-homeassistant)
+* [Monitor Docker](https://github.com/ualex73/monitor_docker)
+* [Nefit easy](https://github.com/ksya/ha-nefiteasy)
 
 ### Custom integrations
 * -

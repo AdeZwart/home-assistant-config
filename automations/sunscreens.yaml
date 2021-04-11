@@ -1,0 +1,14 @@
+- id: raise_sunscreens_on_sundown
+  alias: Raise the sunscreens on sundown
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '0.0'  
+  action:
+    service: cover.open_cover
+    target:
+      entity_id:
+        - cover.rfy_001010_2
+        - cover.rfy_001010_4
+  mode: single

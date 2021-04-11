@@ -17,19 +17,7 @@
         color_temp: 370
     - service: switch.turn_off
       entity_id: switch.shelly1_livingroom
-  mode: single
-      
-- id: send_notification_when_the_front_door_opens
-  alias: Send a notification when the front door opens
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.xiaomi_door_1_contact
-    to: 'on'      
-  action:
-    service: notify.mobile_app_sgs10_andre
-    data_template:
-      message: 'Someone opened the frontdoor!'
-  mode: single  
+  mode: single    
 
 - id: front_door_camera_motion
   alias: 'Send frontdoor camera snapshot when motion is detected'
