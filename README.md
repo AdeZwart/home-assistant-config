@@ -65,7 +65,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
   
 ### HACS integrations
 * [Adax heating](https://github.com/Danielhiversen/home_assistant_adax)
-* [Ecowitt](https://github.com/garbled1/homeassistant_ecowitt)
+* [Ecowitt](https://github.com/garbled1/homeassistant_ecowitt) - Alecto WS-5500
 * [HACS](https://github.com/hacs/integration)
 * [iCal](https://github.com/tybritten/ical-sensor-homeassistant)
 * [Monitor Docker](https://github.com/ualex73/monitor_docker)
@@ -86,12 +86,12 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Send a push notification when my phone is set to silent while being on call
 
 ## Wishlist
+* Xiaomi Mi Flora Plant monitor
 * Netgear ReadyNAS
 * Samsung TV
 * Presence detection
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
-* Alecto WS-5500 weather station
 
 ## Tutorials/Guides/Tools used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)

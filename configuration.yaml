@@ -57,11 +57,11 @@ google_assistant:
     client_email: !secret google_assistant_client_email
   report_state: true
 
-# influxdb:
-#   host: 192.168.2.100
-#   include:
-#     domains:
-#       - sensor
+influxdb:
+  host: 192.168.2.100
+  include:
+    domains:
+      - sensor
 
 media_player:
   - platform: lg_netcast
@@ -177,58 +177,5 @@ utility_meter:
     cycle: monthly      
 
 weather:
-  - platform: template
-    name: "buienradar"
-    condition_template: "{{ states('sensor.br_detailed_condition') }}"
-    temperature_template: "{{ states('sensor.br_temperature') | float }}"
-    humidity_template: "{{ states('sensor.br_humidity') | float }}"
-    pressure_template: "{{ states('sensor.br_pressure') | float }}"
-    wind_speed_template: "{{ states('sensor.br_wind_speed') | float }}"
-    # forecast_template: >-
-    #   "[
-    #     {
-    #       'datetime': '{{ (now() + timedelta(days=1)).strftime('%Y-%m-%dT00:00:00+00:00') }}', 
-    #       'temperature': {{ states('sensor.br_temperature_1d')|float}}, 
-    #       'templow': {{ states('sensor.br_mintemp_1d')|float}}, 
-    #       'precipitation': {{ states('sensor.br_rain_1d')|float}}, 
-    #       'wind_speed': {{ states('sensor.br_wind_speed_1d')|float}}, 
-    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_1d')|int}}, 
-    #       'condition': '{{ states('sensor.br_condition_1d')|string}}'
-    #     },
-    #     {
-    #       'datetime': '{{ (now() + timedelta(days=2)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
-    #       'temperature': {{ states('sensor.br_temperature_2d')|float}}, 
-    #       'templow': {{ states('sensor.br_mintemp_2d')|float}}, 
-    #       'precipitation': {{ states('sensor.br_rain_2d')|float}}, 
-    #       'wind_speed': {{ states('sensor.br_wind_speed_2d')|float}}, 
-    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_2d')|int}}, 
-    #       'condition': '{{ states('sensor.br_condition_2d')|string}}
-    #     },
-    #     {
-    #       'datetime': '{{ (now() + timedelta(days=3)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
-    #       'temperature': {{ states('sensor.br_temperature_3d')|float}}, 
-    #       'templow': {{ states('sensor.br_mintemp_3d')|float}}, 
-    #       'precipitation': {{ states('sensor.br_rain_3d')|float}}, 
-    #       'wind_speed': {{ states('sensor.br_wind_speed_3d')|float}}, 
-    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_3d')|int}}, 
-    #       'condition': '{{ states('sensor.br_condition_3d')|string}}
-    #     },
-    #     {
-    #       'datetime': '{{ (now() + timedelta(days=4)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
-    #       'temperature': {{ states('sensor.br_temperature_4d')|float}}, 
-    #       'templow': {{ states('sensor.br_mintemp_4d')|float}}, 
-    #       'precipitation': {{ states('sensor.br_rain_4d')|float}}, 
-    #       'wind_speed': {{ states('sensor.br_wind_speed_4d')|float}}, 
-    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_4d')|int}}, 
-    #       'condition': '{{ states('sensor.br_condition_4d')|string}}
-    #     },
-    #     {
-    #       'datetime': '{{ (now() + timedelta(days=5)).strftime("%Y-%m-%dT00:00:00+00:00") }}', 
-    #       'temperature': {{ states('sensor.br_temperature_5d')|float}}, 
-    #       'templow': {{ states('sensor.br_mintemp_5d')|float}}, 
-    #       'precipitation': {{ states('sensor.br_rain_5d')|float}}, 
-    #       'wind_speed': {{ states('sensor.br_wind_speed_5d')|float}}, 
-    #       'wind_bearing': {{ states('sensor.br_wind_direction_azimuth_5d')|int}}, 
-    #       'condition': '{{ states('sensor.br_condition_5d')|string}}
-    #     }
-    #    ]"
+  - platform: buienradar
+    name: "buienradar"    
