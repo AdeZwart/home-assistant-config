@@ -1,4 +1,3 @@
-
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
@@ -11,8 +10,9 @@ homeassistant:
   allowlist_external_dirs:
     - /tmp
 
+automation: !include automations.yaml
+automation split: !include_dir_merge_list automations
 group: !include groups.yaml
-automation: !include_dir_merge_list automations
 script: !include scripts.yaml
 scene: !include scenes.yaml
 sensor: !include_dir_merge_list sensors
