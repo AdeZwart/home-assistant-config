@@ -89,7 +89,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Xiaomi Mi Flora Plant monitor
 * Netgear ReadyNAS
 * Samsung TV
-* Presence detection
+* Presence detection (motion or room assistant)
+* Sure PetCare cat flap 
 * [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
 * Custom integration for underground trash container usage
 

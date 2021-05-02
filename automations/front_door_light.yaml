@@ -93,8 +93,10 @@
 - id: turn_on_front_door_light_when_coming_home
   alias: Turn on front door light when coming home
   trigger:
-  - platform: geo_location
-    source: device_tracker.sm_g973f
+  - platform: zone
+    entity_id: 
+      - person.andre_de_zwart
+      - person.lize_wasmus
     zone: zone.home
     event: enter
   condition:
@@ -118,6 +120,9 @@
     entity_id: sun.sun
     attribute: elevation
     below: '-3.0'
+  - condition: state
+    entity_id: switch.outside
+    state: 'off'
   action:
     - service: switch.turn_on
       entity_id: switch.outside
