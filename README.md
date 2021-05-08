@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.4.3%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.4.3)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.5.0%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.5.0)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -35,6 +35,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Camera (Generic IP camera)
 * Certificate Expiry
 * DSMR Slimme meter (Dutch Smart Meter Requirements)
+* ESPHome
 * Google Chromecast
 * Growatt (Inverter for photovoltaic plant)
 * Ikea tradfri
@@ -47,6 +48,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
   * Xiaomi Aqara Door and Window sensor (Zigbee2MQTT)
 * NS (Dutch railways)
 * Onvif
+* Plant (ESPhome based BLE tracker MiFlora)
 * Pi-Hole
 * Ping (Netgear ReadyNAS NV+ v2)
 * RESTful
