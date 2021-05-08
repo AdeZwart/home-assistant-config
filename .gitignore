@@ -12,6 +12,7 @@
 *.db
 *.db-shm
 *.db-wal
+*.db.corrupt.*
 
 # Swap files
 *.swp
