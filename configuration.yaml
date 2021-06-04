@@ -6,11 +6,13 @@ tts:
   - platform: google_translate
 
 homeassistant:
+  packages: !include_dir_named ./integrations
   allowlist_external_dirs:
     - /tmp
 
 automation: !include automations.yaml
 automation split: !include_dir_merge_list automations
+
 group: !include groups.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
@@ -41,155 +43,10 @@ binary_sensor:
             mdi:phone-off
           {% endif %}
 
-camera:
-  - platform: generic
-    name: Frontdoor camera 1
-    still_image_url: !secret frontdoor_ip_cam_still_image_url
-    stream_source: !secret frontdoor_ip_cam_stream_source
-
 ffmpeg:
-
-google_assistant:
-  project_id: !secret google_assistant_proj_id
-  service_account: 
-    private_key: !secret google_assistant_private_key
-    client_email: !secret google_assistant_client_email
-  report_state: true
 
 # influxdb:
 #   host: 192.168.2.100
 #   include:
 #     domains:
-#       - sensor
-
-media_player:
-  - platform: lg_netcast
-    host: !secret lg_ip_address
-    access_token: !secret lg_access_token
-
-monitor_docker:
-  - name: Docker
-    containers:
-      - grafana
-      - home-assistant
-      - influxdb
-      - mosquitto
-      - pihole
-      - portainer
-      - swag
-      - Zigbee2MQTT
-      - Zigbee2MQTTAssistant
-    rename:
-      home-assistant: Home Assistant
-      influxdb: InfluxDB
-      grafana: Grafana
-      portainer: Portainer
-      swag: Secure Web Application Gateway
-      pihole: Pi Hole
-      Zigbee2MQTT: Zigbee2MQTT
-      Zigbee2MQTTAssistant: Zigbee2MQTTAssistant
-    monitored_conditions:
-      - version
-      - containers_total
-      - containers_running
-      - containers_paused
-      - containers_stopped
-      - containers_cpu_percentage
-      - containers_memory
-      - containers_memory_percentage
-      - images
-      - uptime
-      - image
-      - cpu_percentage
-      - memory
-      - memory_percentage
-
-nefiteasy:
-  devices:
-  - serial: !secret nefit_easy_serial
-    accesskey: !secret nefit_easy_accesskey
-    password: !secret nefit_easy_password
-
-notify:
-  - name: telegram_andre
-    platform: telegram
-    chat_id: !secret chat_id_andre
-  - name: telegram_lize
-    platform: telegram
-    chat_id: !secret chat_id_lize
-  - name: telegram_reigeroord
-    platform: telegram
-    chat_id: !secret chat_id_reigeroord
-
-plant:
-  Dracaena_deremensis_compacta:
-    sensors:
-      moisture: sensor.xiaomi_miflora_01_moisture
-      battery: sensor.xiaomi_miflora_01_battery_level
-      temperature: sensor.xiaomi_miflora_01_temperature
-      conductivity: sensor.xiaomi_miflora_01_soil_conductivity
-      brightness: sensor.xiaomi_miflora_01_illuminance
-    min_moisture: 15
-    max_moisture: 60
-    min_conductivity: 350
-    max_conductivity: 2000
-    min_temperature: 5
-    max_temperature: 35
-    
-pi_hole:
-  host: 192.168.2.100
-  name: pihole
-  api_key: !secret pi_hole_api_token
-
-rfxtrx:
-  device: /dev/ttyUSB1
-  automatic_add: true
-  devices:
-    # Sunscreen front
-    071a000000101002:
-      signal_repetitions: 1
-    # Sunscreen back
-    071a000000101004:
-      signal_repetitions: 1
-
-switch:
-  - platform: wake_on_lan
-    name: "Netgear ReadyNAS NV+ v2"
-    mac: e0:46:9a:a0:57:03
-    broadcast_address: 192.168.2.15
-    broadcast_port: 9
-
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_api_key
-    allowed_chat_ids:
-      - !secret chat_id_andre
-      - !secret chat_id_lize
-      - !secret chat_id_reigeroord
-
-utility_meter:
-  gas_nefit:
-    source: sensor.nefit_year_total
-    cycle: monthly
-  gas_dsmr:
-    source: sensor.gas_consumption
-    cycle: monthly
-  energy_consumption_low:
-    source: sensor.energy_consumption_tarif_1
-    cycle: monthly
-  energy_consumption_high:
-    source: sensor.energy_consumption_tarif_2
-    cycle: monthly
-  energy_surplus_low:
-    source: sensor.energy_production_tarif_1
-    cycle: monthly
-  energy_surplus_high:
-    source: sensor.energy_production_tarif_2
-    cycle: monthly
-  energy_production:
-    source: sensor.growatt_total_lifetime_energy_output
-    cycle: monthly      
-
-weather:
-  - platform: buienradar
-    name: "buienradar"    
+#       - sensor 

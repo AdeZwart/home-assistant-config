@@ -1,0 +1,8 @@
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: 
+    - 172.18.0.7
+    - 192.168.2.101
+    - 192.168.2.100
+  ip_ban_enabled: true
+  login_attempts_threshold: 5

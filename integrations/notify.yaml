@@ -1,0 +1,10 @@
+notify:
+  - name: telegram_andre
+    platform: telegram
+    chat_id: !secret chat_id_andre
+  - name: telegram_lize
+    platform: telegram
+    chat_id: !secret chat_id_lize
+  - name: telegram_reigeroord
+    platform: telegram
+    chat_id: !secret chat_id_reigeroord

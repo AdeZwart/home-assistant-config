@@ -1,0 +1,5 @@
+camera:
+  - platform: generic
+    name: Frontdoor camera 1
+    still_image_url: !secret frontdoor_ip_cam_still_image_url
+    stream_source: !secret frontdoor_ip_cam_stream_source

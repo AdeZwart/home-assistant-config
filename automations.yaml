@@ -29,6 +29,9 @@
       - 940887afcb1047b2b74fad4a446ce8b9
       - 10320c5721484f4c87ad56a96e8f441c
       - 75e0dbc9fbbe436db390faa9e7ff08c7
+  - service: media_player.turn_off
+    target:
+      entity_id: media_player.lg_tv_remote
   mode: single
 - id: '1619375794749'
   alias: Left at KDV notification
@@ -47,10 +50,8 @@
     - wed
     - thu
     - fri
-    - sat
-    - sun
   action:
   - service: notify.mobile_app_sgs10_andre
-    data_template:
-      message: '{{trigger.entity_id.friendly_name}} is vertrokken bij Het Tuinhuis'
+    data:
+      message: Lize is vertrokken bij Het Tuinhuis
   mode: single
