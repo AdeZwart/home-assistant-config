@@ -3,7 +3,7 @@
   trigger: 
   - platform: numeric_state
     entity_id: sensor.cpu_temperature
-    above: '70'
+    above: '65'
   action:
     - service: notify.mobile_app_sgs10_andre
       data_template:

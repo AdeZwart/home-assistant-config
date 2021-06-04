@@ -1,0 +1,5 @@
+nefiteasy:
+  devices:
+  - serial: !secret nefit_easy_serial
+    accesskey: !secret nefit_easy_accesskey
+    password: !secret nefit_easy_password

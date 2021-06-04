@@ -1,0 +1,6 @@
+switch:
+  - platform: wake_on_lan
+    name: "Netgear ReadyNAS NV+ v2"
+    mac: e0:46:9a:a0:57:03
+    broadcast_address: 192.168.2.15
+    broadcast_port: 9  

@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.5.0%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.5.0)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.6.1%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.6.1)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -36,6 +36,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Certificate Expiry
 * DSMR Slimme meter (Dutch Smart Meter Requirements)
 * ESPHome
+  * Smart doorbell
+  * MiFlora plant sensor reading
 * Google Chromecast
 * Growatt (Inverter for photovoltaic plant)
 * Ikea tradfri
@@ -43,12 +45,11 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * LG Netcast
 * Mobile App (android)
 * MQTT 
-  * Smart doorbell (ESPHome based)
   * Xiaomi Aqara Temperature and humidity sensor (Zigbee2MQTT)
   * Xiaomi Aqara Door and Window sensor (Zigbee2MQTT)
 * NS (Dutch railways)
 * Onvif
-* Plant (ESPhome based BLE tracker MiFlora)
+* Plant
 * Pi-Hole
 * Ping (Netgear ReadyNAS NV+ v2)
 * RESTful
@@ -72,6 +73,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * [iCal](https://github.com/tybritten/ical-sensor-homeassistant)
 * [Monitor Docker](https://github.com/ualex73/monitor_docker)
 * [Nefit easy](https://github.com/ksya/ha-nefiteasy)
+* [Neerslag App](https://github.com/aex351/home-assistant-neerslag-app)
 
 ### Custom integrations
 * -
@@ -88,7 +90,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Send a push notification when my phone is set to silent while being on call
 
 ## Wishlist
-* Xiaomi Mi Flora Plant monitor
 * Netgear ReadyNAS
 * Samsung TV
 * Presence detection (motion or room assistant)
