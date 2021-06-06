@@ -74,6 +74,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * [Monitor Docker](https://github.com/ualex73/monitor_docker)
 * [Nefit easy](https://github.com/ksya/ha-nefiteasy)
 * [Neerslag App](https://github.com/aex351/home-assistant-neerslag-app)
+* [Xiaomi cloud map extractor](https://github.com/PiotrMachowski/Home-Assistant-custom-components-Xiaomi-Cloud-Map-Extractor)
 
 ### Custom integrations
 * -

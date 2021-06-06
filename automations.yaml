@@ -38,7 +38,9 @@
   description: ''
   trigger:
   - platform: zone
-    entity_id: person.lize_wasmus
+    entity_id:
+    - person.andre_de_zwart
+    - person.lize_wasmus
     zone: zone.kdv_het_tuinhuis
     event: leave
   condition:
@@ -51,7 +53,11 @@
     - thu
     - fri
   action:
-  - service: notify.mobile_app_sgs10_andre
+  - service: "{% if 'André' in trigger.to_state.attributes.friendly_name %}\n  notify.mobile_app_sgs10_lize\n\
+      {% else %}\n  notify.mobile_app_sgs10_andre\n{% endif %}\n"
     data:
-      message: Lize is vertrokken bij Het Tuinhuis
+      message: '{{ trigger.to_state.attributes.friendly_name }} is vertrokken bij
+        Het Tuinhuis
+
+        '
   mode: single
