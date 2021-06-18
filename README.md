@@ -52,8 +52,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Plant
 * Pi-Hole
 * Ping (Netgear ReadyNAS NV+ v2)
-* RESTful
-  * OpsGenie on call status
 * RFXCOM RFXtrx
   * Somfy RFY sunscreens (2x)
   * Alecto SA-41 smoke detectors (3x)

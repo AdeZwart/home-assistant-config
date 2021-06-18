@@ -59,6 +59,3 @@
       unique_id: "sensor.office_current_temperature"
       unit_of_measurement: "°C"
       value_template: "{{ state_attr('climate.office', 'current_temperature') }}"
-
-    opsgenie_participant_id:
-      value_template: !secret genie_participant_name
