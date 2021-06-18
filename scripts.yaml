@@ -1,0 +1,9 @@
+send_vacuum_to_trashbin:
+  alias: Send vacuum to trashbin
+  sequence:
+  - service: xiaomi_miio.vacuum_goto
+    data:
+      x_coord: '25000'
+      y_coord: '26500'
+  mode: single
+  icon: mdi:robot-vacuum
