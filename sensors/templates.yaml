@@ -59,3 +59,34 @@
       unique_id: "sensor.office_current_temperature"
       unit_of_measurement: "°C"
       value_template: "{{ state_attr('climate.office', 'current_temperature') }}"
+
+    buienradar_rain_expected:
+      friendly_name: "Buienradar neerslag verwacht"
+      unique_id: "binary_sensor.neerslag_buienradar_rain_expected"
+      value_template: >-
+        {% if states.sensor.neerslag_buienradar_regen_data.attributes.data is defined and states.sensor.neerslag_buienradar_regen_data.attributes.data != None %}  
+          {% set buienradar_data = state_attr('sensor.neerslag_buienradar_regen_data', 'data').split(" ") %}
+          {% if buienradar_data|length > 1 %}
+            {% if (buienradar_data[0].split("|")|first|int + buienradar_data[1].split("|")|first|int + buienradar_data[2].split("|")|first|int) > 0 -%}
+              true  
+            {% else %}
+              false  
+            {% endif %}
+          {% endif %}
+        {% else %}
+            false  
+        {% endif %}
+
+    buienalarm_rain_expected:
+      friendly_name: "Buienalarm neerslag verwacht"
+      unique_id: "binary_sensor.neerslag_buienalarm_rain_expected"
+      value_template: >-
+        {% if states.sensor.neerslag_buienalarm_regen_data.attributes.data['precip'] is defined and states.sensor.neerslag_buienalarm_regen_data.attributes.data['precip'] != None %}
+          {% if (states.sensor.neerslag_buienalarm_regen_data.attributes.data.precip[0] + states.sensor.neerslag_buienalarm_regen_data.attributes.data.precip[1] + states.sensor.neerslag_buienalarm_regen_data.attributes.data.precip[2]) > 0 -%}
+              true
+          {% else %}
+              false
+          {% endif %}
+        {% else %}
+              false
+        {% endif %}

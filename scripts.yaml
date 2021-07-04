@@ -5,5 +5,37 @@ send_vacuum_to_trashbin:
     data:
       x_coord: '25000'
       y_coord: '26500'
+    target:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
   mode: single
   icon: mdi:robot-vacuum
+clean_kitchen:
+  alias: Vacuum the kitchen
+  sequence:
+  - service: xiaomi_miio.vacuum_clean_segment
+    target:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+    data:
+      segments: 20
+  mode: single
+  icon: mdi:silverware-fork-knife
+clean_living_room:
+  alias: Vacuum the living room
+  sequence:
+  - service: xiaomi_miio.vacuum_clean_segment
+    target:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+    data:
+      segments: 17
+  mode: single
+  icon: mdi:sofa
+clean_dining:
+  alias: Vacuum the dining room
+  sequence:
+  - service: xiaomi_miio.vacuum_clean_segment
+    target:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+    data:
+      segments: 19
+  mode: single
+  icon: mdi:table-chair
