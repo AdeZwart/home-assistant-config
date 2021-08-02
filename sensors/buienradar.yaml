@@ -1,0 +1,7 @@
+- platform: rest
+  resource: https://forecast.buienradar.nl/2.0/forecast/2758765
+  name: Maximum Temperature
+  device_class: temperature
+  unit_of_measurement: "°C"
+  scan_interval: 3600
+  value_template: "{{ value_json['nowrelevant']['values'][1]['value'] }}"
