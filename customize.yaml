@@ -6,3 +6,6 @@ plant.dracaena_deremensis_compacta:
   entity_picture: /local/dracaena-compacta.jpg
 plant.anthurium_andraeanum:
   entity_picture: /local/anthurium-andraeanum.jpg
+sensor.growatt_total_lifetime_energy_output:
+  state_class: measurement
+  last_reset: '2021-08-01T00:00:00.0'
