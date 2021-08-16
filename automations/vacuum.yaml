@@ -34,8 +34,6 @@
               title: "Yes"
             - action: "skip_goto_trashbin"
               title: "No"
-            - action: "postpone_goto_trashbin"
-              title: "Postpone 1h"
   mode: single
 
 - id: goto_trash_bin
