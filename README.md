@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.8.6%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.8.6)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.8.7%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.8.7)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
