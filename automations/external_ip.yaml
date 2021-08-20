@@ -1,0 +1,12 @@
+- id: 'notify_when_external_ip_changes'
+  alias: Notify when external IP changes
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.myip
+  condition: []
+  action:
+  - service: notify.mobile_app_sgs10_andre
+    data_template:
+      message: New external IP address is {{ states('sensor.myip') }}
+  mode: single

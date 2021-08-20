@@ -12,3 +12,28 @@
         - cover.rfy_001010_2
         - cover.rfy_001010_4
   mode: single
+
+- id: 'raise_sunscreens_when_expecting_rain'
+  alias: Raise sunscreens when expecting rain
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.buienalarm_rain_expected
+    to: 'true'
+  - platform: state
+    entity_id: sensor.buienradar_rain_expected
+    to: 'true'
+  condition:
+  - condition: state
+    entity_id: sensor.buienalarm_rain_expected
+    state: 'true'
+  - condition: state
+    entity_id: sensor.buienradar_rain_expected
+    state: 'true'
+  action:
+  - service: cover.open_cover
+    target:
+      entity_id:
+      - cover.rfy_001010_2
+      - cover.rfy_001010_4
+  mode: single
