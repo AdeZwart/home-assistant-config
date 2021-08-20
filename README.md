@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.8.7%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.8.7)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.8.8%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.8.8)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -9,12 +9,13 @@ This is an overview of my [home assistant](https://www.home-assistant.io/) setup
 I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r/homeassistant/raspberrypi3-homeassistant) on my Raspberry Pi 3B+
 
 ## Other containers
+* [Duck DNS](https://github.com/linuxserver/docker-duckdns)
 * [Grafana](https://hub.docker.com/r/grafana/grafana)
 * [InfluxDB](https://hub.docker.com/_/influxdb)
 * [Mosquitto](https://hub.docker.com/_/eclipse-mosquitto)
 * [Pi Hole](https://hub.docker.com/r/pihole/pihole)
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
-* [Swag (Nginx + Let's encrypt)](https://hub.docker.com/r/linuxserver/swag)
+* [Swag (Nginx + Let's encrypt)](https://github.com/linuxserver/docker-swag)
 * [Zigbee2MQTT](https://hub.docker.com/r/koenkk/zigbee2mqtt)
 * [Zigbee2MQTTAssistant](https://hub.docker.com/r/carldebilly/zigbee2mqttassistant)
 
@@ -31,13 +32,18 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 ## Devices
 
 ### Official integrations
+* Adax
 * Buienradar (Dutch weather forecast)
+* Brother Printer
 * Camera (Generic IP camera)
 * Certificate Expiry
+* CO2 Signal
+* DNSIP
 * DSMR Slimme meter (Dutch Smart Meter Requirements)
 * ESPHome
   * Smart doorbell
   * MiFlora plant sensor reading
+* Forecast Solar
 * Google Chromecast
 * Growatt (Inverter for photovoltaic plant)
 * Ikea tradfri
@@ -65,7 +71,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Xiaomi Miio (Robot Vacuum Roborock S5 Max)
   
 ### HACS integrations
-* [Adax heating](https://github.com/Danielhiversen/home_assistant_adax)
 * [Ecowitt](https://github.com/garbled1/homeassistant_ecowitt) - Alecto WS-5500
 * [HACS](https://github.com/hacs/integration)
 * [iCal](https://github.com/tybritten/ical-sensor-homeassistant)
@@ -87,6 +92,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Actionable notification reminder to have the Roborock report at the trashbin to empty the dustbin
 * Send a camera snapshot to Telegram when the doorbell is pressed
 * Send a push notification when my phone is set to silent while being on call
+* Raise the sunscreens in case of rain or on sunset
 
 ## Wishlist
 * Netgear ReadyNAS
