@@ -6,7 +6,7 @@
     entity_id: sensor.myip
   condition: 
   - condition: template
-    value_template: {{ states.sensor.myip.state != 'unknown' and states.input_text.external_ip_address.state != states.myip.state }}
+    value_template: "{{ states.sensor.myip.state != 'unknown' and states.input_text.external_ip_address.state != states.myip.state }}"
   action:
   - service: notify.mobile_app_sgs10_andre
     data_template:
