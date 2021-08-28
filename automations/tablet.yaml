@@ -1,20 +1,33 @@
 - id: notify_tablet_low_battery
-  alias: Notify that the tablet has low battery
+  alias: Tablet battery low
+  description: ''
   trigger:
-    platform: state
-    entity_id: input_boolean.snooze
-    to: 'on'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '30'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '20'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '15'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '10'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '5'
   condition:
-    condition: and
-    conditions:
-      - condition: numeric_state
-        entity_id: sensor.sgts5e_batterijniveau    
-        below: '30'
-      - condition: state
-        entity_id: binary_sensor.sgts5e_is_aan_het_opladen
-        state: 'off'            
+  - condition: state
+    entity_id: sensor.sgts5e_batterij_laadstatus
+    state: discharging
   action:
-    - service: notify.mobile_app_sgs10_andre
-      data:        
-        message: 'Tablet battery level at {{states.sensor.sgts5e_batterijniveau.state_with_unit}}! Please charge.'
+  - service: notify.mobile_app_sgs10_andre
+    data:
+      message: Tablet batterij niveau op {{states.sensor.sgts5e_batterijniveau.state_with_unit}}!
+        Tijd om op te laden.
+  - service: notify.mobile_app_sgs10_lize
+    data:
+      message: Tablet batterij niveau op {{states.sensor.sgts5e_batterijniveau.state_with_unit}}!
+        Tijd om op te laden.
   mode: single

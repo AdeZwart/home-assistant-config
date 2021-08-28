@@ -4,9 +4,16 @@
   trigger:
   - platform: state
     entity_id: sensor.myip
-  condition: []
+  condition: 
+  - condition: template
+    value_template: {{ states.sensor.myip.state != 'unknown' and states.input_text.external_ip_address.state != states.myip.state }}
   action:
   - service: notify.mobile_app_sgs10_andre
     data_template:
       message: New external IP address is {{ states('sensor.myip') }}
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.external_ip_address
+    data:
+      value: "{{ states.sensor.myip.state }}"
   mode: single
