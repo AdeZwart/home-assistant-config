@@ -17,3 +17,16 @@ trash_collection:
     - sensor.afvalkalender_event_0
     - sensor.afvalkalender_event_1
     - sensor.afvalkalender_event_2
+plants:
+    name: "Plants"
+    entities:
+    - plant.anthurium_andraeanum
+    - plant.dracaena_deremensis_compacta
+    - plant.spathiphyllum_gold_cupido
+    - plant.syngonium_podophyllum_pixie
+
+persons:
+    name: "Persons"
+    entities: 
+    - person.andre_de_zwart
+    - person.lize_wasmus

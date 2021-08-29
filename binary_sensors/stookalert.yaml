@@ -1,0 +1,2 @@
+- platform: stookalert
+  province: !secret province

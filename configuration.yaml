@@ -14,28 +14,9 @@ homeassistant:
 automation: !include automations.yaml
 automation split: !include_dir_merge_list automations
 
+alert: !include alerts.yaml
 group: !include groups.yaml
-script: !include scripts.yaml
 scene: !include scenes.yaml
+script: !include scripts.yaml
 sensor: !include_dir_merge_list sensors
-
-binary_sensor:
-  - platform: stookalert
-    province: !secret province
-
-  - platform: workday
-    country: NL
-    workdays: [mon, tue, wed, thu, fri]
-    excludes: [sat, sun]
-
-  - platform: ping
-    name: "Netgear ReadyNAS NV+ v2"
-    host: 192.168.2.15
-
-ffmpeg:
-
-# influxdb:
-#   host: 192.168.2.100
-#   include:
-#     domains:
-#       - sensor 
+binary_sensor: !include_dir_merge_list binary_sensors

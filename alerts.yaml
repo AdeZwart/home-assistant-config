@@ -1,0 +1,17 @@
+notify_of_plant_problem:
+  name: Notify of plant problem
+  entity_id: group.plants
+  state: "problem"
+  repeat: 1440
+  message: >
+    {%- set problems = expand('group.plants') | selectattr('state','eq','problem') | list %}
+    {%- if problems | count > 1 %}
+      {{ problems | count }} planten hebben aandacht nodig:<br>
+    {%- else %}
+      Een plant heeft aandacht nodig:<br>
+    {%- endif %}
+    {%- for problem in problems %}
+      {{ problem.name }} - {{ problem.attributes.problem }}<br>
+    {%- endfor %}
+  notifiers:
+    - mobile_app_sgs10_andre
