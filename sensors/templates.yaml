@@ -61,7 +61,7 @@
       friendly_name: "Direct Power Usage"
       unique_id: "sensor.direct_power_usage"
       unit_of_measurement: "W"
-      value_template: "{{ ((states('sensor.growatt_total_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
+      value_template: "{{ ((states('sensor.adezwart_total_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
 
     nefit_temperature:
       friendly_name: "Nefit Set temperature"
@@ -95,7 +95,7 @@
             {% endif %}
           {% endif %}
         {% else %}
-            false  
+          None  
         {% endif %}
 
     buienalarm_rain_expected:
@@ -104,10 +104,10 @@
       value_template: >-
         {% if states.sensor.neerslag_buienalarm_regen_data.attributes.data['precip'] is defined and states.sensor.neerslag_buienalarm_regen_data.attributes.data['precip'] != None %}
           {% if (states.sensor.neerslag_buienalarm_regen_data.attributes.data.precip[0] + states.sensor.neerslag_buienalarm_regen_data.attributes.data.precip[1] + states.sensor.neerslag_buienalarm_regen_data.attributes.data.precip[2]) > 0 -%}
-              true
+            true
           {% else %}
-              false
+             false
           {% endif %}
         {% else %}
-              false
+          None
         {% endif %}

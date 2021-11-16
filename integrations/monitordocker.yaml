@@ -1,9 +1,7 @@
 monitor_docker:
   - name: Docker
     containers:
-      - grafana
       - home-assistant
-      - influxdb
       - mosquitto
       - pihole
       - portainer
@@ -12,11 +10,10 @@ monitor_docker:
       - duckdns
     rename:
       home-assistant: Home Assistant
-      influxdb: InfluxDB
-      grafana: Grafana
+      mosquitto: Mosquitto
+      pihole: Pi Hole
       portainer: Portainer
       swag: Secure Web Application Gateway
-      pihole: Pi Hole
       Zigbee2MQTT: Zigbee2MQTT
       duckdns: Duck DNS
     monitored_conditions:

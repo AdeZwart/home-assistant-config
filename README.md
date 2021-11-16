@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.9.7%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.9.7)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2021.11.1%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2021.11.1)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -10,14 +10,11 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 
 ## Other containers
 * [Duck DNS](https://github.com/linuxserver/docker-duckdns)
-* [Grafana](https://hub.docker.com/r/grafana/grafana)
-* [InfluxDB](https://hub.docker.com/_/influxdb)
 * [Mosquitto](https://hub.docker.com/_/eclipse-mosquitto)
 * [Pi Hole](https://hub.docker.com/r/pihole/pihole)
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://github.com/linuxserver/docker-swag)
 * [Zigbee2MQTT](https://hub.docker.com/r/koenkk/zigbee2mqtt)
-* [Zigbee2MQTTAssistant](https://hub.docker.com/r/carldebilly/zigbee2mqttassistant)
 
 See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-configuration)
 
@@ -50,9 +47,10 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Influx DB
 * LG Netcast
 * Mobile App (android)
-* MQTT 
-  * Xiaomi Aqara Temperature and humidity sensor (Zigbee2MQTT)
-  * Xiaomi Aqara Door and Window sensor (Zigbee2MQTT)
+* MQTT (Zigbee2MQTT)
+  * Xiaomi Aqara Temperature and humidity sensor
+  * Xiaomi Aqara Door and Window sensor
+  * Blitzwolf BW-SHP13
 * NS (Dutch railways)
 * Onvif
 * Plant
@@ -95,12 +93,8 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Raise the sunscreens in case of rain or on sunset
 
 ## Wishlist
-* Netgear ReadyNAS
-* Samsung TV
-* Presence detection (motion or room assistant)
+* Presence detection
 * Sure PetCare cat flap 
-* [DIY cat feeder](https://github.com/AdeZwart/RPi-HomeAutomation)
-* Custom integration for underground trash container usage
 
 ## Tutorials/Guides/Tools used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)

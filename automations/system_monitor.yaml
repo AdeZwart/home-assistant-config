@@ -3,9 +3,21 @@
   trigger: 
   - platform: numeric_state
     entity_id: sensor.cpu_temperature
-    above: '65'
+    above: '70'
   action:
     - service: notify.mobile_app_sgs10_andre
       data_template:
         message: 'System temperature at {{states.sensor.cpu_temperature.state_with_unit}}!'
   mode: single
+
+- id: system_under_voltage_alert
+  alias: 'System under voltage alert'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.rpi_power_status
+    from: "off"
+    to: "on"
+  action:
+    - service: notify.mobile_app_sgs10_andre
+      data:
+        message: 'System undervoltage detected!'

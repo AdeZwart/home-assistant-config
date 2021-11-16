@@ -20,3 +20,10 @@ scene: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors
+
+light:
+  - platform: group
+    name: TV cabinet
+    entities:
+      - light.tv_cabinet_left
+      - light.tv_cabinet_right      

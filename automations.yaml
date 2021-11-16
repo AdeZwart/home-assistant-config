@@ -21,5 +21,63 @@
   - service: "{% if 'André' in trigger.to_state.attributes.friendly_name %}\n  notify.mobile_app_sgs10_lize\n\
       {% else %}\n  notify.mobile_app_sgs10_andre\n{% endif %}\n"
     data:
-      message: '{{ trigger.to_state.attributes.friendly_name }} is vertrokken bij Het Tuinhuis'
+      message: '{{ trigger.to_state.attributes.friendly_name }} is vertrokken bij
+        Het Tuinhuis'
+  mode: single
+- id: '1636050957204'
+  alias: TV cabinet lights
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.lg_tv_remote
+    to: playing
+  - platform: sun
+    event: sunset
+  condition:
+  - condition: and
+    conditions:
+    - condition: sun
+      after: sunset
+    - condition: state
+      entity_id: media_player.lg_tv_remote
+      state: playing
+  action:
+  - type: turn_on
+    device_id: 7bd1968937b3e53a8fe785b06b9d5d50
+    entity_id: light.tv_cabinet_left
+    domain: light
+  - type: turn_on
+    device_id: d41155d49a64ae65b1fcaf9db11c0131
+    entity_id: light.tv_cabinet_right
+    domain: light
+  mode: single
+- id: '1636292973585'
+  alias: Garden lights
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition:
+  - condition: time
+    before: '23:00:00'
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.backyard_lights
+  mode: single
+- id: '1636445923540'
+  alias: Away from home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.persons
+    to: not_home
+  condition: []
+  action:
+  - service: light.turn_off
+    target:
+      area_id:
+      - 940887afcb1047b2b74fad4a446ce8b9
+      - 5725600297af4a14beb939fde831b3e9
+      - e0451735c3764eebbf1c3fece20c87e9
   mode: single
