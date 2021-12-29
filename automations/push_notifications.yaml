@@ -2,7 +2,7 @@
   alias: 'Send a push notification in case of a stookalert'
   trigger:
     platform: state
-    entity_id: binary_sensor.stookalert
+    entity_id: binary_sensor.stookalert_zuid_holland
     to: 'on'
   action:
     service: notify.mobile_app_sgs10_andre
@@ -14,7 +14,7 @@
   alias: 'Send a push notification in case the alert is lifted'
   trigger:
     platform: state
-    entity_id: binary_sensor.stookalert
+    entity_id: binary_sensor.stookalert_zuid_holland
     to: 'off'
   action:
     service: notify.mobile_app_sgs10_andre

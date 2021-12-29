@@ -63,7 +63,9 @@
   action:
   - service: switch.turn_on
     target:
-      entity_id: switch.backyard_lights
+      entity_id:
+      - switch.backyard_lights
+      - switch.blitzwolf_01
   mode: single
 - id: '1636445923540'
   alias: Away from home
@@ -80,4 +82,26 @@
       - 940887afcb1047b2b74fad4a446ce8b9
       - 5725600297af4a14beb939fde831b3e9
       - e0451735c3764eebbf1c3fece20c87e9
+  mode: single
+- id: '1639577789678'
+  alias: 'Turn off lights when it''s getting light '
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.solar_radiation
+    above: '13'
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id:
+      - switch.shelly1_diningroom
+      - switch.shelly1_kitchen
+      - switch.shelly1_livingroom
+      - switch.blitzwolf_01
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.tv_cabinet
+      - light.kabinet
   mode: single

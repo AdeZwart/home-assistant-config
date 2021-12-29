@@ -2,22 +2,22 @@
   alias: 'Central heating system pressure low alert'
   trigger:
   - platform: numeric_state
-    entity_id: sensor.nefit_cv_pressure
+    entity_id: sensor.system_pressure
     below: '1.5'
   action:
     - service: notify.mobile_app_sgs10_andre
       data_template:
-        message: 'Low CV System pressure! Pressure at {{states.sensor.nefit_cv_pressure.state_with_unit}}!'
+        message: 'Low CV System pressure! Pressure at {{states.sensor.system_pressure.state_with_unit}}!'
   mode: single
 
 - id: central_heating_pressure_high_alert
   alias: 'Central heating system pressure high alert'
   trigger:
   - platform: numeric_state
-    entity_id: sensor.nefit_cv_pressure
+    entity_id: sensor.system_pressure
     above: '2.6'
   action:
     - service: notify.mobile_app_sgs10_andre
       data_template:
-        message: 'High CV System pressure! Pressure at {{states.sensor.nefit_cv_pressure.state_with_unit}}!'
+        message: 'High CV System pressure! Pressure at {{states.sensor.system_pressure.state_with_unit}}!'
   mode: single

@@ -1,6 +1,4 @@
-# google_assistant:
-#   project_id: !secret google_assistant_proj_id
-#   service_account: 
-#     private_key: !secret google_assistant_private_key
-#     client_email: !secret google_assistant_client_email
-#   report_state: true
+google_assistant:
+  project_id: !secret google_assistant_proj_id
+  service_account: !include ../google_service_account.json    
+  report_state: true
