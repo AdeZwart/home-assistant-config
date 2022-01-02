@@ -24,6 +24,7 @@ plants:
     - plant.dracaena_deremensis_compacta
     - plant.spathiphyllum_gold_cupido
     - plant.syngonium_podophyllum_pixie
+    - plant.asplenium_nidus
 
 persons:
     name: "Persons"
