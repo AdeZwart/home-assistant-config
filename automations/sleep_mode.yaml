@@ -52,7 +52,7 @@
       entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
       state: 'on'
     - condition: time
-      after: '19:00:00'
+      after: '20:30:00'
   action:
   - service: homeassistant.turn_off
     target:
@@ -63,6 +63,8 @@
       - 940887afcb1047b2b74fad4a446ce8b9
       - 10320c5721484f4c87ad56a96e8f441c
       - 75e0dbc9fbbe436db390faa9e7ff08c7
+      entity_id:
+      - input_boolean.office
   - service: media_player.turn_off
     target:
       entity_id: media_player.lg_tv_remote
