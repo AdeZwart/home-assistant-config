@@ -65,7 +65,6 @@
     target:
       entity_id:
       - switch.backyard_lights
-      - switch.blitzwolf_01
   mode: single
 - id: '1636445923540'
   alias: Away from home
@@ -95,16 +94,10 @@
     above: '13'
   condition: []
   action:
-  - service: switch.turn_off
+  - service: homeassistant.turn_off
     target:
-      entity_id:
-      - switch.shelly1_diningroom
-      - switch.shelly1_kitchen
-      - switch.shelly1_livingroom
-      - switch.blitzwolf_01
-  - service: light.turn_off
-    target:
-      entity_id:
-      - light.tv_cabinet
-      - light.kabinet
+      area_id:
+      - 5725600297af4a14beb939fde831b3e9
+      - c9c7d949cb959b8436f04d3b8e02018a
+      - 940887afcb1047b2b74fad4a446ce8b9
   mode: single
