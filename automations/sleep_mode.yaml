@@ -5,32 +5,31 @@
     entity_id: input_boolean.snooze
     to: 'on'
   action:
-    - service: media_player.turn_off
+  - service: homeassistant.turn_off
+    target:
+      area_id:
+      - c9c7d949cb959b8436f04d3b8e02018a
+      - 5725600297af4a14beb939fde831b3e9
+      - e0451735c3764eebbf1c3fece20c87e9
+      - 940887afcb1047b2b74fad4a446ce8b9
+      - 10320c5721484f4c87ad56a96e8f441c
+      - 75e0dbc9fbbe436db390faa9e7ff08c7
+      entity_id:
+      - input_boolean.office
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.nefit
+      temperature: 15
+  - service: media_player.turn_off
+    target:
       entity_id: media_player.lg_tv_remote
-    - service: switch.turn_off
-      entity_id: switch.shelly1_diningroom
-    - service: switch.turn_off
-      entity_id: switch.shelly1_livingroom
-    - service: switch.turn_off
-      entity_id: switch.shelly1_kitchen
-    - service: light.turn_off
-      entity_id: light.tradfri_driver
-    - service: light.turn_off
-      entity_id: light.tv_meubel_links
-    - service: light.turn_off
-      entity_id: light.tv_meubel_rechts
-    - service: light.turn_off
-      entity_id: light.test_lamp
-    - service: switch.turn_off
-      entity_id: switch.outside
-    - service: climate.turn_off
-      entity_id: climate.office
-    - service: climate.set_temperature
-      data:
-        entity_id: climate.nefit
-        temperature: 15
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.snooze
+  - service: cover.open_cover
+    target:
+      entity_id:
+      - cover.rfy_001010_2
+      - cover.rfy_001010_4
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.snooze
   mode: single
 
 - id: 'automatically_set_house_sleep_mode'
@@ -65,6 +64,10 @@
       - 75e0dbc9fbbe436db390faa9e7ff08c7
       entity_id:
       - input_boolean.office
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.nefit
+      temperature: 15
   - service: media_player.turn_off
     target:
       entity_id: media_player.lg_tv_remote
