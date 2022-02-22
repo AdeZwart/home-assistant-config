@@ -113,7 +113,7 @@
   alias: Turn on front door light when the door opens
   trigger:
   - platform: state
-    entity_id: binary_sensor.xiaomi_door_1_contact
+    entity_id: binary_sensor.xiaomi_door_01_contact
     to: 'on'    
   condition:
   - condition: numeric_state
