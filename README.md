@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2022.2.8%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2022.2.8)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2022.2.9%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2022.2.9)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -9,11 +9,13 @@ This is an overview of my [home assistant](https://www.home-assistant.io/) setup
 I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r/homeassistant/raspberrypi3-homeassistant) on my Raspberry Pi 3B+
 
 ## Other containers
+* [AppDaemon](https://hub.docker.com/r/acockburn/appdaemon)
 * [Duck DNS](https://github.com/linuxserver/docker-duckdns)
 * [Mosquitto](https://hub.docker.com/_/eclipse-mosquitto)
 * [Pi Hole](https://hub.docker.com/r/pihole/pihole)
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://github.com/linuxserver/docker-swag)
+* [Wireguard](https://github.com/linuxserver/docker-wireguard)
 * [Zigbee2MQTT](https://hub.docker.com/r/koenkk/zigbee2mqtt)
 
 See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-configuration)

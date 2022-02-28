@@ -1,13 +1,14 @@
 monitor_docker:
   - name: Docker
     containers:
+      - appdaemon
+      - duckdns
       - home-assistant
       - mosquitto
       - pihole
       - portainer
       - swag
       - Zigbee2MQTT
-      - duckdns
     rename:
       home-assistant: Home Assistant
       mosquitto: Mosquitto
