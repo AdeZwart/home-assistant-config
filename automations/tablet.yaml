@@ -22,7 +22,7 @@
     entity_id: sensor.sgts5e_batterij_laadstatus
     state: discharging
   action:
-  - service: notify.mobile_app_sgs10_andre
+  - service: notify.mobile_app_phone_andre
     data:
       message: Tablet batterij niveau op {{states.sensor.sgts5e_batterijniveau.state_with_unit}}!
         Tijd om op te laden.

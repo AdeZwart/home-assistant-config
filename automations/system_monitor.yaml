@@ -5,7 +5,7 @@
     entity_id: sensor.cpu_temperature
     above: '70'
   action:
-    - service: notify.mobile_app_sgs10_andre
+    - service: notify.mobile_app_phone_andre
       data_template:
         message: 'System temperature at {{states.sensor.cpu_temperature.state_with_unit}}!'
   mode: single

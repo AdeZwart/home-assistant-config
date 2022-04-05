@@ -8,7 +8,7 @@
   - condition: template
     value_template: "{{ states.sensor.myip.state != 'unavailable' and states.sensor.myip.state != 'unknown' and states.input_text.external_ip_address.state != states.sensor.myip.state }}"
   action:
-  - service: notify.mobile_app_sgs10_andre
+  - service: notify.mobile_app_phone_andre
     data_template:
       message: New external IP address is {{ states('sensor.myip') }}
   - service: input_text.set_value

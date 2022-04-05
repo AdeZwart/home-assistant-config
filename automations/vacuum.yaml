@@ -23,7 +23,7 @@
       - wed
       - sat
   action:
-    - service: notify.mobile_app_sgs10_andre
+    - service: notify.mobile_app_phone_andre
       data:
         message: 'Time to empty the Roborock dust bin! Do it now?'
         data:

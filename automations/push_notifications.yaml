@@ -5,7 +5,7 @@
     entity_id: binary_sensor.stookalert_zuid_holland
     to: 'on'
   action:
-    service: notify.mobile_app_sgs10_andre
+    service: notify.mobile_app_phone_andre
     data:
       message: 'Let op! Stookalert: stook geen hout!'
   mode: single
@@ -17,7 +17,7 @@
     entity_id: binary_sensor.stookalert_zuid_holland
     to: 'off'
   action:
-    service: notify.mobile_app_sgs10_andre
+    service: notify.mobile_app_phone_andre
     data:
       message: 'Stookalert opgeheven.'
   mode: single
@@ -32,7 +32,7 @@
         - binary_sensor.shelly1_8caab54be41c_firmware_update
       to: 'on'
   action:
-    service: notify.mobile_app_sgs10_andre
+    service: notify.mobile_app_phone_andre
     data_template:
       message: "New Shelly firmware version available: {{ trigger.to_state.attributes.latest_stable_version }}"
   mode: single

@@ -14,5 +14,5 @@ notify_of_plant_problem:
       {{ problem.name }} - {{ problem.attributes.problem }}<br>
     {%- endfor %}
   notifiers:
-    - mobile_app_sgs10_andre
+    - mobile_app_phone_andre
     - mobile_app_sgs10_lize

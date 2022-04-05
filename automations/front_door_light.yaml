@@ -5,7 +5,7 @@
   - platform: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    below: '-4.0'  
+    below: '-4.0'
   condition:
   - condition: time
     after: '16:00:00'
@@ -18,7 +18,7 @@
     - fri
   action:
   - service: switch.turn_on
-    entity_id: switch.outside    
+    entity_id: switch.outdoor_light
   mode: single
 
 - id: front_door_light_evening_timed
@@ -37,9 +37,9 @@
       entity_id: sun.sun
       attribute: elevation
       below: '-4.0'
-  action:    
+  action:
   - service: switch.turn_on
-    entity_id: switch.outside
+    entity_id: switch.outdoor_light
   mode: single
 
 - id: front_door_light_morning_timed
@@ -60,7 +60,7 @@
       attribute: elevation
   action:
   - service: switch.turn_on
-    entity_id: switch.outside
+    entity_id: switch.outdoor_light
   mode: single
 
 - id: front_door_light_morning_sun_elevation
@@ -73,7 +73,7 @@
     attribute: elevation
   action:
   - service: switch.turn_off
-    entity_id: switch.outside
+    entity_id: switch.outdoor_light
   mode: single
 
 - id: front_door_light_nighttime_daytime
@@ -87,14 +87,14 @@
   condition: []
   action:
   - service: switch.turn_off
-    entity_id: switch.outside
+    entity_id: switch.outdoor_light
   mode: single
 
 - id: turn_on_front_door_light_when_coming_home
   alias: Turn on front door light when coming home
   trigger:
   - platform: zone
-    entity_id: 
+    entity_id:
       - person.andre_de_zwart
       - person.lize_wasmus
     zone: zone.home
@@ -103,10 +103,10 @@
   - condition: numeric_state
     entity_id: sun.sun
     attribute: elevation
-    below: '-3.0'    
+    below: '-3.0'
   action:
   - service: switch.turn_on
-    entity_id: switch.outside
+    entity_id: switch.outdoor_light
   mode: single
 
 - id: turn_on_front_door_light_when_the_door_opens
@@ -114,19 +114,19 @@
   trigger:
   - platform: state
     entity_id: binary_sensor.xiaomi_door_01_contact
-    to: 'on'    
+    to: 'on'
   condition:
   - condition: numeric_state
     entity_id: sun.sun
     attribute: elevation
     below: '-3.0'
   - condition: state
-    entity_id: switch.outside
+    entity_id: switch.outdoor_light
     state: 'off'
   action:
     - service: switch.turn_on
-      entity_id: switch.outside
+      entity_id: switch.outdoor_light
     - delay: '00:10:00'
     - service: switch.turn_off
-      entity_id: switch.outside
+      entity_id: switch.outdoor_light
   mode: single
