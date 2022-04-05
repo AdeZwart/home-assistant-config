@@ -36,7 +36,7 @@
   alias: Sleep Mode when phones charging
   trigger:
   - platform: state
-    entity_id: binary_sensor.sm_g973f_is_charging
+    entity_id: binary_sensor.sm_g991b_is_charging
     to: 'on'
   - platform: state
     entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
@@ -45,7 +45,7 @@
   - condition: and
     conditions:
     - condition: state
-      entity_id: binary_sensor.sm_g973f_is_charging
+      entity_id: binary_sensor.sm_g991b_is_charging
       state: 'on'
     - condition: state
       entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
