@@ -13,10 +13,10 @@ plant:
     max_temperature: 35
   Spathiphyllum 'Gold Cupido':
     sensors:
-      moisture: sensor.miflora_livingroom_02_moisture
-      temperature: sensor.miflora_livingroom_02_temperature
-      conductivity: sensor.miflora_livingroom_02_soil_conductivity
-      brightness: sensor.miflora_livingroom_02_illuminance
+      moisture: sensor.miflora_bathroom_01_moisture
+      temperature: sensor.miflora_bathroom_01_temperature
+      conductivity: sensor.miflora_bathroom_01_soil_conductivity
+      brightness: sensor.miflora_bathroom_01_illuminance
     min_moisture: 15
     max_moisture: 65
     min_conductivity: 350
