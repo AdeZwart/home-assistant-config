@@ -45,14 +45,13 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Forecast Solar
 * Google Chromecast
 * Growatt (Inverter for photovoltaic plant)
-* Ikea tradfri
-* Influx DB
 * LG Netcast
 * Mobile App (android)
 * MQTT (Zigbee2MQTT)
   * Xiaomi Aqara Temperature and humidity sensor
   * Xiaomi Aqara Door and Window sensor
   * Blitzwolf BW-SHP13
+  * Ikea tradfri devices
 * NS (Dutch railways)
 * Onvif
 * Plant
@@ -62,7 +61,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
   * Somfy RFY sunscreens (2x)
   * Alecto SA-41 smoke detectors (3x)
 * Shelly
-* Speedtest
 * Stookalert
 * System monitor
 * Telegram
