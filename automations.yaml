@@ -18,8 +18,8 @@
     - thu
     - fri
   action:
-  - service: "{% if 'André' in trigger.to_state.attributes.friendly_name %}\n  notify.mobile_app_sgs10_lize\n\
-      {% else %}\n  notify.mobile_app_phone_andre\n{% endif %}\n"
+  - service: "{% if 'André' in trigger.to_state.attributes.friendly_name %}\n  notify.mobile_app_sgs10_lize\n{%
+      else %}\n  notify.mobile_app_phone_andre\n{% endif %}\n"
     data:
       message: '{{ trigger.to_state.attributes.friendly_name }} is vertrokken bij
         Het Tuinhuis'
@@ -115,4 +115,21 @@
     device_id: dfedf6a047a478d4540755ce837b2d82
     entity_id: light.ikea_nightlight_01
     domain: light
+  mode: single
+- id: '1664166314280'
+  alias: Plato pil reminder
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:00:00
+  - platform: time
+    at: '19:00:00'
+  condition: []
+  action:
+  - service: notify.mobile_app_phone_andre
+    data:
+      message: Plato pil!
+  - service: notify.mobile_app_sgs10_lize
+    data:
+      message: Plato pil!
   mode: single
