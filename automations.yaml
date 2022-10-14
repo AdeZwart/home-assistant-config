@@ -122,8 +122,6 @@
   trigger:
   - platform: time
     at: 06:00:00
-  - platform: time
-    at: '19:00:00'
   condition: []
   action:
   - service: notify.mobile_app_phone_andre
@@ -132,4 +130,27 @@
   - service: notify.mobile_app_sgs10_lize
     data:
       message: Plato pil!
+  mode: single
+- id: '1665522807559'
+  alias: Livingroom lights off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.shelly1_livingroom
+    from: 'on'
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: media_player.lg_tv_remote
+    state: 'off'
+  action:
+  - type: turn_off
+    device_id: d41155d49a64ae65b1fcaf9db11c0131
+    entity_id: light.tv_cabinet_right
+    domain: light
+  - type: turn_off
+    device_id: 7bd1968937b3e53a8fe785b06b9d5d50
+    entity_id: light.tv_cabinet_left
+    domain: light
   mode: single
