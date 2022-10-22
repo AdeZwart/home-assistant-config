@@ -116,21 +116,6 @@
     entity_id: light.ikea_nightlight_01
     domain: light
   mode: single
-- id: '1664166314280'
-  alias: Plato pil reminder
-  description: ''
-  trigger:
-  - platform: time
-    at: 06:00:00
-  condition: []
-  action:
-  - service: notify.mobile_app_phone_andre
-    data:
-      message: Plato pil!
-  - service: notify.mobile_app_sgs10_lize
-    data:
-      message: Plato pil!
-  mode: single
 - id: '1665522807559'
   alias: Livingroom lights off
   description: ''
@@ -153,4 +138,41 @@
     device_id: 7bd1968937b3e53a8fe785b06b9d5d50
     entity_id: light.tv_cabinet_left
     domain: light
+  mode: single
+- id: '1666373128921'
+  alias: Slaaptrainer Weekend
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:30:00
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+    - wed
+  action:
+  - type: turn_off
+    device_id: 55ab137d1334f604e4eaf1080252f16d
+    entity_id: switch.blitzwolf_bwshp15_01
+    domain: switch
+  mode: single
+- id: '1666462891423'
+  alias: Slaaptrainer Weekdays
+  description: ''
+  trigger:
+  - platform: time
+    at: 05:35:00
+  condition:
+  - condition: time
+    weekday:
+    - fri
+    - thu
+    - tue
+    - mon
+  action:
+  - type: turn_off
+    device_id: 55ab137d1334f604e4eaf1080252f16d
+    entity_id: switch.blitzwolf_bwshp15_01
+    domain: switch
   mode: single

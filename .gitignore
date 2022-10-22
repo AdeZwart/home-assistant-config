@@ -30,6 +30,7 @@ custom_components/
 www/
 image/
 secrets/
+local/
 
 # Other
 ip_bans.yaml
