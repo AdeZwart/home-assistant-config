@@ -176,3 +176,40 @@
     entity_id: switch.blitzwolf_bwshp15_01
     domain: switch
   mode: single
+- id: '1667046321665'
+  alias: Lekturama - sprookjes voorlezen
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: E3-A7-C9-2E
+  condition:
+  - condition: time
+    after: 06:30:00
+    before: '20:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  action:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.bedroom
+    data:
+      media_content_id: media-source://media_source/local/lekturama/het_lelijke_jonge_eendje.mp3
+      media_content_type: audio/mpeg
+    metadata:
+      title: het_lelijke_jonge_eendje.mp3
+      thumbnail:
+      media_class: music
+      children_media_class:
+      navigateIds:
+      - {}
+      - media_content_type: app
+        media_content_id: media-source://media_source
+      - media_content_type: ''
+        media_content_id: media-source://media_source/local/lekturama
+  mode: single
