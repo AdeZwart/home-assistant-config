@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2022.10.5%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2022.10.5)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2022.11.1%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2022.11.1)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -67,7 +67,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 * Utility Meter
 * Wake On Lan (Netgear ReadyNAS NV+ v2)
 * Xiaomi Miio (Robot Vacuum Roborock S5 Max)
-  
+
 ### HACS integrations
 * [Ecowitt](https://github.com/garbled1/homeassistant_ecowitt) - Alecto WS-5500
 * [HACS](https://github.com/hacs/integration)
@@ -94,7 +94,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 
 ## Wishlist
 * Presence detection
-* Sure PetCare cat flap 
+* Sure PetCare cat flap
 
 ## Tutorials/Guides/Tools used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)

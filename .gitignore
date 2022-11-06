@@ -31,6 +31,7 @@ www/
 image/
 secrets/
 local/
+backups/
 
 # Other
 ip_bans.yaml
