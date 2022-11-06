@@ -1,0 +1,96 @@
+- id: lekturama_luister_sprookjes
+  alias: "Lekturama Luister Sprookjes"
+  mode: single
+  max_exceeded: silent
+  variables:
+    # Map scanner device ID to media player entity ID
+    media_players:
+      # tagreader-5aa2ad
+      a927d8e620ca8e1088df14857e066853: media_player.bedroom
+    # Map tag ID to content
+    tags:
+      53-C9-C3-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lekturama/01 - Het Lelijke Jonge Eendje.mp3
+        media_content_type: audio/mpeg
+      53-B3-BF-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lekturama/02 - Assepoester.mp3
+        media_content_type: audio/mpeg
+      53-DC-C7-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lekturama/03 - Sneeuwwitje.mp3
+        media_content_type: audio/mpeg
+      53-DF-CB-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lekturama/04 - Doornroosje.mp3
+        media_content_type: audio/mpeg
+      53-D3-CF-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lekturama/05 - Repelsteeltje.mp3
+        media_content_type: audio/mpeg
+      53-A7-D5-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lecturama/06 - Hans en Grietje.mp3
+        media_content_type: audio/mpeg
+      53-5B-D9-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lecturama/07 - Roodkapje.mp3
+        media_content_type: audio/mpeg
+      53-EE-DC-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lecturama/08 - Heidi.mp3
+        media_content_type: audio/mpeg
+      53-61-E0-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lecturama/09 - Duimelijntje.mp3
+        media_content_type: audio/mpeg
+      53-B7-E3-C6-00-00-01:
+        media_content_id: media-source://media_source/local/lecturama/10 - De Kikkerprins.mp3
+        media_content_type: audio/mpeg
+  trigger:
+    platform: event
+    event_type: tag_scanned
+  condition:
+    - "{{ trigger.event.data.tag_id in tags }}"
+    - "{{ trigger.event.data.device_id in media_players }}"
+  action:
+    - variables:
+        media_player_entity_id: "{{ media_players[trigger.event.data.device_id] }}"
+        media_content_id: "{{ tags[trigger.event.data.tag_id].media_content_id }}"
+        media_content_type: "{{ tags[trigger.event.data.tag_id].media_content_type }}"
+    - service: media_player.play_media
+      target:
+        entity_id: "{{ media_player_entity_id }}"
+      data:
+        media_content_id: "{{ media_content_id }}"
+        media_content_type: "{{ media_content_type }}"
+    - delay: 2 # timeout before we allow processing next scan
+
+# - id: handle_tag_scan
+#   alias: "Handle Tag Scan"
+#   mode: single
+#   # Hide warnings when triggered while in delay.
+#   max_exceeded: silent
+#   variables:
+#     # Map scanner device ID to media player entity ID
+#     media_players:
+#       tagreader-5aa2ad: media_player.bedroom
+#     # Map tag ID to content
+#     tags:
+#       A7-6B-90-5F:
+#         media_content_id: spotify:album:0h2knr6qpiAq0tV5ri5JMF
+#         media_content_type: album
+#       04-B1-C6-62-2F-64-80:
+#         media_content_id: spotify:playlist:0OtWh3u6fZrBJTQtVBQWge
+#         media_content_type: playlist
+#   trigger:
+#     platform: event
+#     event_type: tag_scanned
+#   condition:
+#     # Test that we support this device and tag
+#     - "{{ trigger.event.data.tag_id in tags }}"
+#     - "{{ trigger.event.data.device_id in media_players }}"
+#   action:
+#     - variables:
+#         media_player_entity_id: "{{ media_players[trigger.event.data.device_id] }}"
+#         media_content_id: "{{ tags[trigger.event.data.tag_id].media_content_id }}"
+#         media_content_type: "{{ tags[trigger.event.data.tag_id].media_content_type }}"
+#     - service: media_player.play_media
+#       target:
+#         entity_id: "{{ media_player_entity_id }}"
+#       data:
+#         media_content_id: "{{ media_content_id }}"
+#         media_content_type: "{{ media_content_type }}"
+#     - delay: 2 # timeout before we allow processing next scan

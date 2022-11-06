@@ -62,6 +62,7 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
   * Alecto SA-41 smoke detectors (3x)
 * Shelly
 * Stookalert
+* Sure Petcare
 * System monitor
 * Telegram
 * Utility Meter
@@ -94,7 +95,6 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 
 ## Wishlist
 * Presence detection
-* Sure PetCare cat flap
 
 ## Tutorials/Guides/Tools used
 * [BurnsHA](https://www.youtube.com/c/BurnsHA)
