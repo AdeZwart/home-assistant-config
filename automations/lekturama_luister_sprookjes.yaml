@@ -25,19 +25,19 @@
         media_content_id: media-source://media_source/local/lekturama/05 - Repelsteeltje.mp3
         media_content_type: audio/mpeg
       53-A7-D5-C6-00-00-01:
-        media_content_id: media-source://media_source/local/lecturama/06 - Hans en Grietje.mp3
+        media_content_id: media-source://media_source/local/lekturama/06 - Hans en Grietje.mp3
         media_content_type: audio/mpeg
       53-5B-D9-C6-00-00-01:
-        media_content_id: media-source://media_source/local/lecturama/07 - Roodkapje.mp3
+        media_content_id: media-source://media_source/local/lekturama/07 - Roodkapje.mp3
         media_content_type: audio/mpeg
       53-EE-DC-C6-00-00-01:
-        media_content_id: media-source://media_source/local/lecturama/08 - Heidi.mp3
+        media_content_id: media-source://media_source/local/lekturama/08 - Heidi.mp3
         media_content_type: audio/mpeg
       53-61-E0-C6-00-00-01:
-        media_content_id: media-source://media_source/local/lecturama/09 - Duimelijntje.mp3
+        media_content_id: media-source://media_source/local/lekturama/09 - Duimelijntje.mp3
         media_content_type: audio/mpeg
       53-B7-E3-C6-00-00-01:
-        media_content_id: media-source://media_source/local/lecturama/10 - De Kikkerprins.mp3
+        media_content_id: media-source://media_source/local/lekturama/10 - De Kikkerprins.mp3
         media_content_type: audio/mpeg
   trigger:
     platform: event

@@ -5,7 +5,7 @@
     entity_id: input_boolean.snooze
     to: 'on'
   action:
-  - service: homeassistant.turn_off
+  - service: light.turn_off
     target:
       area_id:
       - c9c7d949cb959b8436f04d3b8e02018a

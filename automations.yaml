@@ -75,7 +75,7 @@
     to: not_home
   condition: []
   action:
-  - service: homeassistant.turn_off
+  - service: light.turn_off
     target:
       area_id:
       - c9c7d949cb959b8436f04d3b8e02018a
@@ -84,6 +84,7 @@
       - 940887afcb1047b2b74fad4a446ce8b9
       entity_id:
       - input_boolean.office
+    data: {}
   mode: single
 - id: '1639577789678'
   alias: 'Turn off lights when it''s getting light '
@@ -102,7 +103,7 @@
       - 940887afcb1047b2b74fad4a446ce8b9
   mode: single
 - id: '1648526720153'
-  alias: Turn off bedside light
+  alias: Turn off bedside light André
   description: ''
   trigger:
   - platform: state
@@ -175,4 +176,38 @@
     device_id: 55ab137d1334f604e4eaf1080252f16d
     entity_id: switch.blitzwolf_bwshp15_01
     domain: switch
+  mode: single
+- id: '1668957815753'
+  alias: Turn off bedside light Lize
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.sgs10_lize_is_aan_het_opladen
+    to: 'off'
+    from: 'on'
+  condition: []
+  action:
+  - type: turn_off
+    device_id: faad4b192378e316257a2e8d2980cdcd
+    entity_id: light.ikea_nightlight_02
+    domain: light
+  mode: single
+- id: '1668971498514'
+  alias: Wake up light André
+  description: ''
+  trigger:
+  - platform: template
+    value_template: now().timestamp() >= state_attr('sensor.phone_andre_next_alarm',
+      'Time in Milliseconds')
+  condition:
+  - condition: state
+    entity_id: person.andre_de_zwart
+    state: home
+  action:
+  - type: turn_on
+    device_id: dfedf6a047a478d4540755ce837b2d82
+    entity_id: light.ikea_nightlight_01
+    domain: light
+    brightness_pct: 1
   mode: single
