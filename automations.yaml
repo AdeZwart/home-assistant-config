@@ -82,9 +82,19 @@
       - 5725600297af4a14beb939fde831b3e9
       - e0451735c3764eebbf1c3fece20c87e9
       - 940887afcb1047b2b74fad4a446ce8b9
+      - 4ba690e438d54e1ca7f466c0de5d960b
+      - hallway
       entity_id:
       - input_boolean.office
     data: {}
+  - service: climate.turn_off
+    data: {}
+    target:
+      entity_id: climate.office
+  - service: media_player.turn_off
+    data: {}
+    target:
+      entity_id: media_player.lg_tv_remote
   mode: single
 - id: '1639577789678'
   alias: 'Turn off lights when it''s getting light '
@@ -141,7 +151,7 @@
     domain: light
   mode: single
 - id: '1666373128921'
-  alias: Slaaptrainer Weekend
+  alias: Slaaptrainer Weekend 6:30
   description: ''
   trigger:
   - platform: time
@@ -159,11 +169,11 @@
     domain: switch
   mode: single
 - id: '1666462891423'
-  alias: Slaaptrainer Weekdays
+  alias: Slaaptrainer Weekdays 6:15
   description: ''
   trigger:
   - platform: time
-    at: 05:35:00
+    at: 06:15:00
   condition:
   - condition: time
     weekday:
@@ -197,17 +207,49 @@
   alias: Wake up light André
   description: ''
   trigger:
-  - platform: template
-    value_template: now().timestamp() >= state_attr('sensor.phone_andre_next_alarm',
-      'Time in Milliseconds')
+  - platform: time
+    at: input_datetime.next_alarm
   condition:
-  - condition: state
-    entity_id: person.andre_de_zwart
-    state: home
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: person.andre_de_zwart
+      state: home
+    - condition: state
+      entity_id: binary_sensor.sm_g991b_is_charging
+      state: 'on'
   action:
   - type: turn_on
     device_id: dfedf6a047a478d4540755ce837b2d82
     entity_id: light.ikea_nightlight_01
     domain: light
     brightness_pct: 1
+  mode: single
+- id: '1669754804462'
+  alias: Android alarm time
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.phone_andre_next_alarm
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.phone_andre_next_alarm
+      state:
+      - unavailable
+      - unknown
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 15
+      milliseconds: 0
+  - service: input_datetime.set_datetime
+    data_template:
+      datetime: '{{ as_timestamp(states(''sensor.phone_andre_next_alarm'')) | timestamp_custom(''%Y-%m-%d
+        %H:%M:00'') }}'
+    target:
+      entity_id: input_datetime.next_alarm
   mode: single

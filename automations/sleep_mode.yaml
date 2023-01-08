@@ -3,87 +3,94 @@
   trigger:
     platform: state
     entity_id: input_boolean.snooze
-    to: 'on'
+    to: "on"
   action:
-  - service: light.turn_off
-    target:
-      area_id:
-      - c9c7d949cb959b8436f04d3b8e02018a
-      - 5725600297af4a14beb939fde831b3e9
-      - e0451735c3764eebbf1c3fece20c87e9
-      - 940887afcb1047b2b74fad4a446ce8b9
-      - 10320c5721484f4c87ad56a96e8f441c
-      - 75e0dbc9fbbe436db390faa9e7ff08c7
-      entity_id:
-      - input_boolean.office
-  - service: climate.set_temperature
-    data:
-      entity_id: climate.nefit
-      temperature: 15
-  - service: media_player.turn_off
-    target:
-      entity_id: media_player.lg_tv_remote
-  - service: cover.open_cover
-    target:
-      entity_id:
-      - cover.rfy_001010_2
-      - cover.rfy_001010_4
-  - service: input_boolean.turn_off
-    entity_id: input_boolean.snooze
+    - service: light.turn_off
+      target:
+        area_id:
+          - c9c7d949cb959b8436f04d3b8e02018a
+          - 5725600297af4a14beb939fde831b3e9
+          - e0451735c3764eebbf1c3fece20c87e9
+          - 940887afcb1047b2b74fad4a446ce8b9
+          - 10320c5721484f4c87ad56a96e8f441c
+          - 75e0dbc9fbbe436db390faa9e7ff08c7
+          - 4ba690e438d54e1ca7f466c0de5d960b
+          - hallway
+        entity_id:
+          - input_boolean.office
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.nefit
+        temperature: 15
+    - service: climate.turn_off
+      entity_id: climate.office
+    - service: media_player.turn_off
+      target:
+        entity_id: media_player.lg_tv_remote
+    - service: cover.open_cover
+      target:
+        entity_id:
+          - cover.rfy_001010_2
+          - cover.rfy_001010_4
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.snooze
   mode: single
 
-- id: 'automatically_set_house_sleep_mode'
+- id: "automatically_set_house_sleep_mode"
   alias: Sleep Mode when phones charging
   trigger:
-  - platform: state
-    entity_id: binary_sensor.sm_g991b_is_charging
-    to: 'on'
-  - platform: state
-    entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
-    to: 'on'
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
+    - platform: state
       entity_id: binary_sensor.sm_g991b_is_charging
-      state: 'on'
-    - condition: state
+      to: "on"
+    - platform: state
       entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
-      state: 'on'
-    - condition: time
-      after: '20:30:00'
+      to: "on"
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.sm_g991b_is_charging
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
+          state: "on"
+        - condition: time
+          after: "20:30:00"
   action:
-  - service: homeassistant.turn_off
-    target:
-      area_id:
-      - c9c7d949cb959b8436f04d3b8e02018a
-      - 5725600297af4a14beb939fde831b3e9
-      - e0451735c3764eebbf1c3fece20c87e9
-      - 940887afcb1047b2b74fad4a446ce8b9
-      - 10320c5721484f4c87ad56a96e8f441c
-      - 75e0dbc9fbbe436db390faa9e7ff08c7
-      entity_id:
-      - input_boolean.office
-  - service: climate.set_temperature
-    data:
-      entity_id: climate.nefit
-      temperature: 15
-  - service: media_player.turn_off
-    target:
-      entity_id: media_player.lg_tv_remote
-  - service: cover.open_cover
-    target:
-      entity_id:
-      - cover.rfy_001010_2
-      - cover.rfy_001010_4
+    - service: light.turn_off
+      target:
+        area_id:
+          - c9c7d949cb959b8436f04d3b8e02018a
+          - 5725600297af4a14beb939fde831b3e9
+          - e0451735c3764eebbf1c3fece20c87e9
+          - 940887afcb1047b2b74fad4a446ce8b9
+          - 10320c5721484f4c87ad56a96e8f441c
+          - 75e0dbc9fbbe436db390faa9e7ff08c7
+          - hallway
+        entity_id:
+          - input_boolean.office
+    - service: media_player.turn_off
+      target:
+        entity_id: media_player.lg_tv_remote
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.nefit
+        temperature: 15
+    - service: climate.turn_off
+      entity_id: climate.office
+    - service: cover.open_cover
+      target:
+        entity_id:
+          - cover.rfy_001010_2
+          - cover.rfy_001010_4
   mode: single
 
 - id: turn_off_office_heating_in_the_evening
   alias: Turn off office heating at 22.00
   trigger:
-  - platform: time
-    at: '22:00:00'
+    - platform: time
+      at: "22:00:00"
   action:
-  - service: climate.turn_off
-    entity_id: climate.office
+    - service: climate.turn_off
+      entity_id: climate.office
   mode: single

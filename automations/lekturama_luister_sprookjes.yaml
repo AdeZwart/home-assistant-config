@@ -6,7 +6,7 @@
     # Map scanner device ID to media player entity ID
     media_players:
       # tagreader-5aa2ad
-      a927d8e620ca8e1088df14857e066853: media_player.bedroom
+      a927d8e620ca8e1088df14857e066853: media_player.bedroom_veerle
     # Map tag ID to content
     tags:
       53-C9-C3-C6-00-00-01:
