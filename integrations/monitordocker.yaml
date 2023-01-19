@@ -3,11 +3,13 @@ monitor_docker:
     containers:
       - appdaemon
       - duckdns
+      - grott
       - home-assistant
       - mosquitto
       - pihole
       - portainer
       - swag
+      - wireguard
       - Zigbee2MQTT
     rename:
       home-assistant: Home Assistant

@@ -1,23 +1,33 @@
 - id: central_heating_pressure_low_alert
-  alias: 'Central heating system pressure low alert'
+  alias: "Central heating system pressure low alert"
   trigger:
-  - platform: numeric_state
-    entity_id: sensor.system_pressure
-    below: '1.5'
+    - platform: numeric_state
+      entity_id: sensor.system_pressure
+      below: "1.5"
   action:
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
     - service: notify.mobile_app_phone_andre
       data_template:
-        message: 'Low CV System pressure! Pressure at {{states.sensor.system_pressure.state_with_unit}}!'
+        message: "Low CV System pressure! Pressure at {{states.sensor.system_pressure.state_with_unit}}!"
   mode: single
 
 - id: central_heating_pressure_high_alert
-  alias: 'Central heating system pressure high alert'
+  alias: "Central heating system pressure high alert"
   trigger:
-  - platform: numeric_state
-    entity_id: sensor.system_pressure
-    above: '2.6'
+    - platform: numeric_state
+      entity_id: sensor.system_pressure
+      above: "2.6"
   action:
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
     - service: notify.mobile_app_phone_andre
       data_template:
-        message: 'High CV System pressure! Pressure at {{states.sensor.system_pressure.state_with_unit}}!'
+        message: "High CV System pressure! Pressure at {{states.sensor.system_pressure.state_with_unit}}!"
   mode: single

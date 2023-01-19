@@ -253,3 +253,30 @@
     target:
       entity_id: input_datetime.next_alarm
   mode: single
+- id: '1673262664635'
+  alias: Turn off hallway light after 7 min
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.shelly1_hallway
+    to: 'on'
+  - platform: state
+    entity_id:
+    - binary_sensor.xiaomi_door_01_contact
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.shelly1_hallway
+    state: 'on'
+  action:
+  - delay:
+      hours: 0
+      minutes: 7
+      seconds: 0
+      milliseconds: 0
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.shelly1_hallway
+  mode: restart

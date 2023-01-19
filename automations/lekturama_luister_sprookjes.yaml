@@ -39,6 +39,57 @@
       53-B7-E3-C6-00-00-01:
         media_content_id: media-source://media_source/local/lekturama/10 - De Kikkerprins.mp3
         media_content_type: audio/mpeg
+      53-26-28-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/11 - Het Dappere Kleermakertje.mp3
+        media_content_type: audio/mpeg
+      53-9C-2B-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/12 - Aladin en de Wonderlamp.mp3
+        media_content_type: audio/mpeg
+      53-FE-2E-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/13 - De Ratenvanger van Hamelen.mp3
+        media_content_type: audio/mpeg
+      53-35-32-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/14 - Vrouw Holle.mp3
+        media_content_type: audio/mpeg
+      53-4D-35-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/15 - De Wolf en de Zeven Geitjes.mp3
+        media_content_type: audio/mpeg
+      53-4C-35-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/16 - Tafeltje dek je, Ezeltje strek je.mp3
+        media_content_type: audio/mpeg
+      53-34-32-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/17 - Zwaan kleef aan.mp3
+        media_content_type: audio/mpeg
+      53-FD-2E-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/18 - Tijl Uilenspiegel.mp3
+        media_content_type: audio/mpeg
+      53-93-24-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/19 - Klaas Vaak.mp3
+        media_content_type: audio/mpeg
+      53-A7-2B-D1-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/20 - Klein Duimpje.mp3
+        media_content_type: audio/mpeg
+      53-59-FB-D0-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/21 - De Onnozele Hals.mp3
+        media_content_type: audio/mpeg
+      53-D5-F6-D0-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/22 - De Ganzenhoedster.mp3
+        media_content_type: audio/mpeg
+      53-4F-F2-D0-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/23 - Gelukkige Hans.mp3
+        media_content_type: audio/mpeg
+      53-A4-ED-D0-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/24 - De Bremer Stadsmuzikanten.mp3
+        media_content_type: audio/mpeg
+      53-F5-E8-D0-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/25 - De Chinese Nachtegaal.mp3
+        media_content_type: audio/mpeg
+      53-2D-E4-D0-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/26 - De Kleine Zeemeermin.mp3
+        media_content_type: audio/mpeg
+      53-64-DF-D0-50-00-01:
+        media_content_id: media-source://media_source/local/lekturama/27 - Het Meisje met de Zwavelstokjes.mp3
+        media_content_type: audio/mpeg
   trigger:
     platform: event
     event_type: tag_scanned
