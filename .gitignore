@@ -32,6 +32,7 @@ image/
 secrets/
 local/
 backups/
+tts/
 
 # Other
 ip_bans.yaml

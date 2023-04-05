@@ -87,14 +87,24 @@
       entity_id:
       - input_boolean.office
     data: {}
-  - service: climate.turn_off
-    data: {}
-    target:
-      entity_id: climate.office
   - service: media_player.turn_off
     data: {}
     target:
       entity_id: media_player.lg_tv_remote
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: Manual
+    target:
+      device_id: 78450d0b88d1fdf35297da6ed09f4f8b
+  - service: climate.set_temperature
+    data:
+      temperature: 15
+    target:
+      entity_id: climate.nefit
+  - service: climate.turn_off
+    data: {}
+    target:
+      entity_id: climate.office
   mode: single
 - id: '1639577789678'
   alias: 'Turn off lights when it''s getting light '
@@ -120,7 +130,10 @@
     entity_id: binary_sensor.sm_g991b_is_charging
     to: 'off'
     from: 'on'
-  condition: []
+  condition:
+  - condition: time
+    after: 05:00:00
+    before: '10:00:00'
   action:
   - type: turn_off
     device_id: dfedf6a047a478d4540755ce837b2d82
@@ -151,11 +164,11 @@
     domain: light
   mode: single
 - id: '1666373128921'
-  alias: Slaaptrainer Weekend 6:30
+  alias: Slaaptrainer Weekend 6:45
   description: ''
   trigger:
   - platform: time
-    at: 06:30:00
+    at: 06:45:00
   condition:
   - condition: time
     weekday:
@@ -169,11 +182,11 @@
     domain: switch
   mode: single
 - id: '1666462891423'
-  alias: Slaaptrainer Weekdays 6:15
+  alias: Slaaptrainer Weekdays 5:45
   description: ''
   trigger:
   - platform: time
-    at: 06:15:00
+    at: 05:45:00
   condition:
   - condition: time
     weekday:
@@ -196,7 +209,10 @@
     - binary_sensor.sgs10_lize_is_aan_het_opladen
     to: 'off'
     from: 'on'
-  condition: []
+  condition:
+  - condition: time
+    after: 05:00:00
+    before: '10:00:00'
   action:
   - type: turn_off
     device_id: faad4b192378e316257a2e8d2980cdcd
@@ -218,12 +234,27 @@
     - condition: state
       entity_id: binary_sensor.sm_g991b_is_charging
       state: 'on'
+    - condition: state
+      entity_id: light.ikea_nightlight_01
+      state: 'off'
   action:
-  - type: turn_on
-    device_id: dfedf6a047a478d4540755ce837b2d82
-    entity_id: light.ikea_nightlight_01
-    domain: light
-    brightness_pct: 1
+  - service: light.turn_on
+    data:
+      brightness_pct: 1
+      color_temp: 500
+    target:
+      device_id: dfedf6a047a478d4540755ce837b2d82
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 2
+      milliseconds: 0
+  - service: light.turn_on
+    data:
+      transition: 1800
+      brightness_pct: 100
+    target:
+      device_id: dfedf6a047a478d4540755ce837b2d82
   mode: single
 - id: '1669754804462'
   alias: Android alarm time
@@ -280,3 +311,32 @@
     target:
       entity_id: light.shelly1_hallway
   mode: restart
+- id: '1676100536712'
+  alias: Slaaptrainer aan 19:00
+  description: ''
+  trigger:
+  - platform: time
+    at: '19:00:00'
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 55ab137d1334f604e4eaf1080252f16d
+    entity_id: switch.blitzwolf_bwshp15_01
+    domain: switch
+  mode: single
+- id: '1678219014663'
+  alias: Arrive back home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - group.persons
+    to: home
+  condition: []
+  action:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: Clock
+    target:
+      device_id: 78450d0b88d1fdf35297da6ed09f4f8b
+  mode: single
