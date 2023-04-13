@@ -6,20 +6,22 @@ plant.dracaena_deremensis_compacta:
   entity_picture: /local/dracaena-compacta.jpg
 plant.anthurium_andraeanum:
   entity_picture: /local/anthurium-andraeanum.jpg
-plant.asplenium_antiquum:
-  entity_picture: /local/asplenium-antiquum.jpg
+# plant.asplenium_antiquum:
+#   entity_picture: /local/asplenium-antiquum.jpg
+plant.zamioculcas_compacta:
+  entity_picture: /local/zamioculcas-compacta.jpg
 sensor.cpu_temperature:
   state_class: measurement
   last_reset: 2021-01-01T00:00:00+0000
-  unit_of_measurement: '°C'
+  unit_of_measurement: "°C"
   device_class: temperature
 sensor.memory_use_percent:
   state_class: measurement
   last_reset: 2021-01-01T00:00:00+0000
-  unit_of_measurement: '%'
+  unit_of_measurement: "%"
   device_class: power_factor
 sensor.processor_use:
   state_class: measurement
   last_reset: 2021-01-01T00:00:00+0000
-  unit_of_measurement: '%'
+  unit_of_measurement: "%"
   device_class: power_factor

@@ -24,10 +24,10 @@ plants:
     - plant.dracaena_deremensis_compacta
     - plant.spathiphyllum_gold_cupido
     - plant.syngonium_podophyllum_pixie
-    - plant.asplenium_antiquum
+    - plant.zamioculcas_compacta
 
 persons:
     name: "Persons"
-    entities: 
+    entities:
     - person.andre_de_zwart
     - person.lize_wasmus
