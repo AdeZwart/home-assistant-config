@@ -174,7 +174,6 @@
     weekday:
     - sat
     - sun
-    - wed
   action:
   - type: turn_off
     device_id: 55ab137d1334f604e4eaf1080252f16d
@@ -339,4 +338,90 @@
       preset_mode: Clock
     target:
       device_id: 78450d0b88d1fdf35297da6ed09f4f8b
+  mode: single
+- id: '1682845588155'
+  alias: Washing machine - update state
+  description: Set washing machine to "washing" state
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.washing_machine_power
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+    attribute: power
+    above: 5
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_select.washing_machine
+        state: 'Off'
+      sequence:
+      - service: input_select.select_option
+        data:
+          option: Washing
+        target:
+          entity_id: input_select.washing_machine
+    alias: State to Washing
+  mode: single
+- id: '1682846009852'
+  alias: Washing machine - notification
+  description: Send notification when the washing machine is done.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.washing_machine_power
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+    attribute: power
+    below: 2
+  condition:
+  - condition: state
+    entity_id: input_select.washing_machine
+    state: Washing
+  action:
+  - service: input_select.select_option
+    data:
+      option: 'Off'
+    target:
+      entity_id: input_select.washing_machine
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: person.andre_de_zwart
+        state: home
+      sequence:
+      - service: notify.mobile_app_phone_andre
+        data:
+          message: De was is klaar!
+    alias: Notify André if home
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: person.lize_wasmus
+        state: home
+      sequence:
+      - service: notify.mobile_app_sgs10_lize
+        data:
+          message: De was is klaar!
+    alias: Notify Lize if home
+  mode: single
+- id: '1683692334259'
+  alias: Slaaptrainer Wednesday 6:30
+  description: ''
+  trigger:
+  - platform: time
+    at: 06:30:00
+  condition:
+  - condition: time
+    weekday:
+    - wed
+  action:
+  - type: turn_off
+    device_id: 55ab137d1334f604e4eaf1080252f16d
+    entity_id: switch.blitzwolf_bwshp15_01
+    domain: switch
   mode: single

@@ -6,8 +6,6 @@ plant.dracaena_deremensis_compacta:
   entity_picture: /local/dracaena-compacta.jpg
 plant.anthurium_andraeanum:
   entity_picture: /local/anthurium-andraeanum.jpg
-# plant.asplenium_antiquum:
-#   entity_picture: /local/asplenium-antiquum.jpg
 plant.zamioculcas_compacta:
   entity_picture: /local/zamioculcas-compacta.jpg
 sensor.cpu_temperature:

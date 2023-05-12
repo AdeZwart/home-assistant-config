@@ -11,11 +11,6 @@ homeassistant:
     - /tmp
   customize: !include customize.yaml
 
-# logger:
-#   default: info
-#   logs:
-#     homeassistant.components.websocket_api: debug
-
 automation: !include automations.yaml
 automation split: !include_dir_merge_list automations
 

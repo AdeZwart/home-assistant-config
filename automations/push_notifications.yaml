@@ -21,18 +21,3 @@
     data:
       message: 'Stookalert opgeheven.'
   mode: single
-
-- id: notify_on_shelly_firmware_update
-  alias: 'Send a push notification when a Shelly firmware update is available'
-  trigger:
-    - platform: state
-      entity_id: 
-        - binary_sensor.shelly1_kitchen_firmware_update
-        - binary_sensor.shelly1_8caab54b660e_firmware_update
-        - binary_sensor.shelly1_8caab54be41c_firmware_update
-      to: 'on'
-  action:
-    service: notify.mobile_app_phone_andre
-    data_template:
-      message: "New Shelly firmware version available: {{ trigger.to_state.attributes.latest_stable_version }}"
-  mode: single
