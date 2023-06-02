@@ -340,7 +340,7 @@
       device_id: 78450d0b88d1fdf35297da6ed09f4f8b
   mode: single
 - id: '1682845588155'
-  alias: Washing machine - update state
+  alias: Washing machine - Washing
   description: Set washing machine to "washing" state
   trigger:
   - platform: numeric_state
@@ -367,7 +367,7 @@
     alias: State to Washing
   mode: single
 - id: '1682846009852'
-  alias: Washing machine - notification
+  alias: Washing machine - Finished
   description: Send notification when the washing machine is done.
   trigger:
   - platform: numeric_state
@@ -377,7 +377,7 @@
       minutes: 2
       seconds: 0
     attribute: power
-    below: 2
+    below: 1
   condition:
   - condition: state
     entity_id: input_select.washing_machine
@@ -385,7 +385,7 @@
   action:
   - service: input_select.select_option
     data:
-      option: 'Off'
+      option: Finished
     target:
       entity_id: input_select.washing_machine
   - choose:
@@ -397,6 +397,9 @@
       - service: notify.mobile_app_phone_andre
         data:
           message: De was is klaar!
+          data:
+            persistent: true
+            tag: washing_machine
     alias: Notify André if home
   - choose:
     - conditions:
@@ -424,4 +427,78 @@
     device_id: 55ab137d1334f604e4eaf1080252f16d
     entity_id: switch.blitzwolf_bwshp15_01
     domain: switch
+  mode: single
+- id: '1684870809099'
+  alias: Sync IP cam time
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: /1
+  - platform: homeassistant
+    event: shutdown
+  condition: []
+  action:
+  - service: button.press
+    data: {}
+    target:
+      entity_id: button.frontdoor_set_system_date_and_time
+  mode: single
+- id: '1684871522129'
+  alias: Test persistent message
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: notify.mobile_app_phone_andre
+    data:
+      message: Persistent test bericht
+      data:
+        persistent: true
+        tag: washing_machine
+  mode: single
+- id: '1684871753906'
+  alias: test persistent dismiss
+  description: ''
+  trigger: []
+  condition: []
+  action:
+  - service: notify.mobile_app_phone_andre
+    data:
+      message: clear_notification
+      data:
+        tag: washing_machine
+  mode: single
+- id: '1684872146878'
+  alias: Washing Machine - Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.xiaomi_door_03_contact
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: input_select.washing_machine
+      state: Finished
+    - condition: state
+      entity_id: input_select.washing_machine
+      state: Washing
+  action:
+  - service: input_select.select_option
+    data:
+      option: 'Off'
+    target:
+      entity_id: input_select.washing_machine
+  - service: notify.mobile_app_phone_andre
+    data:
+      message: clear_notification
+      data:
+        tag: washing_machine
+  - service: notify.mobile_app_sgs10_lize
+    data:
+      message: clear_notification
+      data:
+        tag: washing_machine
   mode: single

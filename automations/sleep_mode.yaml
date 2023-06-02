@@ -67,8 +67,9 @@
           - 10320c5721484f4c87ad56a96e8f441c
           - 75e0dbc9fbbe436db390faa9e7ff08c7
           - hallway
-        entity_id:
-          - input_boolean.office
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.office
     - service: media_player.turn_off
       target:
         entity_id: media_player.lg_tv_remote
@@ -91,6 +92,7 @@
     - platform: time
       at: "22:00:00"
   action:
-    - service: climate.turn_off
-      entity_id: climate.office
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.office
   mode: single

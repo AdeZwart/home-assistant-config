@@ -1,28 +1,32 @@
 plant:
   Dracaena deremensis 'Compacta':
     sensors:
-      moisture: sensor.xiaomi_miflora_01_moisture
-      temperature: sensor.xiaomi_miflora_01_temperature
-      conductivity: sensor.xiaomi_miflora_01_soil_conductivity
-      brightness: sensor.xiaomi_miflora_01_illuminance
+      moisture: sensor.plant_sensor_3ba0_moisture
+      temperature: sensor.plant_sensor_3ba0_temperature
+      conductivity: sensor.plant_sensor_3ba0_conductivity
+      brightness: sensor.plant_sensor_3ba0_illuminance
+      battery: sensor.plant_sensor_3ba0_battery
     min_moisture: 15
     max_moisture: 60
     min_conductivity: 350
     max_conductivity: 2000
     min_temperature: 5
     max_temperature: 35
+    min_battery: 15
   Spathiphyllum 'Gold Cupido':
     sensors:
-      moisture: sensor.miflora_bathroom_01_moisture
-      temperature: sensor.miflora_bathroom_01_temperature
-      conductivity: sensor.miflora_bathroom_01_soil_conductivity
-      brightness: sensor.miflora_bathroom_01_illuminance
+      moisture: sensor.plant_sensor_3eeb_moisture
+      temperature: sensor.plant_sensor_3eeb_temperature
+      conductivity: sensor.plant_sensor_3eeb_conductivity
+      brightness: sensor.plant_sensor_3eeb_illuminance
+      battery: sensor.plant_sensor_3eeb_battery
     min_moisture: 15
     max_moisture: 65
     min_conductivity: 350
     max_conductivity: 2000
     min_temperature: 15
     max_temperature: 32
+    min_battery: 15
   Anthurium andraeanum:
     sensors:
       moisture: sensor.miflora_livingroom_03_moisture
@@ -37,25 +41,29 @@ plant:
     max_temperature: 32
   Syngonium podophyllum 'Pixie':
     sensors:
-      moisture: sensor.miflora_office_01_moisture
-      temperature: sensor.miflora_office_01_temperature
-      conductivity: sensor.miflora_office_01_soil_conductivity
-      brightness: sensor.miflora_office_01_illuminance
+      moisture: sensor.plant_sensor_d745_moisture
+      temperature: sensor.plant_sensor_d745_temperature
+      conductivity: sensor.plant_sensor_d745_conductivity
+      brightness: sensor.plant_sensor_d745_illuminance
+      battery: sensor.plant_sensor_d745_battery
     min_moisture: 15
     max_moisture: 60
     min_conductivity: 350
     max_conductivity: 2000
     min_temperature: 10
     max_temperature: 32
+    min_battery: 15
   Zamioculcas compacta:
     sensors:
-      moisture: sensor.miflora_office_02_moisture
-      temperature: sensor.miflora_office_02_temperature
-      conductivity: sensor.miflora_office_02_soil_conductivity
-      brightness: sensor.miflora_office_02_illuminance
+      moisture: sensor.plant_sensor_ac68_moisture
+      temperature: sensor.plant_sensor_ac68_temperature
+      conductivity: sensor.plant_sensor_ac68_conductivity
+      brightness: sensor.plant_sensor_ac68_illuminance
+      battery: sensor.plant_sensor_ac68_battery
     min_moisture: 15
     max_moisture: 60
     min_conductivity: 350
     max_conductivity: 2000
     min_temperature: 10
     max_temperature: 32
+    min_battery: 15
