@@ -20,6 +20,14 @@ scene: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors
+
+command_line:
+  - sensor:
+      command: "cat /sys/class/thermal/thermal_zone0/temp"
+      name: CPU Temperature
+      unit_of_measurement: "°C"
+      value_template: "{{ (value | multiply(0.001)) | round(1) }}"
+
 light:
   - platform: group
     name: TV cabinet

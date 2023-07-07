@@ -1,29 +1,3 @@
-- id: '1619375794749'
-  alias: Left at KDV notification
-  description: ''
-  trigger:
-  - platform: zone
-    entity_id:
-    - person.andre_de_zwart
-    - person.lize_wasmus
-    zone: zone.kdv_het_tuinhuis
-    event: leave
-  condition:
-  - condition: time
-    after: '16:00'
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  action:
-  - service: "{% if 'André' in trigger.to_state.attributes.friendly_name %}\n  notify.mobile_app_sgs10_lize\n{%
-      else %}\n  notify.mobile_app_phone_andre\n{% endif %}\n"
-    data:
-      message: '{{ trigger.to_state.attributes.friendly_name }} is vertrokken bij
-        Het Tuinhuis'
-  mode: single
 - id: '1636050957204'
   alias: TV cabinet lights
   description: ''
@@ -329,7 +303,11 @@
   trigger:
   - platform: state
     entity_id:
-    - group.persons
+    - person.andre_de_zwart
+    to: home
+  - platform: state
+    entity_id:
+    - person.lize_wasmus
     to: home
   condition: []
   action:
@@ -338,6 +316,50 @@
       preset_mode: Clock
     target:
       device_id: 78450d0b88d1fdf35297da6ed09f4f8b
+  - if:
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: -3
+    then:
+    - service: light.turn_on
+      data: {}
+      target:
+        entity_id:
+        - light.outdoor_light
+        - light.shelly1_hallway
+  - if:
+    - condition: and
+      conditions:
+      - condition: zone
+        entity_id: person.andre_de_zwart
+        zone: zone.home
+      - condition: state
+        entity_id: input_select.washing_machine
+        state: Finished
+    then:
+    - service: notify.mobile_app_phone_andre
+      data:
+        message: De was is klaar!
+        data:
+          tag: washing_machine
+    alias: If André comes home & the washing machine is finished, then send a notification
+  - if:
+    - condition: and
+      conditions:
+      - condition: zone
+        entity_id: person.lize_wasmus
+        zone: zone.home
+      - condition: state
+        entity_id: input_select.washing_machine
+        state: Finished
+    then:
+    - service: notify.mobile_app_sgs10_lize
+      data:
+        data:
+          tag: washing_machine
+        message: De was is klaar!
+    alias: If Lize comes home & the washing machine is finished, then send a notification
   mode: single
 - id: '1682845588155'
   alias: Washing machine - Washing
