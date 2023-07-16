@@ -435,11 +435,11 @@
     alias: Notify Lize if home
   mode: single
 - id: '1683692334259'
-  alias: Slaaptrainer Wednesday 6:30
+  alias: Slaaptrainer Wednesday 6:15
   description: ''
   trigger:
   - platform: time
-    at: 06:30:00
+    at: 06:15:00
   condition:
   - condition: time
     weekday:
@@ -523,4 +523,67 @@
       message: clear_notification
       data:
         tag: washing_machine
+  mode: single
+- id: '1689508842876'
+  alias: Tablet battery low
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '30'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '20'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '15'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '10'
+  - platform: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    below: '5'
+  condition:
+  - condition: state
+    entity_id: sensor.sgts5e_batterij_laadstatus
+    state: discharging
+  action:
+  - service: notify.mobile_app_phone_andre
+    data:
+      message: Tablet batterij niveau op {{states.sensor.sgts5e_batterijniveau.state_with_unit}}!
+        Tijd om op te laden.
+      data:
+        tag: tablet_battery_low
+  - service: notify.mobile_app_sgs10_lize
+    data:
+      message: Tablet batterij niveau op {{states.sensor.sgts5e_batterijniveau.state_with_unit}}!
+        Tijd om op te laden.
+      data:
+        tag: tablet_battery_low
+  mode: single
+- id: '1689509348992'
+  alias: Tablet is charging
+  description: Clear notification when tablet is charging
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.sgts5e_batterij_laadstatus
+    to: charging
+    from: discharging
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.sgts5e_batterijniveau
+    value_template: ''
+    below: 30
+  action:
+  - service: notify.mobile_app_phone_andre
+    data:
+      message: clear_notification
+      data:
+        tag: tablet_battery_low
+  - service: notify.mobile_app_sgs10_lize
+    data:
+      message: clear_notification
+      data:
+        tag: tablet_battery_low
   mode: single
