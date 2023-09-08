@@ -138,11 +138,11 @@
     domain: light
   mode: single
 - id: '1666373128921'
-  alias: Slaaptrainer Weekend 6:45
+  alias: Slaaptrainer Weekend
   description: ''
   trigger:
   - platform: time
-    at: 06:45:00
+    at: 07:00:00
   condition:
   - condition: time
     weekday:
@@ -155,11 +155,11 @@
     domain: switch
   mode: single
 - id: '1666462891423'
-  alias: Slaaptrainer Weekdays 5:45
+  alias: Slaaptrainer Mo, Tu, Th, Fr
   description: ''
   trigger:
   - platform: time
-    at: 05:45:00
+    at: 06:00:00
   condition:
   - condition: time
     weekday:
@@ -435,11 +435,11 @@
     alias: Notify Lize if home
   mode: single
 - id: '1683692334259'
-  alias: Slaaptrainer Wednesday 6:15
+  alias: Slaaptrainer Wednesday
   description: ''
   trigger:
   - platform: time
-    at: 06:15:00
+    at: 06:30:00
   condition:
   - condition: time
     weekday:
@@ -567,13 +567,12 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.sgts5e_batterij_laadstatus
-    to: charging
-    from: discharging
+    - binary_sensor.sgts5e_is_aan_het_opladen
+    from: 'off'
+    to: 'on'
   condition:
   - condition: numeric_state
     entity_id: sensor.sgts5e_batterijniveau
-    value_template: ''
     below: 30
   action:
   - service: notify.mobile_app_phone_andre
