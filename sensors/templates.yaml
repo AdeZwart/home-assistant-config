@@ -21,13 +21,13 @@
 
     trash_1:
       friendly_name_template: "{{ state_attr('sensor.ical_afvalkalender_event_1', 'description')}}"
-      value_template: >-        
+      value_template: >-
         {% if states.sensor.ical_afvalkalender_event_1 is defined and states.sensor.ical_afvalkalender_event_1 != None and 'start' in states.sensor.ical_afvalkalender_event_1.attributes %}
           {{ as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start) | timestamp_custom('%d %b %Y') }}
         {% else %}
           ""
-        {% endif %}     
-      icon_template: >-        
+        {% endif %}
+      icon_template: >-
         {% if states.sensor.ical_afvalkalender_event_1 is defined and states.sensor.ical_afvalkalender_event_1 != None and 'start' in states.sensor.ical_afvalkalender_event_1.attributes %}
           {% if 'Plastic' in state_attr('sensor.ical_afvalkalender_event_1', 'description') %}
             mdi:sack
@@ -61,7 +61,7 @@
       friendly_name: "Direct Power Usage"
       unique_id: "sensor.direct_power_usage"
       unit_of_measurement: "W"
-      value_template: "{{ ((states('sensor.adezwart_total_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
+      value_template: "{{ ((states('sensor.dcf0a0807f_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
 
     nefit_temperature:
       friendly_name: "Nefit Set temperature"
@@ -85,17 +85,17 @@
       friendly_name: "Buienradar neerslag verwacht"
       unique_id: "binary_sensor.neerslag_buienradar_rain_expected"
       value_template: >-
-        {% if states.sensor.neerslag_buienradar_regen_data.attributes.data is defined and states.sensor.neerslag_buienradar_regen_data.attributes.data != None %}  
+        {% if states.sensor.neerslag_buienradar_regen_data.attributes.data is defined and states.sensor.neerslag_buienradar_regen_data.attributes.data != None %}
           {% set buienradar_data = state_attr('sensor.neerslag_buienradar_regen_data', 'data').split(" ") %}
           {% if buienradar_data|length > 1 %}
             {% if (buienradar_data[0].split("|")|first|int + buienradar_data[1].split("|")|first|int + buienradar_data[2].split("|")|first|int) > 0 -%}
-              true  
+              true
             {% else %}
-              false  
+              false
             {% endif %}
           {% endif %}
         {% else %}
-          None  
+          None
         {% endif %}
 
     buienalarm_rain_expected:
