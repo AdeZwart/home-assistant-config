@@ -450,21 +450,6 @@
     entity_id: switch.blitzwolf_bwshp15_01
     domain: switch
   mode: single
-- id: '1684870809099'
-  alias: Sync IP cam time
-  description: ''
-  trigger:
-  - platform: time_pattern
-    hours: /1
-  - platform: homeassistant
-    event: shutdown
-  condition: []
-  action:
-  - service: button.press
-    data: {}
-    target:
-      entity_id: button.frontdoor_set_system_date_and_time
-  mode: single
 - id: '1684871522129'
   alias: Test persistent message
   description: ''
@@ -585,4 +570,22 @@
       message: clear_notification
       data:
         tag: tablet_battery_low
+  mode: single
+- id: '1699123266126'
+  alias: Dismiss bosch notification test
+  description: ''
+  trigger:
+  - platform: persistent_notification
+    update_type:
+    - added
+    - removed
+    notification_id: ''
+  condition: []
+  action:
+  - service: notify.mobile_app_phone_andre
+    data_template:
+      message: '{{trigger.event.data.notification_id}}'
+  - service: notify.telegram_andre
+    data_template:
+      message: '{{trigger.event.data.notification_id}}'
   mode: single
