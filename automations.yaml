@@ -589,3 +589,103 @@
     data_template:
       message: '{{trigger.event.data.notification_id}}'
   mode: single
+- id: '1702883926949'
+  alias: Christmas lights
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.shelly1_livingroom
+    from: 'off'
+    to: 'on'
+  - platform: state
+    entity_id:
+    - group.persons
+  condition: []
+  action:
+  - service: light.turn_on
+    target:
+      device_id: 44f554a69328b870c091d11e4c3f01df
+    data: {}
+  mode: single
+- id: '1702923409928'
+  alias: Start hot water tracker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.status
+    to: '=H: hot water active'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition: []
+  action:
+  - service: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.shower_tracker_duration
+    data:
+      datetime: '{{ now() }}'
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.shower_tracker_cost
+    data:
+      value: '{{ states(''sensor.gas_dsmr_cost'') }}'
+  - service: input_text.set_value
+    target:
+      entity_id: input_text.shower_tracker_m3
+    data:
+      value: '{{ states(''sensor.gas_dsmr'') }}'
+  mode: single
+- id: '1703321827916'
+  alias: Stop hot water tracker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.status
+    from: '=H: hot water active'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.last_changed < utcnow() - timedelta(minutes=3)
+      }}'
+  action:
+  - service: notify.telegram_andre
+    data_template:
+      message: Deze douchebeurt duurde {{ ((now() - states('input_datetime.shower_tracker_duration')|as_datetime|as_local).seconds
+        / 60) | int }} minuten, heeft {{ (states('sensor.gas_dsmr')|float - states('input_text.shower_tracker_m3')|float)|round(2)
+        }}m3 gas gebruikt en kostte €{{ (states('sensor.gas_dsmr_cost')|float - states('input_text.shower_tracker_cost')|float)|round(2)
+        }}
+  mode: single
+- id: '1703327561828'
+  alias: TGTG pakket beschikbaar
+  description: ''
+  trigger:
+  - alias: When any TGTG favorite has a package available
+    platform: numeric_state
+    entity_id:
+    - sensor.tgtg_bakkerij_t_stoepje_bodegraven_verrassingspakket
+    - sensor.tgtg_john_groente_en_meer_verrassingspakket
+    - sensor.tgtg_jumbo_langerak_broekvelden_bodegraven_verrassingspakket
+    - sensor.tgtg_supervlaai_ijs_bodegraven_verrassingspakket
+    - sensor.tgtg_domino_s_bodegraven_verrassingspakket
+    above: 0
+  condition: []
+  action:
+  - service: notify.telegram_reigeroord
+    data:
+      message: Winkel *{{ state_attr(trigger.to_state.entity_id, 'friendly_name').split('TGTG
+        ')[1].split(' (Verrassingspakket)')[0] }}* heeft {{ states(trigger.to_state.entity_id)
+        }} box(en) beschikbaar van {{ state_attr(trigger.to_state.entity_id, 'original_value')
+        }} voor {{ state_attr(trigger.to_state.entity_id, 'item_price') }} euro. Op
+        te halen tussen {{ as_timestamp(state_attr(trigger.to_state.entity_id, 'pickup_start'))
+        | timestamp_custom("%H:%M") }} en {{ as_timestamp(state_attr(trigger.to_state.entity_id,
+        'pickup_end')) | timestamp_custom("%H:%M") }}. Als je interesse hebt, klik
+        dan hier {{ state_attr(trigger.to_state.entity_id, 'item_url') }} om deze
+        te kopen.
+  mode: single
