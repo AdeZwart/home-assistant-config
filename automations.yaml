@@ -674,6 +674,11 @@
     - sensor.tgtg_jumbo_langerak_broekvelden_bodegraven_verrassingspakket
     - sensor.tgtg_supervlaai_ijs_bodegraven_verrassingspakket
     - sensor.tgtg_domino_s_bodegraven_verrassingspakket
+    - sensor.tgtg_bakkerij_t_stoepje_bodegraven_feestdagenpakket
+    - sensor.tgtg_domino_s_bodegraven_duo_pizza_pakket
+    - sensor.tgtg_john_groente_en_meer_feestdagenpakket
+    - sensor.tgtg_jumbo_langerak_broekvelden_bodegraven_feestdagenpakket
+    - sensor.tgtg_supervlaai_ijs_bodegraven_feestdagenpakket
     above: 0
   condition: []
   action:

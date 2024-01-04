@@ -11,6 +11,12 @@ homeassistant:
     - /tmp
   customize: !include customize.yaml
 
+logger:
+  default: warning
+  logs:
+    custom_components.nefiteasy: debug
+    aionefit: debug
+
 automation: !include automations.yaml
 automation split: !include_dir_merge_list automations
 
