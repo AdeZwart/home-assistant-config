@@ -1,4 +1,0 @@
-media_player:
-  - platform: lg_netcast
-    host: !secret lg_ip_address
-    access_token: !secret lg_access_token

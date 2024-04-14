@@ -3,8 +3,9 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: media_player.lg_tv_remote
-    to: playing
+    entity_id:
+    - media_player.tv_ue40eh5300_2
+    to: 'on'
   - platform: sun
     event: sunset
   condition:
@@ -13,17 +14,13 @@
     - condition: sun
       after: sunset
     - condition: state
-      entity_id: media_player.lg_tv_remote
-      state: playing
+      state: 'on'
+      entity_id: media_player.tv_ue40eh5300_2
   action:
-  - type: turn_on
-    device_id: 7bd1968937b3e53a8fe785b06b9d5d50
-    entity_id: light.tv_cabinet_left
-    domain: light
-  - type: turn_on
-    device_id: d41155d49a64ae65b1fcaf9db11c0131
-    entity_id: light.tv_cabinet_right
-    domain: light
+  - service: light.turn_on
+    target:
+      entity_id: light.tv_cabinet
+    data: {}
   mode: single
 - id: '1636292973585'
   alias: Garden lights
@@ -64,7 +61,8 @@
   - service: media_player.turn_off
     data: {}
     target:
-      entity_id: media_player.lg_tv_remote
+      entity_id:
+      - media_player.tv_ue40eh5300_2
   - service: climate.set_preset_mode
     data:
       preset_mode: Manual
@@ -110,8 +108,8 @@
     before: '10:00:00'
   action:
   - type: turn_off
-    device_id: dfedf6a047a478d4540755ce837b2d82
-    entity_id: light.ikea_nightlight_01
+    device_id: 68914297aa12d794b831b768627a4dc8
+    entity_id: 8784853f8bf58f76032496cf2c65326d
     domain: light
   mode: single
 - id: '1665522807559'
@@ -125,24 +123,23 @@
     to: 'off'
   condition:
   - condition: state
-    entity_id: media_player.lg_tv_remote
     state: 'off'
+    entity_id: media_player.tv_ue40eh5300_2
   action:
-  - type: turn_off
-    device_id: d41155d49a64ae65b1fcaf9db11c0131
-    entity_id: light.tv_cabinet_right
-    domain: light
-  - type: turn_off
-    device_id: 7bd1968937b3e53a8fe785b06b9d5d50
-    entity_id: light.tv_cabinet_left
-    domain: light
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - light.tv_cabinet
+      - light.ikea_led_strip_couch
   mode: single
 - id: '1666373128921'
   alias: Slaaptrainer Weekend
   description: ''
   trigger:
   - platform: time
-    at: 07:00:00
+    at: 07:15:00
   condition:
   - condition: time
     weekday:
@@ -216,7 +213,7 @@
       brightness_pct: 1
       color_temp: 500
     target:
-      device_id: dfedf6a047a478d4540755ce837b2d82
+      device_id: 68914297aa12d794b831b768627a4dc8
   - delay:
       hours: 0
       minutes: 0
@@ -227,7 +224,7 @@
       transition: 1800
       brightness_pct: 100
     target:
-      device_id: dfedf6a047a478d4540755ce837b2d82
+      device_id: 68914297aa12d794b831b768627a4dc8
   mode: single
 - id: '1669754804462'
   alias: Android alarm time
@@ -571,24 +568,6 @@
       data:
         tag: tablet_battery_low
   mode: single
-- id: '1699123266126'
-  alias: Dismiss bosch notification test
-  description: ''
-  trigger:
-  - platform: persistent_notification
-    update_type:
-    - added
-    - removed
-    notification_id: ''
-  condition: []
-  action:
-  - service: notify.mobile_app_phone_andre
-    data_template:
-      message: '{{trigger.event.data.notification_id}}'
-  - service: notify.telegram_andre
-    data_template:
-      message: '{{trigger.event.data.notification_id}}'
-  mode: single
 - id: '1702883926949'
   alias: Christmas lights
   description: ''
@@ -693,4 +672,100 @@
         'pickup_end')) | timestamp_custom("%H:%M") }}. Als je interesse hebt, klik
         dan hier {{ state_attr(trigger.to_state.entity_id, 'item_url') }} om deze
         te kopen.
+  mode: single
+- id: '1704723397140'
+  alias: Nefit unavailable notification
+  description: 'Sends a notification as soon as the nefit integration becomes unavailable
+    for 30 seconds. '
+  trigger:
+  - platform: state
+    entity_id:
+    - climate.nefit
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - service: homeassistant.reload_config_entry
+    target:
+      device_id: 78450d0b88d1fdf35297da6ed09f4f8b
+    data: {}
+    enabled: false
+  - service: notify.mobile_app_phone_andre
+    data:
+      message: Nefit thermostat became unavailable for the last 5 minutes.
+  mode: single
+- id: '1713119300766'
+  alias: Sleep Mode when phones charging
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.sm_g991b_is_charging
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.sm_g991b_is_charging
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
+      state: 'on'
+    - condition: time
+      after: '20:30:00'
+  action:
+  - service: light.turn_off
+    target:
+      area_id:
+      - c9c7d949cb959b8436f04d3b8e02018a
+      - 5725600297af4a14beb939fde831b3e9
+      - e0451735c3764eebbf1c3fece20c87e9
+      - 940887afcb1047b2b74fad4a446ce8b9
+      - 10320c5721484f4c87ad56a96e8f441c
+      - 75e0dbc9fbbe436db390faa9e7ff08c7
+      - hallway
+    data: {}
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.office
+    data: {}
+  - service: switch.turn_off
+    target:
+      device_id: 7a3bae697ba001388e90d599cdc0b4e6
+    data: {}
+  - service: media_player.turn_off
+    target:
+      entity_id:
+      - media_player.tv_ue40eh5300_2
+    data: {}
+  - service: climate.set_temperature
+    data:
+      entity_id: climate.nefit
+      temperature: 15
+  - service: climate.turn_off
+    entity_id: climate.office
+  - service: cover.open_cover
+    target:
+      entity_id:
+      - cover.rfy_001010_2
+      - cover.rfy_001010_4
+    data: {}
+  mode: single
+- id: '1713119338921'
+  alias: Turn off office heating at 22.00
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:00:00'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.office
+    data: {}
   mode: single
