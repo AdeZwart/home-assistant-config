@@ -40,3 +40,4 @@ secrets.yaml
 known_devices.yaml
 core
 google_service_account.json
+.ps4-games.*.json

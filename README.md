@@ -1,4 +1,4 @@
-[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2024.4.3%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2024.4.3)
+[![HA Version](https://img.shields.io/badge/Running%20Home%20Assistant-2024.5.2%20-darkblue)](https://github.com/home-assistant/core/releases/tag/2024.5.2)
 [![Last commit](https://img.shields.io/github/last-commit/AdeZwart/home-assistant-config.svg?style=plasticr")](https://github.com/AdeZwart/home-assistant-config/commits/main)
 
 # Home Assistant configuration
@@ -32,50 +32,54 @@ See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-confi
 
 ### Official integrations
 * Adax
+* Awair
 * Buienradar (Dutch weather forecast)
-* Brother Printer
-* Camera (Generic IP camera)
-* Certificate Expiry
-* CO2 Signal
-* DNSIP
+* DNS IP
 * DSMR Slimme meter (Dutch Smart Meter Requirements)
+* Ecowitt
+* Electricity Maps
 * ESPHome
-  * Smart doorbell
-  * MiFlora plant sensor reading
+  * Bluetooth Proxy
+  * Flexispot standing desk integration
+  * Custom doorbell integration
+  * M5Stack Atom Echo
 * Forecast Solar
 * Google Chromecast
-* Growatt (Inverter for photovoltaic plant)
-* LG Netcast
 * Mobile App (android)
 * MQTT (Zigbee2MQTT)
   * Xiaomi Aqara Temperature and humidity sensor
   * Xiaomi Aqara Door and Window sensor
-  * Blitzwolf BW-SHP13
+  * Blitzwolf BW-SHP13 & BW-SHP15
   * Ikea tradfri devices
-* NS (Dutch railways)
-* Onvif
 * Plant
 * Pi-Hole
+* Reolink IP NVR/Camera
 * Ping (Netgear ReadyNAS NV+ v2)
 * RFXCOM RFXtrx
   * Somfy RFY sunscreens (2x)
   * Alecto SA-41 smoke detectors (3x)
+* RIVM Stookalert
+* Samsung Smart TV
 * Shelly
-* Stookalert
+* Sonos
+* sony Playstation 4
+* Sun
 * Sure Petcare
 * System monitor
-* Telegram
-* Utility Meter
-* Wake On Lan (Netgear ReadyNAS NV+ v2)
+* UniFi Network
+* Workday
+* Wyoming Protocol
+* Xiaomi BLE
 * Xiaomi Miio (Robot Vacuum Roborock S5 Max)
 
 ### HACS integrations
-* [Ecowitt](https://github.com/garbled1/homeassistant_ecowitt) - Alecto WS-5500
+* [Grott](https://github.com/muppet3000/homeassistant-grott)
 * [HACS](https://github.com/hacs/integration)
 * [iCal](https://github.com/tybritten/ical-sensor-homeassistant)
 * [Monitor Docker](https://github.com/ualex73/monitor_docker)
 * [Nefit easy](https://github.com/ksya/ha-nefiteasy)
 * [Neerslag App](https://github.com/aex351/home-assistant-neerslag-app)
+* [TooGoodToGo](https://github.com/Chouffy/home_assistant_tgtg)
 * [Xiaomi cloud map extractor](https://github.com/PiotrMachowski/Home-Assistant-custom-components-Xiaomi-Cloud-Map-Extractor)
 
 ### Custom integrations

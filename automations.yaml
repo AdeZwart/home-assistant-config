@@ -1,5 +1,5 @@
 - id: '1636050957204'
-  alias: TV cabinet lights
+  alias: Ambiant TV light
   description: ''
   trigger:
   - platform: state
@@ -19,7 +19,9 @@
   action:
   - service: light.turn_on
     target:
-      entity_id: light.tv_cabinet
+      entity_id:
+      - light.tv_cabinet
+      - light.ikea_led_strip_couch
     data: {}
   mode: single
 - id: '1636292973585'
@@ -107,10 +109,10 @@
     after: 05:00:00
     before: '10:00:00'
   action:
-  - type: turn_off
-    device_id: 68914297aa12d794b831b768627a4dc8
-    entity_id: 8784853f8bf58f76032496cf2c65326d
-    domain: light
+  - service: light.turn_off
+    target:
+      device_id: 68914297aa12d794b831b768627a4dc8
+    data: {}
   mode: single
 - id: '1665522807559'
   alias: Livingroom lights off
@@ -184,10 +186,11 @@
     after: 05:00:00
     before: '10:00:00'
   action:
-  - type: turn_off
-    device_id: faad4b192378e316257a2e8d2980cdcd
-    entity_id: light.ikea_nightlight_02
-    domain: light
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      device_id: faad4b192378e316257a2e8d2980cdcd
   mode: single
 - id: '1668971498514'
   alias: Wake up light André
