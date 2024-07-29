@@ -178,7 +178,7 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.sgs10_lize_is_aan_het_opladen
+    - binary_sensor.phone_lize_is_charging
     to: 'off'
     from: 'on'
   condition:
@@ -344,7 +344,8 @@
         data:
           tag: washing_machine
     alias: If André comes home & the washing machine is finished, then send a notification
-  - if:
+  - alias: If Lize comes home & the washing machine is finished, then send a notification
+    if:
     - condition: and
       conditions:
       - condition: zone
@@ -354,12 +355,9 @@
         entity_id: input_select.washing_machine
         state: Finished
     then:
-    - service: notify.mobile_app_sgs10_lize
+    - service: notify.mobile_app_phone_lize
       data:
-        data:
-          tag: washing_machine
-        message: De was is klaar!
-    alias: If Lize comes home & the washing machine is finished, then send a notification
+        data: {}
   mode: single
 - id: '1682845588155'
   alias: Washing machine - Washing
@@ -423,16 +421,15 @@
             persistent: true
             tag: washing_machine
     alias: Notify André if home
-  - choose:
+  - alias: Notify Lize if home
+    choose:
     - conditions:
       - condition: state
         entity_id: person.lize_wasmus
         state: home
       sequence:
-      - service: notify.mobile_app_sgs10_lize
-        data:
-          message: De was is klaar!
-    alias: Notify Lize if home
+      - service: notify.mobile_app_phone_lize
+        data: {}
   mode: single
 - id: '1683692334259'
   alias: Slaaptrainer Wednesday
@@ -708,7 +705,8 @@
     entity_id: binary_sensor.sm_g991b_is_charging
     to: 'on'
   - platform: state
-    entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
+    entity_id:
+    - binary_sensor.phone_lize_is_charging
     to: 'on'
   condition:
   - condition: and
@@ -717,7 +715,7 @@
       entity_id: binary_sensor.sm_g991b_is_charging
       state: 'on'
     - condition: state
-      entity_id: binary_sensor.sgs10_lize_is_aan_het_opladen
+      entity_id: binary_sensor.phone_lize_is_charging
       state: 'on'
     - condition: time
       after: '20:30:00'
@@ -771,4 +769,50 @@
     target:
       entity_id: input_boolean.office
     data: {}
+  mode: single
+- id: '1715544844492'
+  alias: Turn off ambiant lights after tv ghost turn on
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: ccea0b737a8d188b78be2d06dd0fb9c3
+    entity_id: 54db9111e2b20ae4312b178538a7e71f
+    domain: remote
+  condition:
+  - type: is_plugged_in
+    condition: device
+    device_id: 32564424fbb20cba4076ddc23df9f674
+    entity_id: dadcf79aaafbf8e1618bb6c2671254eb
+    domain: binary_sensor
+  - type: is_plugged_in
+    condition: device
+    device_id: e6169ab9eaa51d00fee92037864b6e64
+    entity_id: e80ad796235f027874eef131addae9a4
+    domain: binary_sensor
+  action:
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      area_id: 5725600297af4a14beb939fde831b3e9
+  mode: single
+- id: '1715801791714'
+  alias: Force ambiant light off
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:05:00
+  condition: []
+  action:
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      area_id: 5725600297af4a14beb939fde831b3e9
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      device_id: 7853d012140ca6e3d75c8a4d8e9442a7
   mode: single
