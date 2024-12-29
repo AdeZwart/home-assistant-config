@@ -1,28 +1,28 @@
 - id: '1636050957204'
   alias: Ambiant TV light
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - media_player.tv_ue40eh5300_2
-    to: 'on'
-  - platform: sun
-    event: sunset
-  condition:
+    to: idle
+    trigger: state
+  - event: sunset
+    trigger: sun
+  conditions:
   - condition: and
     conditions:
     - condition: sun
       after: sunset
     - condition: state
-      state: 'on'
+      state: idle
       entity_id: media_player.tv_ue40eh5300_2
-  action:
-  - service: light.turn_on
-    target:
+  actions:
+  - target:
       entity_id:
       - light.tv_cabinet
       - light.ikea_led_strip_couch
     data: {}
+    action: light.turn_on
   mode: single
 - id: '1636292973585'
   alias: Garden lights
@@ -287,15 +287,21 @@
 - id: '1676100536712'
   alias: Slaaptrainer aan 19:00
   description: ''
-  trigger:
-  - platform: time
-    at: '19:00:00'
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 55ab137d1334f604e4eaf1080252f16d
-    entity_id: switch.blitzwolf_bwshp15_01
-    domain: switch
+  triggers:
+  - at: '19:00:00'
+    trigger: time
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data:
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      brightness_pct: 1
+    target:
+      entity_id: light.gl_lb_001p
   mode: single
 - id: '1678219014663'
   alias: Arrive back home
@@ -389,37 +395,37 @@
 - id: '1682846009852'
   alias: Washing machine - Finished
   description: Send notification when the washing machine is done.
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.washing_machine_power
+  triggers:
+  - entity_id: sensor.washing_machine_power
     for:
       hours: 0
       minutes: 2
       seconds: 0
     attribute: power
     below: 1
-  condition:
+    trigger: numeric_state
+  conditions:
   - condition: state
     entity_id: input_select.washing_machine
     state: Washing
-  action:
-  - service: input_select.select_option
-    data:
+  actions:
+  - data:
       option: Finished
     target:
       entity_id: input_select.washing_machine
+    action: input_select.select_option
   - choose:
     - conditions:
       - condition: state
         entity_id: person.andre_de_zwart
         state: home
       sequence:
-      - service: notify.mobile_app_phone_andre
-        data:
+      - data:
           message: De was is klaar!
           data:
             persistent: true
             tag: washing_machine
+        action: notify.mobile_app_phone_andre
     alias: Notify André if home
   - alias: Notify Lize if home
     choose:
@@ -428,8 +434,9 @@
         entity_id: person.lize_wasmus
         state: home
       sequence:
-      - service: notify.mobile_app_phone_lize
-        data: {}
+      - data:
+          message: De was is klaar!
+        action: notify.mobile_app_phone_lize
   mode: single
 - id: '1683692334259'
   alias: Slaaptrainer Wednesday
@@ -475,12 +482,12 @@
 - id: '1684872146878'
   alias: Washing Machine - Off
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.xiaomi_door_03_contact
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: or
     conditions:
     - condition: state
@@ -489,84 +496,86 @@
     - condition: state
       entity_id: input_select.washing_machine
       state: Washing
-  action:
-  - service: input_select.select_option
-    data:
+  actions:
+  - data:
       option: 'Off'
     target:
       entity_id: input_select.washing_machine
-  - service: notify.mobile_app_phone_andre
-    data:
+    action: input_select.select_option
+  - data:
       message: clear_notification
       data:
         tag: washing_machine
-  - service: notify.mobile_app_sgs10_lize
-    data:
-      message: clear_notification
-      data:
-        tag: washing_machine
+    action: notify.mobile_app_phone_andre
+  - action: notify.mobile_app_phone_lize
+    data: {}
   mode: single
 - id: '1689508842876'
   alias: Tablet battery low
   description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.sgts5e_batterijniveau
+  triggers:
+  - entity_id:
+    - sensor.sgts5e_battery_level
     below: '30'
-  - platform: numeric_state
-    entity_id: sensor.sgts5e_batterijniveau
+    trigger: numeric_state
+  - entity_id:
+    - sensor.sgts5e_battery_level
     below: '20'
-  - platform: numeric_state
-    entity_id: sensor.sgts5e_batterijniveau
+    trigger: numeric_state
+  - entity_id:
+    - sensor.sgts5e_battery_level
     below: '15'
-  - platform: numeric_state
-    entity_id: sensor.sgts5e_batterijniveau
+    trigger: numeric_state
+  - entity_id:
+    - sensor.sgts5e_battery_level
     below: '10'
-  - platform: numeric_state
-    entity_id: sensor.sgts5e_batterijniveau
+    trigger: numeric_state
+  - entity_id:
+    - sensor.sgts5e_battery_level
     below: '5'
-  condition:
+    trigger: numeric_state
+  conditions:
   - condition: state
-    entity_id: sensor.sgts5e_batterij_laadstatus
+    entity_id: sensor.sgts5e_battery_state
     state: discharging
-  action:
-  - service: notify.mobile_app_phone_andre
-    data:
-      message: Tablet batterij niveau op {{states.sensor.sgts5e_batterijniveau.state_with_unit}}!
+  actions:
+  - data:
+      message: Tablet batterij niveau op {{states.sensor.sgts5e_battery_level.state_with_unit}}!
         Tijd om op te laden.
       data:
         tag: tablet_battery_low
-  - service: notify.mobile_app_sgs10_lize
-    data:
-      message: Tablet batterij niveau op {{states.sensor.sgts5e_batterijniveau.state_with_unit}}!
+    action: notify.mobile_app_phone_andre
+  - data:
+      message: Tablet batterij niveau op {{states.sensor.sgts5e_battery_level.state_with_unit}}!
         Tijd om op te laden.
       data:
         tag: tablet_battery_low
+    action: notify.mobile_app_phone_lize
   mode: single
 - id: '1689509348992'
   alias: Tablet is charging
   description: Clear notification when tablet is charging
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.sgts5e_is_aan_het_opladen
+  triggers:
+  - entity_id:
+    - binary_sensor.sgts5e_is_charging
     from: 'off'
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: numeric_state
-    entity_id: sensor.sgts5e_batterijniveau
+    entity_id: sensor.sgts5e_battery_level
     below: 30
-  action:
-  - service: notify.mobile_app_phone_andre
-    data:
+  actions:
+  - data:
       message: clear_notification
       data:
         tag: tablet_battery_low
-  - service: notify.mobile_app_sgs10_lize
-    data:
+    action: notify.mobile_app_phone_andre
+  - data:
       message: clear_notification
       data:
         tag: tablet_battery_low
+    action: notify.mobile_app_phone_lize
   mode: single
 - id: '1702883926949'
   alias: Christmas lights
@@ -773,29 +782,28 @@
 - id: '1715544844492'
   alias: Turn off ambiant lights after tv ghost turn on
   description: ''
-  trigger:
-  - platform: device
-    type: turned_off
-    device_id: ccea0b737a8d188b78be2d06dd0fb9c3
-    entity_id: 54db9111e2b20ae4312b178538a7e71f
-    domain: remote
-  condition:
+  triggers:
+  - device_id: ccea0b737a8d188b78be2d06dd0fb9c3
+    domain: samsungtv
+    type: samsungtv.turn_on
+    trigger: device
+  conditions:
   - type: is_plugged_in
     condition: device
-    device_id: 32564424fbb20cba4076ddc23df9f674
-    entity_id: dadcf79aaafbf8e1618bb6c2671254eb
+    device_id: 1432640584ed94de496813d71af8de78
+    entity_id: 03d2e546f4a04ca108dfeeb1ca84d5e3
     domain: binary_sensor
   - type: is_plugged_in
     condition: device
     device_id: e6169ab9eaa51d00fee92037864b6e64
     entity_id: e80ad796235f027874eef131addae9a4
     domain: binary_sensor
-  action:
-  - service: light.turn_off
-    metadata: {}
+  actions:
+  - metadata: {}
     data: {}
     target:
       area_id: 5725600297af4a14beb939fde831b3e9
+    action: light.turn_off
   mode: single
 - id: '1715801791714'
   alias: Force ambiant light off
@@ -815,4 +823,113 @@
     data: {}
     target:
       device_id: 7853d012140ca6e3d75c8a4d8e9442a7
+  mode: single
+- id: '1728535143816'
+  alias: Slaaptrainer 2
+  description: ''
+  triggers:
+  - trigger: time
+    at: 06:00:00
+  conditions: []
+  actions:
+  - if:
+    - condition: time
+      weekday:
+      - sun
+      - sat
+    then:
+    - delay:
+        hours: 0
+        minutes: 15
+        seconds: 0
+        milliseconds: 0
+  - action: light.turn_on
+    metadata: {}
+    data:
+      rgb_color:
+      - 255
+      - 255
+      - 0
+    target:
+      entity_id: light.gl_lb_001p
+    alias: Light to yellow
+  - if:
+    - condition: time
+      weekday:
+      - sun
+      - sat
+    then:
+    - delay:
+        hours: 0
+        minutes: 15
+        seconds: 0
+        milliseconds: 0
+    else:
+    - delay:
+        hours: 0
+        minutes: 10
+        seconds: 0
+        milliseconds: 0
+  - action: light.turn_on
+    metadata: {}
+    data:
+      rgb_color:
+      - 0
+      - 255
+      - 0
+    target:
+      entity_id: light.gl_lb_001p
+    alias: Light to green
+  - delay:
+      hours: 1
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.gl_lb_001p
+  mode: single
+- id: '1729448788452'
+  alias: Hallway light on motion
+  description: ''
+  triggers:
+  - type: occupied
+    device_id: 157aab08947579e998973107e69b445c
+    entity_id: bb7f35eafc20d132e90282b993f1edb6
+    domain: binary_sensor
+    metadata:
+      secondary: false
+    trigger: device
+  conditions:
+  - type: is_illuminance
+    condition: device
+    device_id: 157aab08947579e998973107e69b445c
+    entity_id: 5af751f1c926f36e088f203059b1580d
+    domain: sensor
+    below: 16
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.shelly1_hallway
+  mode: single
+- id: '1735204940347'
+  alias: Kitchen lights
+  description: ''
+  triggers:
+  - type: changed_states
+    device_id: a66e755ff6e040f5ceaa550f6b3700cf
+    entity_id: 586af42dc7cdc7a3f6cf907982426a2c
+    domain: light
+    trigger: device
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id: d308eca34105f3125939d649f379ac9f
   mode: single
