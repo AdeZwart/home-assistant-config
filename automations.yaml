@@ -927,9 +927,65 @@
     trigger: device
   conditions: []
   actions:
-  - action: light.turn_on
-    metadata: {}
-    data: {}
-    target:
-      device_id: d308eca34105f3125939d649f379ac9f
+  - choose:
+    - conditions:
+      - condition: device
+        type: is_on
+        device_id: a66e755ff6e040f5ceaa550f6b3700cf
+        entity_id: 586af42dc7cdc7a3f6cf907982426a2c
+        domain: light
+      sequence:
+      - type: turn_on
+        device_id: d308eca34105f3125939d649f379ac9f
+        entity_id: 6b0224eacc9e61e5805642f1455ca858
+        domain: light
+    - conditions:
+      - condition: device
+        type: is_off
+        device_id: a66e755ff6e040f5ceaa550f6b3700cf
+        entity_id: 586af42dc7cdc7a3f6cf907982426a2c
+        domain: light
+      sequence:
+      - type: turn_off
+        device_id: d308eca34105f3125939d649f379ac9f
+        entity_id: 6b0224eacc9e61e5805642f1455ca858
+        domain: light
+  mode: single
+- id: '1736341038640'
+  alias: Send a push notification in case of a stookalert
+  description: abc
+  triggers:
+  - entity_id:
+    - sensor.stookwijzer_advice_code
+    to: code_orange
+    trigger: state
+  - trigger: state
+    entity_id:
+    - sensor.stookwijzer_advice_code
+    to: code_red
+  conditions: []
+  actions:
+  - data:
+      message: 'Let op! Stookalert: stook geen hout!'
+    action: notify.mobile_app_phone_andre
+  mode: single
+- id: '1736341088443'
+  alias: Send a push notification in case the stookalert is lifted
+  description: abc
+  triggers:
+  - entity_id:
+    - sensor.stookwijzer_advice_code
+    to: code_yellow
+    trigger: state
+    from: code_orange
+  - trigger: state
+    entity_id:
+    - sensor.stookwijzer_advice_code
+    from: code_red
+    to: code_yellow
+  conditions: []
+  actions:
+  - data:
+      message: Stookalert opgeheven.
+    action: notify.mobile_app_phone_andre
   mode: single
