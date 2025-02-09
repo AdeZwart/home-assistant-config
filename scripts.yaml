@@ -1,41 +1,45 @@
 send_vacuum_to_trashbin:
   alias: Send vacuum to trashbin
   sequence:
-  - service: xiaomi_miio.vacuum_goto
-    data:
+  - data:
       x_coord: '25000'
       y_coord: '26500'
     target:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id:
+      - vacuum.roborock_s5_max
+    action: xiaomi_miio.vacuum_goto
   mode: single
   icon: mdi:robot-vacuum
 clean_kitchen:
   alias: Vacuum the kitchen
   sequence:
-  - service: xiaomi_miio.vacuum_clean_segment
-    target:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+  - target:
+      entity_id:
+      - vacuum.roborock_s5_max
     data:
-      segments: 20
+      segments: 16
+    action: xiaomi_miio.vacuum_clean_segment
   mode: single
   icon: mdi:silverware-fork-knife
 clean_living_room:
   alias: Vacuum the living room
   sequence:
-  - service: xiaomi_miio.vacuum_clean_segment
-    target:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+  - target:
+      entity_id:
+      - vacuum.roborock_s5_max
     data:
       segments: 17
+    action: xiaomi_miio.vacuum_clean_segment
   mode: single
   icon: mdi:sofa
 clean_dining:
   alias: Vacuum the dining room
   sequence:
-  - service: xiaomi_miio.vacuum_clean_segment
-    target:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+  - target:
+      entity_id:
+      - vacuum.roborock_s5_max
     data:
-      segments: 19
+      segments: 18
+    action: xiaomi_miio.vacuum_clean_segment
   mode: single
   icon: mdi:table-chair

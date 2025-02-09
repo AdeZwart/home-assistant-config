@@ -3,8 +3,8 @@
   description: ''
   triggers:
   - entity_id:
-    - media_player.tv_ue40eh5300_2
-    to: idle
+    - media_player.ue40eh5300
+    to: 'on'
     trigger: state
   - event: sunset
     trigger: sun
@@ -14,8 +14,8 @@
     - condition: sun
       after: sunset
     - condition: state
-      state: idle
-      entity_id: media_player.tv_ue40eh5300_2
+      state: 'on'
+      entity_id: media_player.ue40eh5300
   actions:
   - target:
       entity_id:
@@ -42,14 +42,13 @@
 - id: '1636445923540'
   alias: Away from home
   description: ''
-  trigger:
-  - platform: state
-    entity_id: group.persons
+  triggers:
+  - entity_id: group.persons
     to: not_home
-  condition: []
-  action:
-  - service: light.turn_off
-    target:
+    trigger: state
+  conditions: []
+  actions:
+  - target:
       area_id:
       - c9c7d949cb959b8436f04d3b8e02018a
       - 5725600297af4a14beb939fde831b3e9
@@ -60,25 +59,26 @@
       entity_id:
       - input_boolean.office
     data: {}
-  - service: media_player.turn_off
-    data: {}
+    action: light.turn_off
+  - data: {}
     target:
       entity_id:
-      - media_player.tv_ue40eh5300_2
-  - service: climate.set_preset_mode
-    data:
+      - media_player.ue40eh5300_2
+    action: media_player.turn_off
+  - data:
       preset_mode: Manual
     target:
       device_id: 78450d0b88d1fdf35297da6ed09f4f8b
-  - service: climate.set_temperature
-    data:
+    action: climate.set_preset_mode
+  - data:
       temperature: 15
     target:
       entity_id: climate.nefit
-  - service: climate.turn_off
-    data: {}
+    action: climate.set_temperature
+  - data: {}
     target:
       entity_id: climate.office
+    action: climate.turn_off
   mode: single
 - id: '1639577789678'
   alias: 'Turn off lights when it''s getting light '
@@ -117,24 +117,24 @@
 - id: '1665522807559'
   alias: Livingroom lights off
   description: ''
-  trigger:
-  - platform: state
+  triggers:
+  - trigger: state
     entity_id:
-    - switch.shelly1_livingroom
-    from: 'on'
+    - light.shelly1_livingroom
     to: 'off'
-  condition:
+    from: 'on'
+  conditions:
   - condition: state
     state: 'off'
-    entity_id: media_player.tv_ue40eh5300_2
-  action:
-  - service: light.turn_off
-    metadata: {}
+    entity_id: media_player.ue40eh5300_2
+  actions:
+  - metadata: {}
     data: {}
     target:
       entity_id:
       - light.tv_cabinet
       - light.ikea_led_strip_couch
+    action: light.turn_off
   mode: single
 - id: '1666373128921'
   alias: Slaaptrainer Weekend
@@ -306,50 +306,55 @@
 - id: '1678219014663'
   alias: Arrive back home
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - person.andre_de_zwart
     to: home
-  - platform: state
-    entity_id:
+    trigger: state
+    id: andre_home
+  - entity_id:
     - person.lize_wasmus
     to: home
-  condition: []
-  action:
-  - service: climate.set_preset_mode
-    data:
+    trigger: state
+    id: lize_home
+  conditions: []
+  actions:
+  - data:
       preset_mode: Clock
     target:
       device_id: 78450d0b88d1fdf35297da6ed09f4f8b
+    action: climate.set_preset_mode
   - if:
     - condition: numeric_state
       entity_id: sun.sun
       attribute: elevation
       below: -3
     then:
-    - service: light.turn_on
-      data: {}
+    - data: {}
       target:
         entity_id:
         - light.outdoor_light
         - light.shelly1_hallway
-  - if:
+      action: light.turn_on
+  - alias: If André comes home & the washing machine is finished, then send a notification
+    if:
     - condition: and
       conditions:
       - condition: zone
         entity_id: person.andre_de_zwart
         zone: zone.home
+      - condition: trigger
+        id:
+        - andre_home
       - condition: state
         entity_id: input_select.washing_machine
         state: Finished
     then:
-    - service: notify.mobile_app_phone_andre
-      data:
+    - data:
         message: De was is klaar!
         data:
           tag: washing_machine
-    alias: If André comes home & the washing machine is finished, then send a notification
+      action: notify.mobile_app_phone_andre
   - alias: If Lize comes home & the washing machine is finished, then send a notification
     if:
     - condition: and
@@ -357,39 +362,50 @@
       - condition: zone
         entity_id: person.lize_wasmus
         zone: zone.home
+      - condition: trigger
+        id:
+        - lize_home
       - condition: state
         entity_id: input_select.washing_machine
         state: Finished
     then:
-    - service: notify.mobile_app_phone_lize
-      data:
+    - data:
         data: {}
+      action: notify.mobile_app_phone_lize
   mode: single
 - id: '1682845588155'
   alias: Washing machine - Washing
   description: Set washing machine to "washing" state
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.washing_machine_power
+  triggers:
+  - entity_id:
+    - sensor.washing_machine_power
     for:
       hours: 0
       minutes: 3
       seconds: 0
-    attribute: power
     above: 5
-  condition: []
-  action:
+    trigger: numeric_state
+  - trigger: numeric_state
+    entity_id:
+    - sensor.washing_machine_power
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 30
+    above: 5
+  conditions: []
+  actions:
   - choose:
     - conditions:
       - condition: state
         entity_id: input_select.washing_machine
         state: 'Off'
       sequence:
-      - service: input_select.select_option
-        data:
+      - data:
           option: Washing
         target:
           entity_id: input_select.washing_machine
+        action: input_select.select_option
     alias: State to Washing
   mode: single
 - id: '1682846009852'
@@ -401,7 +417,6 @@
       hours: 0
       minutes: 2
       seconds: 0
-    attribute: power
     below: 1
     trigger: numeric_state
   conditions:
@@ -906,7 +921,7 @@
   - type: is_illuminance
     condition: device
     device_id: 157aab08947579e998973107e69b445c
-    entity_id: 5af751f1c926f36e088f203059b1580d
+    entity_id: a9fb8080f04b3e509dbc51c7cc1a8728
     domain: sensor
     below: 16
   actions:
@@ -987,5 +1002,198 @@
   actions:
   - data:
       message: Stookalert opgeheven.
+    action: notify.mobile_app_phone_andre
+  mode: single
+- id: '1736344755957'
+  alias: Tablet Veerle battery low
+  description: ''
+  triggers:
+  - entity_id:
+    - sensor.tablet_veerle_battery_level
+    below: '30'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_veerle_battery_level
+    below: '20'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_veerle_battery_level
+    below: '15'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_veerle_battery_level
+    below: '10'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_veerle_battery_level
+    below: '5'
+    trigger: numeric_state
+  conditions:
+  - condition: state
+    entity_id: sensor.tablet_veerle_battery_state
+    state: discharging
+  actions:
+  - data:
+      message: Batterij niveau van Veerle''s tablet op {{states.sensor.tablet_veerle_battery_level.state_with_unit}}!
+        Tijd om op te laden.
+      data:
+        tag: tablet_veerle_battery_low
+    action: notify.mobile_app_phone_andre
+  - data:
+      message: Batterij niveau van Veerle''s tablet op {{states.sensor.tablet_veerle_battery_level.state_with_unit}}!
+        Tijd om op te laden.
+      data:
+        tag: tablet_veerle_battery_low
+    action: notify.mobile_app_phone_lize
+  mode: single
+- id: '1736344823817'
+  alias: Tablet Veerle is charging
+  description: Clear notification when Veerle's tablet is charging
+  triggers:
+  - entity_id:
+    - binary_sensor.tablet_veerle_is_charging
+    from: 'off'
+    to: 'on'
+    trigger: state
+  conditions:
+  - condition: numeric_state
+    entity_id: sensor.tablet_veerle_battery_level
+    below: 30
+  actions:
+  - data:
+      message: clear_notification
+      data:
+        tag: tablet_veerle_battery_low
+    action: notify.mobile_app_phone_andre
+  - data:
+      message: clear_notification
+      data:
+        tag: tablet_veerle_battery_low
+    action: notify.mobile_app_phone_lize
+  mode: single
+- id: '1736344960875'
+  alias: Tablet Jitse battery low
+  description: ''
+  triggers:
+  - entity_id:
+    - sensor.tablet_jitse_battery_level
+    below: '30'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_jitse_battery_level
+    below: '20'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_jitse_battery_level
+    below: '15'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_jitse_battery_level
+    below: '10'
+    trigger: numeric_state
+  - entity_id:
+    - sensor.tablet_jitse_battery_level
+    below: '5'
+    trigger: numeric_state
+  conditions:
+  - condition: state
+    entity_id: sensor.tablet_jitse_battery_state
+    state: discharging
+  actions:
+  - data:
+      message: Batterij niveau van Jitse's tablet op {{states.sensor.tablet_jitse_battery_level.state_with_unit}}!
+        Tijd om op te laden.
+      data:
+        tag: tablet_jitse_battery_low
+    action: notify.mobile_app_phone_andre
+  - data:
+      message: Batterij niveau van Jitse's tablet op {{states.sensor.tablet_jitse_battery_level.state_with_unit}}!
+        Tijd om op te laden.
+      data:
+        tag: tablet_jitse_battery_low
+    action: notify.mobile_app_phone_lize
+  mode: single
+- id: '1736345016659'
+  alias: Tablet Jitse is charging
+  description: Clear notification when Jitse's tablet is charging
+  triggers:
+  - entity_id:
+    - binary_sensor.tablet_jitse_is_charging
+    from: 'off'
+    to: 'on'
+    trigger: state
+  conditions:
+  - condition: numeric_state
+    entity_id: sensor.tablet_jitse_battery_level
+    below: 30
+  actions:
+  - data:
+      message: clear_notification
+      data:
+        tag: tablet_jitse_battery_low
+    action: notify.mobile_app_phone_andre
+  - data:
+      message: clear_notification
+      data:
+        tag: tablet_jitse_battery_low
+    action: notify.mobile_app_phone_lize
+  mode: single
+- id: '1736970220904'
+  alias: Have the vacuum report at the trashbin to empty the dust bin
+  description: ''
+  triggers:
+  - event_type: mobile_app_notification_action
+    event_data:
+      action: start_goto_trashbin
+    trigger: event
+  conditions: []
+  actions:
+  - data:
+      x_coord: 25000
+      y_coord: 26500
+    action: xiaomi_miio.vacuum_goto
+    target:
+      entity_id:
+      - vacuum.roborock_s5_max
+  mode: single
+- id: '1736971149523'
+  alias: Start vacuuming
+  description: ''
+  triggers:
+  - entity_id: input_boolean.vacuum
+    to: 'on'
+    trigger: state
+  conditions: []
+  actions:
+  - data: {}
+    action: vacuum.start
+    target:
+      entity_id:
+      - vacuum.roborock_s5_max
+  - entity_id: input_boolean.vacuum
+    action: input_boolean.turn_off
+  mode: single
+- id: '1736971208288'
+  alias: Send vacuum to trashbin for emptying?
+  description: ''
+  triggers:
+  - at: '20:00:00'
+    trigger: time
+  conditions:
+  - condition: time
+    weekday:
+    - wed
+    - sat
+  actions:
+  - data:
+      message: Time to empty the Roborock dust bin! Do it now?
+      data:
+        persistent: true
+        tag: persistent
+        actions:
+        - action: start_goto_trashbin
+          title: 'Yes'
+        - action: skip_goto_trashbin
+          title: 'No'
     action: notify.mobile_app_phone_andre
   mode: single
