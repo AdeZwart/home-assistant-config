@@ -3,7 +3,7 @@
   description: ''
   triggers:
   - entity_id:
-    - media_player.ue40eh5300
+    - media_player.ue40eh5300_2
     to: 'on'
     trigger: state
   - event: sunset
@@ -15,7 +15,7 @@
       after: sunset
     - condition: state
       state: 'on'
-      entity_id: media_player.ue40eh5300
+      entity_id: media_player.ue40eh5300_2
   actions:
   - target:
       entity_id:
@@ -469,31 +469,6 @@
     entity_id: switch.blitzwolf_bwshp15_01
     domain: switch
   mode: single
-- id: '1684871522129'
-  alias: Test persistent message
-  description: ''
-  trigger: []
-  condition: []
-  action:
-  - service: notify.mobile_app_phone_andre
-    data:
-      message: Persistent test bericht
-      data:
-        persistent: true
-        tag: washing_machine
-  mode: single
-- id: '1684871753906'
-  alias: test persistent dismiss
-  description: ''
-  trigger: []
-  condition: []
-  action:
-  - service: notify.mobile_app_phone_andre
-    data:
-      message: clear_notification
-      data:
-        tag: washing_machine
-  mode: single
 - id: '1684872146878'
   alias: Washing Machine - Off
   description: ''
@@ -701,25 +676,25 @@
   alias: Nefit unavailable notification
   description: 'Sends a notification as soon as the nefit integration becomes unavailable
     for 30 seconds. '
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - climate.nefit
     to: unavailable
     for:
       hours: 0
-      minutes: 5
+      minutes: 15
       seconds: 0
-  condition: []
-  action:
-  - service: homeassistant.reload_config_entry
-    target:
+    trigger: state
+  conditions: []
+  actions:
+  - target:
       device_id: 78450d0b88d1fdf35297da6ed09f4f8b
     data: {}
     enabled: false
-  - service: notify.mobile_app_phone_andre
-    data:
+    action: homeassistant.reload_config_entry
+  - data:
       message: Nefit thermostat became unavailable for the last 5 minutes.
+    action: notify.mobile_app_phone_andre
   mode: single
 - id: '1713119300766'
   alias: Sleep Mode when phones charging
@@ -974,6 +949,7 @@
     - sensor.stookwijzer_advice_code
     to: code_orange
     trigger: state
+    enabled: false
   - trigger: state
     entity_id:
     - sensor.stookwijzer_advice_code
@@ -993,6 +969,7 @@
     to: code_yellow
     trigger: state
     from: code_orange
+    enabled: false
   - trigger: state
     entity_id:
     - sensor.stookwijzer_advice_code
@@ -1196,4 +1173,36 @@
         - action: skip_goto_trashbin
           title: 'No'
     action: notify.mobile_app_phone_andre
+  mode: single
+- id: '1739722337342'
+  alias: Disable automations when we have guests
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - input_boolean.guests_home
+    to: 'on'
+  conditions: []
+  actions:
+  - action: automation.turn_off
+    entity_id: automation.away_from_home
+    metadata: {}
+    data:
+      stop_actions: true
+  mode: single
+- id: '1739722395773'
+  alias: Enable automations when guests leave
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - input_boolean.guests_home
+    to: 'off'
+  conditions: []
+  actions:
+  - action: automation.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: automation.away_from_home
   mode: single
