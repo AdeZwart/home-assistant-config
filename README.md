@@ -15,10 +15,7 @@ I'm running [Home Assistant Core in a docker container](https://hub.docker.com/r
 * [Pi Hole](https://hub.docker.com/r/pihole/pihole)
 * [Portainer](https://hub.docker.com/r/portainer/portainer-ce)
 * [Swag (Nginx + Let's encrypt)](https://github.com/linuxserver/docker-swag)
-* [Wireguard](https://github.com/linuxserver/docker-wireguard)
 * [Zigbee2MQTT](https://hub.docker.com/r/koenkk/zigbee2mqtt)
-
-See also my [Docker setup repo](https://github.com/AdeZwart/docker-compose-configuration)
 
 ## Tooling
 * [VS Code](https://code.visualstudio.com/download)
