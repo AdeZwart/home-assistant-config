@@ -3,8 +3,8 @@ camera:
     host: !secret roborock_host
     token: !secret roborock_token
     username: !secret xiaomi_cloud_username
-    password: !secret xiaomi_cloud_password  
+    password: !secret xiaomi_cloud_password
     scan_interval: 10
-    draw: ['all']
+    draw: ["all"]
     attributes:
       - calibration_points

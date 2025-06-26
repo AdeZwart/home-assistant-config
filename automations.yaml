@@ -643,25 +643,27 @@
 - id: '1703327561828'
   alias: TGTG pakket beschikbaar
   description: ''
-  trigger:
+  triggers:
   - alias: When any TGTG favorite has a package available
-    platform: numeric_state
     entity_id:
     - sensor.tgtg_bakkerij_t_stoepje_bodegraven_verrassingspakket
-    - sensor.tgtg_john_groente_en_meer_verrassingspakket
     - sensor.tgtg_jumbo_langerak_broekvelden_bodegraven_verrassingspakket
     - sensor.tgtg_supervlaai_ijs_bodegraven_verrassingspakket
     - sensor.tgtg_domino_s_bodegraven_verrassingspakket
     - sensor.tgtg_bakkerij_t_stoepje_bodegraven_feestdagenpakket
     - sensor.tgtg_domino_s_bodegraven_duo_pizza_pakket
-    - sensor.tgtg_john_groente_en_meer_feestdagenpakket
     - sensor.tgtg_jumbo_langerak_broekvelden_bodegraven_feestdagenpakket
     - sensor.tgtg_supervlaai_ijs_bodegraven_feestdagenpakket
+    - sensor.tgtg_bakker_de_kruijf_bodegraven_verrassingspakket
+    - sensor.tgtg_circle_k_reeuwijk_verrassingspakket
+    - sensor.tgtg_de_goudreinet_bodegraven_maaltijdpakket
+    - sensor.tgtg_delicious_healthy_bodegraven_verrassingspakket
+    - sensor.tgtg_hema_bodegraven_verrassingspakket
     above: 0
-  condition: []
-  action:
-  - service: notify.telegram_reigeroord
-    data:
+    trigger: numeric_state
+  conditions: []
+  actions:
+  - data:
       message: Winkel *{{ state_attr(trigger.to_state.entity_id, 'friendly_name').split('TGTG
         ')[1].split(' (Verrassingspakket)')[0] }}* heeft {{ states(trigger.to_state.entity_id)
         }} box(en) beschikbaar van {{ state_attr(trigger.to_state.entity_id, 'original_value')
@@ -671,6 +673,7 @@
         'pickup_end')) | timestamp_custom("%H:%M") }}. Als je interesse hebt, klik
         dan hier {{ state_attr(trigger.to_state.entity_id, 'item_url') }} om deze
         te kopen.
+    action: notify.telegram_reigeroord
   mode: single
 - id: '1704723397140'
   alias: Nefit unavailable notification
@@ -830,7 +833,7 @@
     then:
     - delay:
         hours: 0
-        minutes: 15
+        minutes: 20
         seconds: 0
         milliseconds: 0
   - action: light.turn_on
@@ -851,13 +854,13 @@
     then:
     - delay:
         hours: 0
-        minutes: 15
+        minutes: 20
         seconds: 0
         milliseconds: 0
     else:
     - delay:
         hours: 0
-        minutes: 10
+        minutes: 15
         seconds: 0
         milliseconds: 0
   - action: light.turn_on
@@ -1185,10 +1188,13 @@
   conditions: []
   actions:
   - action: automation.turn_off
-    entity_id: automation.away_from_home
     metadata: {}
     data:
       stop_actions: true
+    target:
+      entity_id:
+      - automation.away_from_home
+      - automation.sleep_mode_when_phones_charging_2
   mode: single
 - id: '1739722395773'
   alias: Enable automations when guests leave
@@ -1204,5 +1210,7 @@
     metadata: {}
     data: {}
     target:
-      entity_id: automation.away_from_home
+      entity_id:
+      - automation.away_from_home
+      - automation.sleep_mode_when_phones_charging_2
   mode: single

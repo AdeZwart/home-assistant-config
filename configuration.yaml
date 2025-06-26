@@ -29,7 +29,7 @@ group: !include groups.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensors
-binary_sensor: !include_dir_merge_list binary_sensors
+# binary_sensor: !include_dir_merge_list binary_sensors
 
 command_line:
   - sensor:
