@@ -451,6 +451,9 @@
       sequence:
       - data:
           message: De was is klaar!
+          data:
+            persistent: false
+            tag: washing_machine
         action: notify.mobile_app_phone_lize
   mode: single
 - id: '1683692334259'
@@ -492,13 +495,16 @@
     target:
       entity_id: input_select.washing_machine
     action: input_select.select_option
-  - data:
+  - action: notify.mobile_app_phone_andre
+    data:
       message: clear_notification
       data:
         tag: washing_machine
-    action: notify.mobile_app_phone_andre
   - action: notify.mobile_app_phone_lize
-    data: {}
+    data:
+      message: clear_notification
+      data:
+        tag: washing_machine
   mode: single
 - id: '1689508842876'
   alias: Tablet battery low
@@ -1213,4 +1219,38 @@
       entity_id:
       - automation.away_from_home
       - automation.sleep_mode_when_phones_charging_2
+  mode: single
+- id: '1750925310204'
+  alias: Get weather forecast
+  description: ''
+  triggers:
+  - trigger: homeassistant
+    event: start
+  - trigger: sun
+    event: sunrise
+    offset: 0
+  conditions: []
+  actions:
+  - action: weather.get_forecasts
+    metadata: {}
+    data:
+      type: daily
+    target:
+      entity_id: weather.buienradar
+    response_variable: buienradar_daily
+  - variables:
+      today_max: '{{ buienradar_daily[''weather.buienradar''].forecast[0].temperature
+        }}'
+      today_min: '{{ buienradar_daily[''weather.buienradar''].forecast[0].templow
+        }}'
+  - action: input_number.set_value
+    data:
+      value: '{{ today_min }}'
+    target:
+      entity_id: input_number.today_min_temp
+  - action: input_number.set_value
+    data:
+      value: '{{ today_max }}'
+    target:
+      entity_id: input_number.today_max_temp
   mode: single
