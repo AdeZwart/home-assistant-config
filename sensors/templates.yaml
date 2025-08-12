@@ -61,7 +61,7 @@
       friendly_name: "Direct Power Usage"
       unique_id: "sensor.direct_power_usage"
       unit_of_measurement: "W"
-      value_template: "{{ ((states('sensor.dcf0a0807f_output_power') | float) - ((states('sensor.power_production') | float) * 1000)) | round(2) }}"
+      value_template: "{{ ((states('sensor.dcf0a0807f_output_power') | float) - (states('sensor.power_production') | float)) | round(2) }}"
 
     nefit_temperature:
       friendly_name: "Nefit Set temperature"

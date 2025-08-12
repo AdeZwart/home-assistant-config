@@ -1254,3 +1254,21 @@
     target:
       entity_id: input_number.today_max_temp
   mode: single
+- id: '1752230779412'
+  alias: Bathroom Humidity Exhaust Fan
+  description: ''
+  use_blueprint:
+    path: Blackshome/bathroom-humidity-exhaust-fan.yaml
+    input:
+      trigger: sensor.bathroom_humidity
+      fan_switch:
+        entity_id: fan.nrg_itho_4d8c_fan
+      bathroom_humidity_sensor: sensor.xiaomi_aqara_temp_02_humidity
+      manual_trigger_default_time_delay: 10
+      manual_trigger_winter_time_delay: 5
+      rising_humidity: 1.5
+      falling_humidity: -1.5
+      time_out: 20
+      include_fan_speed: fan_low_speed_enabled
+      time_delay_low_speed: 10
+      fan_speed_low: []
