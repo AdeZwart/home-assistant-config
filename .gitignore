@@ -41,3 +41,4 @@ known_devices.yaml
 core
 google_service_account.json
 .ps4-games.*.json
+.ha_run.lock

@@ -81,6 +81,11 @@
       unit_of_measurement: "°C"
       value_template: "{{ state_attr('climate.office', 'current_temperature') }}"
 
+    ihto_preset_mode:
+      friendly_name: "IHTO preset mode"
+      unique_id: "sensor.ihto_preset_mode"
+      value_template: "{{ state_attr('fan.nrg_itho_4d8c_fan', 'preset_mode')}}"
+
     buienradar_rain_expected:
       friendly_name: "Buienradar neerslag verwacht"
       unique_id: "binary_sensor.neerslag_buienradar_rain_expected"

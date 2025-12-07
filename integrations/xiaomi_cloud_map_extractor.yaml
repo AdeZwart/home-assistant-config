@@ -1,10 +1,10 @@
-camera:
-  - platform: xiaomi_cloud_map_extractor
-    host: !secret roborock_host
-    token: !secret roborock_token
-    username: !secret xiaomi_cloud_username
-    password: !secret xiaomi_cloud_password
-    scan_interval: 10
-    draw: ["all"]
-    attributes:
-      - calibration_points
+# camera:
+#  - platform: xiaomi_cloud_map_extractor
+#    host: !secret roborock_host
+#    token: !secret roborock_token
+#    username: !secret xiaomi_cloud_username
+#    password: !secret xiaomi_cloud_password
+#    scan_interval: 10
+#    draw: ["all"]
+#    attributes:
+#      - calibration_points

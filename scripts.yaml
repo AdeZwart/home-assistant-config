@@ -43,3 +43,36 @@ clean_dining:
     action: xiaomi_miio.vacuum_clean_segment
   mode: single
   icon: mdi:table-chair
+fan_preset_mode_low:
+  sequence:
+  - action: fan.set_preset_mode
+    metadata: {}
+    data:
+      preset_mode: Low
+    target:
+      entity_id: fan.nrg_itho_4d8c_fan
+  alias: Fan preset mode low
+  description: ''
+  icon: mdi:fan-speed-1
+fan_preset_mode_high:
+  sequence:
+  - action: fan.set_preset_mode
+    metadata: {}
+    data:
+      preset_mode: High
+    target:
+      entity_id: fan.nrg_itho_4d8c_fan
+  alias: Fan preset mode high
+  description: ''
+  icon: mdi:fan-speed-3
+fan_preset_modemedium:
+  sequence:
+  - action: fan.set_preset_mode
+    metadata: {}
+    data:
+      preset_mode: Medium
+    target:
+      entity_id: fan.nrg_itho_4d8c_fan
+  alias: Fan preset mode medium
+  description: ''
+  icon: mdi:fan-speed-2

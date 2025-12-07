@@ -1254,21 +1254,371 @@
     target:
       entity_id: input_number.today_max_temp
   mode: single
-- id: '1752230779412'
+- id: '1756118780574'
   alias: Bathroom Humidity Exhaust Fan
   description: ''
   use_blueprint:
     path: Blackshome/bathroom-humidity-exhaust-fan.yaml
     input:
       trigger: sensor.bathroom_humidity
-      fan_switch:
-        entity_id: fan.nrg_itho_4d8c_fan
       bathroom_humidity_sensor: sensor.xiaomi_aqara_temp_02_humidity
-      manual_trigger_default_time_delay: 10
-      manual_trigger_winter_time_delay: 5
-      rising_humidity: 1.5
-      falling_humidity: -1.5
-      time_out: 20
+      fan_switch:
+        entity_id: script.fan_preset_mode_high
+      rising_humidity: 0.6
+      falling_humidity: -0.6
+      fan_speed_low:
+      - script.fan_preset_mode_medium
+      fan_speed_off:
+      - script.fan_preset_mode_low
       include_fan_speed: fan_low_speed_enabled
-      time_delay_low_speed: 10
-      fan_speed_low: []
+- id: '1761455164769'
+  alias: Weekend mornings
+  description: ''
+  triggers:
+  - entity_id:
+    - media_player.ue40eh5300_2
+    to: 'on'
+    trigger: state
+  conditions:
+  - condition: sun
+    before: sunrise
+  - condition: time
+    after: 05:00:00
+    weekday:
+    - sun
+    - sat
+  actions:
+  - target:
+      entity_id:
+      - light.tv_cabinet
+      - light.ikea_led_strip_couch
+    data: {}
+    action: light.turn_on
+  - action: climate.set_temperature
+    metadata: {}
+    data:
+      temperature: 19
+    target:
+      device_id: 78450d0b88d1fdf35297da6ed09f4f8b
+  mode: single
+- id: '1762205407533'
+  alias: Reminder gymkleren
+  description: ''
+  triggers:
+  - trigger: time
+    at: 07:55:00
+    weekday:
+    - tue
+    - thu
+  conditions: []
+  actions:
+  - action: notify.mobile_app_phone_andre
+    metadata: {}
+    data:
+      message: Gymkleren Veerle inpakken
+  - action: notify.mobile_app_phone_lize
+    metadata: {}
+    data:
+      message: Gymkleren Veerle inpakken
+  mode: single
+- id: '1763805454880'
+  alias: Send frontdoor camera snapshot with Telegram when the doorbell is pressed
+  description: ''
+  triggers:
+  - entity_id: binary_sensor.doorbell_button
+    to: 'on'
+    trigger: state
+  conditions: []
+  actions:
+  - action: telegram_bot.send_message
+    metadata: {}
+    data:
+      config_entry_id: 01JZFHE762470W8EDDYAFF43G2
+      message: We hebben een beller!
+      target:
+      - '497232173'
+      - '412049771'
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - data:
+      entity_id: camera.frontdoor_fluent
+      filename: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now
+        ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
+    action: camera.snapshot
+  - action: telegram_bot.send_photo
+    metadata: {}
+    data:
+      verify_ssl: true
+      config_entry_id: 01JZFHE762470W8EDDYAFF43G2
+      target:
+      - '497232173'
+      - '412049771'
+      file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day
+        }}_{{ now ().hour }}_{{ now ().minute }}.jpg
+  - delay: 00:00:30
+  mode: single
+- id: '1763922892319'
+  alias: Trash collection notification day before 0 - migrated
+  description: ''
+  triggers:
+  - at: '19:30:00'
+    trigger: time
+  conditions:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: "{% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)
+        - 43200)) %}\n  true\n{% endif %}\n"
+    - condition: template
+      value_template: "{% if (as_timestamp(now()) < (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)))
+        %}\n  true\n{% endif %}\n"
+  actions:
+  - action: telegram_bot.send_message
+    metadata: {}
+    data:
+      config_entry_id: 01JZFHE762470W8EDDYAFF43G2
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}}
+        wordt morgen opgehaald.'
+      target:
+      - '412049771'
+      - '497232173'
+  mode: single
+- id: '1763923147875'
+  alias: Trash collection notification day before 1 - migrated
+  description: ''
+  triggers:
+  - at: '19:30:00'
+    trigger: time
+  conditions:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: "{% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start)
+        - 43200)) %}\n  true\n{% endif %}\n"
+    - condition: template
+      value_template: "{% if (as_timestamp(now()) < (as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start)))
+        %}\n  true\n{% endif %}\n"
+  actions:
+  - action: telegram_bot.send_message
+    metadata: {}
+    data:
+      config_entry_id: 01JZFHE762470W8EDDYAFF43G2
+      message: '{{states.sensor.ical_afvalkalender_event_1.attributes.description}}
+        wordt morgen opgehaald.'
+      target:
+      - '412049771'
+      - '497232173'
+  mode: single
+- id: '1763923279041'
+  alias: Trash collection notification reminder weekend day 0 - migrated
+  description: ''
+  triggers:
+  - at: 07:30:00
+    trigger: time
+  conditions:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'off'
+    - condition: template
+      value_template: "{% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)))
+        \ %} \n  true\n{% endif  %}\n"
+  actions:
+  - action: telegram_bot.send_message
+    metadata: {}
+    data:
+      config_entry_id: 01JZFHE762470W8EDDYAFF43G2
+      target:
+      - '412049771'
+      - '497232173'
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}}
+        wordt vandaag opgehaald!'
+  mode: single
+- id: '1763923428275'
+  alias: Trash collection notification reminder working day 0 - migrated
+  description: ''
+  triggers:
+  - at: 06:15:00
+    trigger: time
+  conditions:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: template
+      value_template: "{% if (as_timestamp(now()) > (as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)))
+        %}\n  true\n{% endif %}\n"
+  actions:
+  - action: telegram_bot.send_message
+    metadata: {}
+    data:
+      config_entry_id: 01JZFHE762470W8EDDYAFF43G2
+      message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}}
+        wordt vandaag opgehaald!'
+      target:
+      - '412049771'
+      - '497232173'
+  mode: single
+- id: '1763924141108'
+  alias: Trash collection notifications (merged-migrated)
+  description: ''
+  triggers:
+  - at: '19:30:00'
+    trigger: time
+  - at: 06:15:00
+    trigger: time
+  - at: 07:30:00
+    trigger: time
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: time
+        after: '19:29:00'
+        before: '19:31:00'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: template
+            value_template: "{{ as_timestamp(now()) >\n   as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)
+              - 43200\n   and\n   as_timestamp(now()) <\n   as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)\n}}\n"
+          sequence:
+          - data:
+              message: '{{ states.sensor.ical_afvalkalender_event_0.attributes.description
+                }} wordt morgen opgehaald.'
+            action: notify.telegram_andre
+          - data:
+              message: '{{ states.sensor.ical_afvalkalender_event_0.attributes.description
+                }} wordt morgen opgehaald.'
+            action: notify.telegram_lize
+        - conditions:
+          - condition: template
+            value_template: "{{ as_timestamp(now()) >\n   as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start)
+              - 43200\n   and\n   as_timestamp(now()) <\n   as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start)\n}}\n"
+          sequence:
+          - data:
+              message: '{{ states.sensor.ical_afvalkalender_event_1.attributes.description
+                }} wordt morgen opgehaald.'
+            action: notify.telegram_andre
+          - data:
+              message: '{{ states.sensor.ical_afvalkalender_event_1.attributes.description
+                }} wordt morgen opgehaald.'
+            action: notify.telegram_lize
+    - conditions:
+      - condition: time
+        after: 06:14:00
+        before: 06:16:00
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: template
+        value_template: "{{ as_timestamp(now()) >\n   as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)\n}}\n"
+      sequence:
+      - data:
+          message: '{{ states.sensor.ical_afvalkalender_event_0.attributes.description
+            }} wordt vandaag opgehaald!'
+        action: notify.telegram_andre
+      - data:
+          message: '{{ states.sensor.ical_afvalkalender_event_0.attributes.description
+            }} wordt vandaag opgehaald!'
+        action: notify.telegram_lize
+    - conditions:
+      - condition: time
+        after: 07:19:00
+        before: 07:21:00
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'off'
+      - condition: template
+        value_template: "{{ as_timestamp(now()) >\n   as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start)\n}}\n"
+      sequence:
+      - data:
+          message: '{{ states.sensor.ical_afvalkalender_event_0.attributes.description
+            }} wordt vandaag opgehaald!'
+        action: notify.telegram_andre
+      - data:
+          message: '{{ states.sensor.ical_afvalkalender_event_0.attributes.description
+            }} wordt vandaag opgehaald!'
+        action: notify.telegram_lize
+  mode: single
+- id: '1764013541457'
+  alias: TrueNas alert
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - update.truenas_system
+    to:
+    - unavailable
+  conditions: []
+  actions:
+  - action: notify.mobile_app_phone_andre
+    metadata: {}
+    data:
+      message: TrueNas unavailable
+  mode: single
+- id: '1764013777249'
+  alias: TrueNas availability alert
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - update.truenas_system
+    to:
+    - unavailable
+  conditions: []
+  actions:
+  - action: notify.mobile_app_phone_andre
+    metadata: {}
+    data:
+      message: Check TrueNas availability http://truenas.local
+  mode: single
+- id: '1764831747208'
+  alias: Holidays lights
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: 0
+    id: SunSet
+  - trigger: sun
+    event: sunrise
+    offset: 0
+    id: SunRise
+  - trigger: time
+    at: 06:00:00
+    id: EarlyMorning
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id:
+          - SunSet
+        - condition: trigger
+          id:
+          - EarlyMorning
+      sequence:
+      - action: switch.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: switch.blitzwolf_bwshp13_01
+    - conditions:
+      - condition: trigger
+        id:
+        - SunRise
+      sequence:
+      - action: switch.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: switch.blitzwolf_bwshp13_01
+  mode: single

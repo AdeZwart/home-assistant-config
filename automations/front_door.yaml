@@ -1,32 +1,32 @@
-- id: front_door_camera_snapshot_when_doorbell_is_pressed
-  alias: "Send frontdoor camera snapshot with Telegram when the doorbell is pressed"
-  trigger:
-    platform: state
-    entity_id: binary_sensor.doorbell_button
-    to: "on"
-  action:
-    - service: notify.telegram_andre
-      data:
-        message: "We hebben een beller!"
-    - service: notify.telegram_lize
-      data:
-        message: "We hebben een beller!"
-    - delay: "00:00:01"
-    - service: camera.snapshot
-      data:
-        entity_id: camera.frontdoor_fluent
-        filename: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
-    - service: notify.telegram_andre
-      data:
-        message: "frontdoor snapshot"
-        data:
-          photo:
-            file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
-    - service: notify.telegram_lize
-      data:
-        message: "frontdoor snapshot"
-        data:
-          photo:
-            file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
-    - delay: "00:00:30"
-  mode: single
+# - id: front_door_camera_snapshot_when_doorbell_is_pressed
+#   alias: "Send frontdoor camera snapshot with Telegram when the doorbell is pressed"
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.doorbell_button
+#     to: "on"
+#   action:
+#     - service: notify.telegram_andre
+#       data:
+#         message: "We hebben een beller!"
+#     - service: notify.telegram_lize
+#       data:
+#         message: "We hebben een beller!"
+#     - delay: "00:00:01"
+#     - service: camera.snapshot
+#       data:
+#         entity_id: camera.frontdoor_fluent
+#         filename: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
+#     - service: notify.telegram_andre
+#       data:
+#         message: "frontdoor snapshot"
+#         data:
+#           photo:
+#             file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
+#     - service: notify.telegram_lize
+#       data:
+#         message: "frontdoor snapshot"
+#         data:
+#           photo:
+#             file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day }}_{{ now ().hour }}_{{ now ().minute }}.jpg
+#     - delay: "00:00:30"
+#   mode: single
