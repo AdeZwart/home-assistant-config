@@ -63,17 +63,17 @@
       unit_of_measurement: "W"
       value_template: "{{ ((states('sensor.dcf0a0807f_output_power') | float) - (states('sensor.power_production') | float)) | round(2) }}"
 
-    nefit_temperature:
-      friendly_name: "Nefit Set temperature"
-      unique_id: "sensor.nefit_temperature"
-      unit_of_measurement: "°C"
-      value_template: "{{ state_attr('climate.nefit', 'temperature') }}"
+    # nefit_temperature:
+    #   friendly_name: "Nefit Set temperature"
+    #   unique_id: "sensor.nefit_temperature"
+    #   unit_of_measurement: "°C"
+    #   value_template: "{{ state_attr('climate.nefit', 'temperature') }}"
 
-    nefit_current_temperature:
-      friendly_name: "Nefit Current temperature"
-      unique_id: "sensor.nefit_current_temperature"
-      unit_of_measurement: "°C"
-      value_template: "{{ state_attr('climate.nefit', 'current_temperature') }}"
+    # nefit_current_temperature:
+    #   friendly_name: "Nefit Current temperature"
+    #   unique_id: "sensor.nefit_current_temperature"
+    #   unit_of_measurement: "°C"
+    #   value_template: "{{ state_attr('climate.nefit', 'current_temperature') }}"
 
     office_temperature:
       friendly_name: "Office Current temperature"

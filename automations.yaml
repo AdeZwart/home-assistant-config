@@ -839,7 +839,7 @@
     then:
     - delay:
         hours: 0
-        minutes: 20
+        minutes: 25
         seconds: 0
         milliseconds: 0
   - action: light.turn_on
