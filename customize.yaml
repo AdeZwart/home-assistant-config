@@ -23,3 +23,15 @@ sensor.processor_use:
   last_reset: 2021-01-01T00:00:00+0000
   unit_of_measurement: "%"
   device_class: power_factor
+sensor.easyweatherv1_6_5_event_rain_rate:
+  state_class: total_increasing
+sensor.easyweatherv1_6_5_hourly_rain_rate:
+  state_class: total_increasing
+sensor.easyweatherv1_6_5_daily_rain_rate:
+  state_class: total_increasing
+sensor.easyweatherv1_6_5_weekly_rain_rate:
+  state_class: total_increasing
+sensor.easyweatherv1_6_5_monthly_rain_rate:
+  state_class: total_increasing
+sensor.easyweatherv1_6_5_yearly_rain_rate:
+  state_class: total_increasing

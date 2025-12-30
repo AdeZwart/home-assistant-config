@@ -1,0 +1,18 @@
+- sensor:    
+  - name: "Nefit set temperature"
+    unique_id: "sensor.nefit_temperature"
+    device_class: temperature
+    unit_of_measurement: "°C"
+    state: "{{ state_attr('climate.nefit', 'temperature') }}"
+
+  - name: "Nefit current temperature"
+    unique_id: "sensor.nefit_current_temperature"
+    device_class: temperature
+    unit_of_measurement: "°C"
+    state: "{{ state_attr('climate.nefit', 'current_temperature') }}"
+
+  - name: "Office current temperature"
+    unique_id: "sensor.office_current_temperature"
+    device_class: temperature
+    unit_of_measurement: "°C"
+    state: "{{ state_attr('climate.office', 'current_temperature') }}"

@@ -576,21 +576,23 @@
 - id: '1702883926949'
   alias: Christmas lights
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - switch.shelly1_livingroom
     from: 'off'
     to: 'on'
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
     - group.persons
-  condition: []
-  action:
-  - service: light.turn_on
-    target:
+    trigger: state
+    to:
+    - Home
+  conditions: []
+  actions:
+  - target:
       device_id: 44f554a69328b870c091d11e4c3f01df
     data: {}
+    action: light.turn_on
   mode: single
 - id: '1702923409928'
   alias: Start hot water tracker

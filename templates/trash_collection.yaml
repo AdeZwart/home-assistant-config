@@ -1,0 +1,57 @@
+- sensor:
+  - name: "{{ state_attr('sensor.ical_afvalkalender_event_0', 'description')}}"
+    default_entity_id: sensor.trash_0
+    state: |
+        {% if states.sensor.ical_afvalkalender_event_0 is defined and states.sensor.ical_afvalkalender_event_0 != None and 'start' in states.sensor.ical_afvalkalender_event_0.attributes %}
+          {{ as_timestamp(states.sensor.ical_afvalkalender_event_0.attributes.start) | timestamp_custom('%d %b %Y') }}
+        {% else %}
+          ""
+        {% endif %}
+    icon: |
+        {% if states.sensor.ical_afvalkalender_event_0 is defined and states.sensor.ical_afvalkalender_event_0 != None and 'start' in states.sensor.ical_afvalkalender_event_0.attributes %}
+          {% if 'Plastic' in state_attr('sensor.ical_afvalkalender_event_0', 'description') %}
+            mdi:sack
+          {% elif 'papier' in state_attr('sensor.ical_afvalkalender_event_0', 'description') %}
+            mdi:package-variant
+          {% else %}
+            mdi:trash-can-outline
+          {% endif %}
+        {% endif %}
+
+  - name: "{{ state_attr('sensor.ical_afvalkalender_event_1', 'description')}}"
+    default_entity_id: sensor.trash_1
+    state: |
+        {% if states.sensor.ical_afvalkalender_event_1 is defined and states.sensor.ical_afvalkalender_event_1 != None and 'start' in states.sensor.ical_afvalkalender_event_1.attributes %}
+          {{ as_timestamp(states.sensor.ical_afvalkalender_event_1.attributes.start) | timestamp_custom('%d %b %Y') }}
+        {% else %}
+          ""
+        {% endif %}
+    icon: |
+        {% if states.sensor.ical_afvalkalender_event_1 is defined and states.sensor.ical_afvalkalender_event_1 != None and 'start' in states.sensor.ical_afvalkalender_event_1.attributes %}
+          {% if 'Plastic' in state_attr('sensor.ical_afvalkalender_event_1', 'description') %}
+            mdi:sack
+          {% elif 'papier' in state_attr('sensor.ical_afvalkalender_event_1', 'description') %}
+            mdi:package-variant
+          {% else %}
+            mdi:trash-can-outline
+          {% endif %}
+        {% endif %}
+
+  - name: "{{ state_attr('sensor.ical_afvalkalender_event_2', 'description')}}"
+    default_entity_id: sensor.trash_2
+    state: |
+        {% if states.sensor.ical_afvalkalender_event_2 is defined and states.sensor.ical_afvalkalender_event_2 != None and 'start' in states.sensor.ical_afvalkalender_event_2.attributes %}
+          {{ as_timestamp(states.sensor.ical_afvalkalender_event_2.attributes.start) | timestamp_custom('%d %b %Y') }}
+        {% else %}
+          ""
+        {% endif %}
+    icon: |
+        {% if states.sensor.ical_afvalkalender_event_2 is defined and states.sensor.ical_afvalkalender_event_2 != None and 'start' in states.sensor.ical_afvalkalender_event_2.attributes %}
+          {% if 'Plastic' in state_attr('sensor.ical_afvalkalender_event_2', 'description') %}
+            mdi:sack
+          {% elif 'papier' in state_attr('sensor.ical_afvalkalender_event_2', 'description') %}
+            mdi:package-variant
+          {% else %}
+            mdi:trash-can-outline
+          {% endif %}
+        {% endif %}
