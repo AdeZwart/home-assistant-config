@@ -1,7 +1,7 @@
 utility_meter:
   # Month totals
   gas_nefit:
-    source: sensor.nefit_year_total
+    source: sensor.year_total
     cycle: monthly
   gas_dsmr:
     source: sensor.gas_consumption
@@ -19,11 +19,11 @@ utility_meter:
     source: sensor.energy_production_tarif_2
     cycle: monthly
   energy_production:
-    source: sensor.adezwart_total_lifetime_energy_output
+    source: sensor.dcf0a0807f_power_generation_total_pvenergytotal
     cycle: monthly
   # Year totals
   gas_nefit_year:
-    source: sensor.nefit_year_total
+    source: sensor.year_total
     cycle: yearly
   gas_dsmr_year:
     source: sensor.gas_consumption
@@ -41,5 +41,5 @@ utility_meter:
     source: sensor.energy_production_tarif_2
     cycle: yearly
   energy_production_yearly:
-    source: sensor.adezwart_total_lifetime_energy_output
+    source: sensor.dcf0a0807f_power_generation_total_pvenergytotal
     cycle: yearly

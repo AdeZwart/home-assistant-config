@@ -80,22 +80,6 @@
       entity_id: climate.office
     action: climate.turn_off
   mode: single
-- id: '1639577789678'
-  alias: 'Turn off lights when it''s getting light '
-  description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.solar_radiation
-    above: '13'
-  condition: []
-  action:
-  - service: homeassistant.turn_off
-    target:
-      area_id:
-      - 5725600297af4a14beb939fde831b3e9
-      - c9c7d949cb959b8436f04d3b8e02018a
-      - 940887afcb1047b2b74fad4a446ce8b9
-  mode: single
 - id: '1648526720153'
   alias: Turn off bedside light André
   description: ''
@@ -136,42 +120,6 @@
       - light.ikea_led_strip_couch
     action: light.turn_off
   mode: single
-- id: '1666373128921'
-  alias: Slaaptrainer Weekend
-  description: ''
-  trigger:
-  - platform: time
-    at: 07:15:00
-  condition:
-  - condition: time
-    weekday:
-    - sat
-    - sun
-  action:
-  - type: turn_off
-    device_id: 55ab137d1334f604e4eaf1080252f16d
-    entity_id: switch.blitzwolf_bwshp15_01
-    domain: switch
-  mode: single
-- id: '1666462891423'
-  alias: Slaaptrainer Mo, Tu, Th, Fr
-  description: ''
-  trigger:
-  - platform: time
-    at: 06:00:00
-  condition:
-  - condition: time
-    weekday:
-    - fri
-    - thu
-    - tue
-    - mon
-  action:
-  - type: turn_off
-    device_id: 55ab137d1334f604e4eaf1080252f16d
-    entity_id: switch.blitzwolf_bwshp15_01
-    domain: switch
-  mode: single
 - id: '1668957815753'
   alias: Turn off bedside light Lize
   description: ''
@@ -195,10 +143,10 @@
 - id: '1668971498514'
   alias: Wake up light André
   description: ''
-  trigger:
-  - platform: time
-    at: input_datetime.next_alarm
-  condition:
+  triggers:
+  - at: input_datetime.next_alarm
+    trigger: time
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -210,24 +158,25 @@
     - condition: state
       entity_id: light.ikea_nightlight_01
       state: 'off'
-  action:
-  - service: light.turn_on
-    data:
+  actions:
+  - data:
       brightness_pct: 1
-      color_temp: 500
+      color_temp_kelvin: 2000
     target:
       device_id: 68914297aa12d794b831b768627a4dc8
+    action: light.turn_on
   - delay:
       hours: 0
       minutes: 0
       seconds: 2
       milliseconds: 0
-  - service: light.turn_on
-    data:
-      transition: 1800
+  - data:
+      transition: 300
       brightness_pct: 100
     target:
       device_id: 68914297aa12d794b831b768627a4dc8
+    action: light.turn_on
+    enabled: true
   mode: single
 - id: '1669754804462'
   alias: Android alarm time
@@ -456,22 +405,6 @@
             tag: washing_machine
         action: notify.mobile_app_phone_lize
   mode: single
-- id: '1683692334259'
-  alias: Slaaptrainer Wednesday
-  description: ''
-  trigger:
-  - platform: time
-    at: 06:15:00
-  condition:
-  - condition: time
-    weekday:
-    - wed
-  action:
-  - type: turn_off
-    device_id: 55ab137d1334f604e4eaf1080252f16d
-    entity_id: switch.blitzwolf_bwshp15_01
-    domain: switch
-  mode: single
 - id: '1684872146878'
   alias: Washing Machine - Off
   description: ''
@@ -683,42 +616,18 @@
         te kopen.
     action: notify.telegram_reigeroord
   mode: single
-- id: '1704723397140'
-  alias: Nefit unavailable notification
-  description: 'Sends a notification as soon as the nefit integration becomes unavailable
-    for 30 seconds. '
-  triggers:
-  - entity_id:
-    - climate.nefit
-    to: unavailable
-    for:
-      hours: 0
-      minutes: 15
-      seconds: 0
-    trigger: state
-  conditions: []
-  actions:
-  - target:
-      device_id: 78450d0b88d1fdf35297da6ed09f4f8b
-    data: {}
-    enabled: false
-    action: homeassistant.reload_config_entry
-  - data:
-      message: Nefit thermostat became unavailable for the last 5 minutes.
-    action: notify.mobile_app_phone_andre
-  mode: single
 - id: '1713119300766'
   alias: Sleep Mode when phones charging
   description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.sm_g991b_is_charging
+  triggers:
+  - entity_id: binary_sensor.sm_g991b_is_charging
     to: 'on'
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
     - binary_sensor.phone_lize_is_charging
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -729,9 +638,8 @@
       state: 'on'
     - condition: time
       after: '20:30:00'
-  action:
-  - service: light.turn_off
-    target:
+  actions:
+  - target:
       area_id:
       - c9c7d949cb959b8436f04d3b8e02018a
       - 5725600297af4a14beb939fde831b3e9
@@ -741,31 +649,33 @@
       - 75e0dbc9fbbe436db390faa9e7ff08c7
       - hallway
     data: {}
-  - service: input_boolean.turn_off
-    target:
+    action: light.turn_off
+  - target:
       entity_id: input_boolean.office
     data: {}
-  - service: switch.turn_off
-    target:
+    action: input_boolean.turn_off
+  - target:
       device_id: 7a3bae697ba001388e90d599cdc0b4e6
     data: {}
-  - service: media_player.turn_off
-    target:
+    action: switch.turn_off
+  - target:
       entity_id:
-      - media_player.tv_ue40eh5300_2
+      - media_player.diw7022_1f73c8_2
+      - media_player.ue40eh5300_2
     data: {}
-  - service: climate.set_temperature
-    data:
+    action: media_player.turn_off
+  - data:
       entity_id: climate.nefit
       temperature: 15
-  - service: climate.turn_off
-    entity_id: climate.office
-  - service: cover.open_cover
-    target:
+    action: climate.set_temperature
+  - entity_id: climate.office
+    action: climate.turn_off
+  - target:
       entity_id:
       - cover.rfy_001010_2
       - cover.rfy_001010_4
     data: {}
+    action: cover.open_cover
   mode: single
 - id: '1713119338921'
   alias: Turn off office heating at 22.00
@@ -1136,30 +1046,13 @@
     trigger: event
   conditions: []
   actions:
-  - data:
-      x_coord: 25000
-      y_coord: 26500
-    action: xiaomi_miio.vacuum_goto
+  - action: roborock.set_vacuum_goto_position
+    metadata: {}
+    data:
+      x: '25000'
+      y: '26500'
     target:
-      entity_id:
-      - vacuum.roborock_s5_max
-  mode: single
-- id: '1736971149523'
-  alias: Start vacuuming
-  description: ''
-  triggers:
-  - entity_id: input_boolean.vacuum
-    to: 'on'
-    trigger: state
-  conditions: []
-  actions:
-  - data: {}
-    action: vacuum.start
-    target:
-      entity_id:
-      - vacuum.roborock_s5_max
-  - entity_id: input_boolean.vacuum
-    action: input_boolean.turn_off
+      entity_id: vacuum.s5_max
   mode: single
 - id: '1736971208288'
   alias: Send vacuum to trashbin for emptying?
@@ -1203,6 +1096,7 @@
       entity_id:
       - automation.away_from_home
       - automation.sleep_mode_when_phones_charging_2
+      - automation.force_ambiant_light_off
   mode: single
 - id: '1739722395773'
   alias: Enable automations when guests leave
@@ -1221,6 +1115,7 @@
       entity_id:
       - automation.away_from_home
       - automation.sleep_mode_when_phones_charging_2
+      - automation.force_ambiant_light_off
   mode: single
 - id: '1750925310204'
   alias: Get weather forecast
@@ -1337,9 +1232,9 @@
     data:
       config_entry_id: 01JZFHE762470W8EDDYAFF43G2
       message: We hebben een beller!
-      target:
-      - '497232173'
-      - '412049771'
+      entity_id:
+      - notify.telegram_andre
+      - notify.telegram_lize
   - delay:
       hours: 0
       minutes: 0
@@ -1355,11 +1250,11 @@
     data:
       verify_ssl: true
       config_entry_id: 01JZFHE762470W8EDDYAFF43G2
-      target:
-      - '497232173'
-      - '412049771'
       file: /tmp/frontdoor_snapshot_{{ now ().year }}_{{ now ().month }}_{{ now ().day
         }}_{{ now ().hour }}_{{ now ().minute }}.jpg
+      entity_id:
+      - notify.telegram_andre
+      - notify.telegram_lize
   - delay: 00:00:30
   mode: single
 - id: '1763922892319'
@@ -1623,4 +1518,25 @@
         data: {}
         target:
           entity_id: switch.blitzwolf_bwshp13_01
+  mode: single
+- id: '1767531438824'
+  alias: Nightly visitors
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.frontdoor_person_2
+    to:
+    - 'on'
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.night_time
+    state:
+    - 'on'
+  actions:
+  - action: camera.snapshot
+    metadata: {}
+    target:
+      entity_id: camera.frontdoor_fluent
+    data: {}
   mode: single

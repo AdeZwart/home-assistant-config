@@ -11,12 +11,6 @@ homeassistant:
     - /tmp
   customize: !include customize.yaml
 
-# logger:
-#   default: warning
-#   logs:
-#     custom_components.nefiteasy: debug
-#     aionefit: debug
-
 sonos:
   media_player:
     advertise_addr: 192.168.2.100
@@ -30,7 +24,6 @@ scene: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensors
 template: !include_dir_merge_list templates
-# binary_sensor: !include_dir_merge_list binary_sensors
 
 command_line:
   - sensor:

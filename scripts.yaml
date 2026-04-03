@@ -1,46 +1,55 @@
 send_vacuum_to_trashbin:
   alias: Send vacuum to trashbin
   sequence:
-  - data:
-      x_coord: '25000'
-      y_coord: '26500'
+  - action: roborock.set_vacuum_goto_position
+    metadata: {}
     target:
-      entity_id:
-      - vacuum.roborock_s5_max
-    action: xiaomi_miio.vacuum_goto
+      entity_id: vacuum.s5_max
+    data:
+      x: '25000'
+      y: '26500'
   mode: single
   icon: mdi:robot-vacuum
 clean_kitchen:
   alias: Vacuum the kitchen
   sequence:
-  - target:
-      entity_id:
-      - vacuum.roborock_s5_max
+  - action: vacuum.send_command
+    metadata: {}
+    target:
+      entity_id: vacuum.s5_max
     data:
-      segments: 16
-    action: xiaomi_miio.vacuum_clean_segment
+      command: app_segment_clean
+      params:
+      - segments:
+        - 16
   mode: single
   icon: mdi:silverware-fork-knife
 clean_living_room:
   alias: Vacuum the living room
   sequence:
-  - target:
-      entity_id:
-      - vacuum.roborock_s5_max
+  - action: vacuum.send_command
+    metadata: {}
+    target:
+      entity_id: vacuum.s5_max
     data:
-      segments: 17
-    action: xiaomi_miio.vacuum_clean_segment
+      command: app_segment_clean
+      params:
+      - segments:
+        - 17
   mode: single
   icon: mdi:sofa
 clean_dining:
   alias: Vacuum the dining room
   sequence:
-  - target:
-      entity_id:
-      - vacuum.roborock_s5_max
+  - action: vacuum.send_command
+    metadata: {}
+    target:
+      entity_id: vacuum.s5_max
     data:
-      segments: 18
-    action: xiaomi_miio.vacuum_clean_segment
+      command: app_segment_clean
+      params:
+      - segments:
+        - 18
   mode: single
   icon: mdi:table-chair
 fan_preset_mode_low:

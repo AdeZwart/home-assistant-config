@@ -1,0 +1,9 @@
+- sensor:    
+  - name: "Direct Power Usage"
+    unique_id: "sensor.direct_power_usage"
+    device_class: power
+    unit_of_measurement: "W"
+    state: >
+      {% set gen = states('sensor.dcf0a0807f_output_power') | float(0) %}
+      {% set export = states('sensor.power_production') | float(0) %}
+      {{ max(gen - export, 0) }}
