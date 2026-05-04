@@ -1,0 +1,13 @@
+- platform: rest
+  name: PiHole Primary Health
+  resource: !secret pi_hole_primary_address
+  method: GET
+  scan_interval: 300
+  value_template: "ok"
+
+- platform: rest
+  name: PiHole Secondary Health
+  resource: !secret pi_hole_secondary_address
+  method: GET
+  scan_interval: 300
+  value_template: "ok"

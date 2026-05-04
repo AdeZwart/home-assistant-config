@@ -1258,7 +1258,7 @@
   - delay: 00:00:30
   mode: single
 - id: '1763922892319'
-  alias: Trash collection notification day before 0 - migrated
+  alias: Trash collection notification day before 0
   description: ''
   triggers:
   - at: '19:30:00'
@@ -1279,12 +1279,12 @@
       config_entry_id: 01JZFHE762470W8EDDYAFF43G2
       message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}}
         wordt morgen opgehaald.'
-      target:
-      - '412049771'
-      - '497232173'
+      entity_id:
+      - notify.telegram_andre
+      - notify.telegram_lize
   mode: single
 - id: '1763923147875'
-  alias: Trash collection notification day before 1 - migrated
+  alias: Trash collection notification day before 1
   description: ''
   triggers:
   - at: '19:30:00'
@@ -1305,12 +1305,12 @@
       config_entry_id: 01JZFHE762470W8EDDYAFF43G2
       message: '{{states.sensor.ical_afvalkalender_event_1.attributes.description}}
         wordt morgen opgehaald.'
-      target:
-      - '412049771'
-      - '497232173'
+      entity_id:
+      - notify.telegram_andre
+      - notify.telegram_lize
   mode: single
 - id: '1763923279041'
-  alias: Trash collection notification reminder weekend day 0 - migrated
+  alias: Trash collection notification reminder weekend day 0
   description: ''
   triggers:
   - at: 07:30:00
@@ -1329,14 +1329,14 @@
     metadata: {}
     data:
       config_entry_id: 01JZFHE762470W8EDDYAFF43G2
-      target:
-      - '412049771'
-      - '497232173'
       message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}}
         wordt vandaag opgehaald!'
+      entity_id:
+      - notify.telegram_andre
+      - notify.telegram_lize
   mode: single
 - id: '1763923428275'
-  alias: Trash collection notification reminder working day 0 - migrated
+  alias: Trash collection notification reminder working day 0
   description: ''
   triggers:
   - at: 06:15:00
@@ -1357,9 +1357,9 @@
       config_entry_id: 01JZFHE762470W8EDDYAFF43G2
       message: '{{states.sensor.ical_afvalkalender_event_0.attributes.description}}
         wordt vandaag opgehaald!'
-      target:
-      - '412049771'
-      - '497232173'
+      entity_id:
+      - notify.telegram_andre
+      - notify.telegram_lize
   mode: single
 - id: '1763924141108'
   alias: Trash collection notifications (merged-migrated)
@@ -1539,4 +1539,108 @@
     target:
       entity_id: camera.frontdoor_fluent
     data: {}
+  mode: single
+- id: '1777198309067'
+  alias: Vacation mode
+  description: ''
+  triggers:
+  - trigger: time
+    at: 09:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+    id: 0900
+  - trigger: time
+    at: '12:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+    id: '1200'
+  - trigger: time
+    at: '17:00:00'
+    weekday:
+    - sun
+    - sat
+    - fri
+    - thu
+    - wed
+    - tue
+    - mon
+    id: '1700'
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - 0900
+      sequence:
+      - action: cover.close_cover
+        metadata: {}
+        target:
+          entity_id: cover.rfy_001010_2
+        data: {}
+    - conditions:
+      - condition: trigger
+        id:
+        - '1200'
+      sequence:
+      - action: cover.close_cover
+        metadata: {}
+        target:
+          entity_id:
+          - cover.rfy_001010_4
+        data: {}
+    - conditions:
+      - condition: trigger
+        id:
+        - '1700'
+      sequence:
+      - action: cover.open_cover
+        metadata: {}
+        target:
+          entity_id: cover.rfy_001010_2
+        data: {}
+  mode: single
+- id: '1777882612642'
+  alias: PiHole health monitor
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.pihole_primary_health
+    to:
+    - unavailable
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    id: primary
+  - trigger: state
+    entity_id:
+    - sensor.pihole_secondary_health
+    to:
+    - unavailable
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    id: secondary
+  conditions: []
+  actions:
+  - action: notify.mobile_app_phone_andre
+    metadata: {}
+    data:
+      title: ⚠️ Pi-hole {{ trigger.id }} down!
+      message: The {{ trigger.id }} pi-hole is not responding.
   mode: single
