@@ -1,0 +1,21 @@
+- sensor:
+    - name: "Gas prijs dit uur incl. alles"
+      unique_id: gas_price_current_hour_all_in
+      unit_of_measurement: "€/m³"
+      device_class: monetary
+      state: >
+        {% set energy_tax = 0.72680 %}
+        {% set purch_costs = 0.10239 %}
+        {% set current_hour_price = states('sensor.energyzero_today_gas_current_hour_price') | float(0) %}
+        {{ (current_hour_price + energy_tax + purch_costs) | round(3) }}
+
+- sensor:
+    - name: "Gas prijs volgende uur incl. alles"
+      unique_id: gas_price_next_hour_all_in
+      unit_of_measurement: "€/m³"
+      device_class: monetary
+      state: >
+        {% set energy_tax = 0.72680 %}
+        {% set purch_costs = 0.10239 %}
+        {% set next_hour_price = states('sensor.energyzero_today_gas_next_hour_price') | float(0) %}
+        {{ (next_hour_price + energy_tax + purch_costs) | round(3) }}

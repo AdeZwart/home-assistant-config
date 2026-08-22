@@ -273,6 +273,7 @@
     target:
       device_id: 78450d0b88d1fdf35297da6ed09f4f8b
     action: climate.set_preset_mode
+    continue_on_error: true
   - if:
     - condition: numeric_state
       entity_id: sun.sun
@@ -826,7 +827,7 @@
     data: {}
     target:
       entity_id: light.shelly1_hallway
-  mode: single
+  mode: restart
 - id: '1735204940347'
   alias: Kitchen lights
   description: ''
